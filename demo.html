@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- load the webcomponents loader, which injects the necessary polyfill bundle -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="dist/counter.1.0.0.esm.min.js"></script>
+    <script type="module" src="dist/bo-string-concat.1.0.0.esm.min.js"></script>
+    <script nomodule src="dist/counter.1.0.0.es5.min.js"></script>
+    <script nomodule src="dist/bo-string-concat.1.0.0.es5.min.js"></script>
+  </head>
+  <body>
+    <counter-element></counter-element>
+    <bo-string-concat></bo-string-concat>
+  </body>
+</html>

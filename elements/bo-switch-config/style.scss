@@ -1,0 +1,48 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+
+$secondary-color: rgba(144, 144, 144, 0.25);
+
+:host {
+  display: flex;
+  justify-content: space-between;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+section#to {
+  width: 100%;
+}
+
+div#header-title {
+  display: grid;
+  display: -ms-grid; /* version IE */
+  grid-gap: 1rem;
+  column-gap: 10px;
+  align-items: center;
+  -ms-grid-columns: 2fr 2fr 3fr; /* version IE */
+  grid-template-columns: 2fr 2fr 3fr;
+}
+
+.property-label {
+  width: 100%;
+  font-weight: bold;
+}
+
+.title-area {
+  height: 100%;
+  padding: 0.5em;
+  background-color: var(--header-color, $secondary-color);
+}
+
+.btn {
+  background-color: var(--btn-background-color, $primary);
+  border-color: var(--btn-border-color, $primary);
+
+  &:hover {
+    background-color: var(--btn-hover-color, $link-hover-color);
+  }
+}

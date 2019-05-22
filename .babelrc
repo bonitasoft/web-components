@@ -1,0 +1,22 @@
+{
+  "exclude": "node_modules/**",
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",{
+        "corejs": false
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "modules": "cjs"
+          }
+        ]
+      ]
+    }
+  }
+}

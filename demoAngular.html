@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- load the webcomponents loader, which injects the necessary polyfill bundle -->
+    <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script type="module" src="dist/bo-switch-config.esm.min.js"></script>
+    <script nomodule src="dist/bo-switch-config.es5.min.js" defer></script>
+    <script src="./myController.js"></script>
+    <style>
+      bo-switch-config {
+        --btn-background-color: red;
+        --btn-border-color: black;
+        --btn-hover-color: #830000;
+      }
+    </style>
+  </head>
+  <body>
+    <div ng-app="myApp" ng-controller="myController as vm">
+      <bo-switch-config
+        id="wc1"
+        translate="{{translate}}"
+        from="{{ from }}"
+        to="{{ widgets[selectedWidget]}}"
+      ></bo-switch-config>
+      <button ng-click="applyConfig()">Apply</button>
+    </div>
+  </body>
+</html>

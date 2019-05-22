@@ -1,0 +1,27 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/forms';
+
+:host {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 2fr 2fr 3fr;
+  align-items: center;
+  grid-column-gap: 10px;
+}
+
+/* Styling slot label*/
+::slotted([slot='label']) {
+  justify-self: start;
+}
+
+.form-control {
+  font-size: 14px;
+}
+
+#property-value {
+  word-break: break-word;
+  justify-self: start;
+  color: var(--property-value-color, #676767);
+}

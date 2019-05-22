@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+    <script type="module" src="../../dist/bo-expanded-select.esm.min.js"></script>
+    <script nomodule src="../../dist/bo-expanded-select.es5.min.js" defer></script>
+  </head>
+  <body>
+    <bo-expanded-select selected="label">
+      <div slot="label">Width</div>
+      <bo-expanded-select-option id="" value="DefaultValue"></bo-expanded-select-option>
+      <bo-expanded-select-option id="label" value="Username">Label</bo-expanded-select-option>
+      <bo-expanded-select-option id="width" value="4">Width</bo-expanded-select-option>
+    </bo-expanded-select>
+  </body>
+</html>
