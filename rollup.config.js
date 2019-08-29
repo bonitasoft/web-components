@@ -6,6 +6,7 @@ import postcss from 'rollup-plugin-postcss';
 import { version } from './package.json';
 import image from 'rollup-plugin-img';
 import svg from 'rollup-plugin-svg';
+import htmlImports from './rollup-plugins/rollup-html-imports';
 
 let folder = process.env.folder;
 // default config is for modern browsers (with ES6 support)
@@ -38,7 +39,8 @@ function defaultProdConfig(output, babelConfig) {
       }),
       image({
         limit: 10000
-      })
+      }),
+      htmlImports()
     ]
   };
 }
