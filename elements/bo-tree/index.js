@@ -5,7 +5,7 @@ import CsakTreeBuilder from './src/CsakTreeBuilder';
 
 class boTree extends HTMLElement {
   static get observedAttributes() {
-    return ['json-tree', 'expanded', 'collapsed'];
+    return ['json-tree', 'expanded', 'collapsed', 'filter'];
   }
 
   constructor() {
@@ -14,6 +14,7 @@ class boTree extends HTMLElement {
     if (!this.jsonTree) this.jsonTree = {};
     if (!this.expanded) this.expanded = {};
     if (!this.collapsed) this.collapsed = {};
+    if (!this.filter) this.filter = '';
     this.attachShadow({ mode: 'open' });
     this.shadowRoot.appendChild(tmpl.content.cloneNode(true));
     this._csakTree = this.shadowRoot.querySelector('#csak-tree');
@@ -37,9 +38,9 @@ class boTree extends HTMLElement {
    */
   attributeChangedCallback(name, oldValue, newValue) {
     this._render();
-    if (name === 'json-tree') {
-      let csak = this.shadowRoot.querySelector('#tree1');
-      csak.data = new CsakTreeBuilder(this.jsonTree, '').build();
+    let csak = this.shadowRoot.querySelector('#tree1');
+    if (name === 'json-tree' || name === 'filter') {
+      csak.data = new CsakTreeBuilder(this.jsonTree, this.filter).build();
     }
   }
 
@@ -49,6 +50,14 @@ class boTree extends HTMLElement {
     } catch {
       return {};
     }
+  }
+
+  collapseAll() {
+    this.shadowRoot.querySelector('#tree1').collapseAll();
+  }
+
+  expandAll() {
+    this.shadowRoot.querySelector('#tree1').expandAll();
   }
 
   set jsonTree(value) {
@@ -61,6 +70,14 @@ class boTree extends HTMLElement {
 
   set expanded(value) {
     this.setAttribute('expanded', value);
+  }
+
+  get filter() {
+    return this.getAttribute('filter');
+  }
+
+  set filter(value) {
+    this.setAttribute('filter', value);
   }
 
   get collapsed() {

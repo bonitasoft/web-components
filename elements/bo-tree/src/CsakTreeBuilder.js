@@ -16,11 +16,20 @@ export default class CsakTreeBuilder {
 
   _bdmAsCsakTree() {
     let bdm = this.bdmJson;
+    let res = {};
+
+    if (
+      !bdm ||
+      !bdm.businessObjectModel ||
+      !bdm.businessObjectModel.businessObjects ||
+      !bdm.businessObjectModel.businessObjects.businessObject
+    ) {
+      return JSON.stringify(res);
+    }
 
     let csakTree = {};
     csakTree.children = [];
     let csakGlobalObject = {};
-    csakGlobalObject.name = 'Business Data Model (BDM)';
     csakGlobalObject.children = [];
 
     let bdmBusObjects = bdm.businessObjectModel.businessObjects.businessObject;
@@ -43,13 +52,12 @@ export default class CsakTreeBuilder {
     });
 
     csakTree.children.push(csakGlobalObject);
-    return JSON.stringify(csakTree);
+    res = { children: csakTree.children[0].children };
+    return JSON.stringify(res);
   }
 
   _bdmBusObjectToCsak(bdmBusObject) {
     // Business object
-    // console.log("business object: " + bdmBusObject.qualifiedName);
-    // console.log(bdmBusObject);
     let csakBusObject = {};
     let qn = bdmBusObject.qualifiedName;
     csakBusObject.name = CsakTreeBuilder._getLastItem(qn);
