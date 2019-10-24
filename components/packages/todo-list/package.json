@@ -1,0 +1,29 @@
+{
+  "name": "@bonita-components/todo-list",
+  "version": "0.0.0",
+  "description": "A simple todo-list component",
+  "homepage": "https://github.com/bonitasoft/web-components#readme",
+  "license": "ISC",
+  "main": "src/index.js",
+  "prettier": "github:@bonita-components/prettier-config#1.0.0",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonitasoft/web-components.git"
+  },
+  "scripts": {
+    "build": "babel src -d lib",
+    "start": "rollup -c --watch",
+    "bundle": "rollup -c",
+    "test": "jest"
+  },
+  "bugs": {
+    "url": "https://github.com/bonitasoft/web-components/issues"
+  }
+}
