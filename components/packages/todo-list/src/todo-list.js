@@ -1,11 +1,13 @@
-import { LitElement, html, customElement} from 'lit-element';
+import { LitElement, html, customElement } from 'lit-element';
 
 @customElement('todo-list')
 export class TodoList extends LitElement {
   static get properties() {
     return {
-      users: { type: Array },
-    }
+      users: {
+        type: Array,
+      },
+    };
   }
 
   constructor() {
@@ -33,12 +35,18 @@ export class TodoList extends LitElement {
 
   render() {
     return html`
-      <input id="usernameInput" name="username">
-      <button @click="${() => this._addUsername()}">Add user</button>
+      <input id="usernameInput" name="username" />
+      <button @click="${() => this._addUsername()}">
+        Add user
+      </button>
       <ul>
-        ${this.users.map(user => html`
-          <li>${user}</li>
-        `)}
+        ${this.users.map(
+          user => html`
+            <li>
+              ${user}
+            </li>
+          `,
+        )}
       </ul>
     `;
   }

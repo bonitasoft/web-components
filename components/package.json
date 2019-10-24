@@ -11,7 +11,6 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
-    "lit-element": "^2.2.1",
     "prettier": "1.16.4",
     "pretty-quick": "^1.10.0",
     "rollup": "^1.25.2",
@@ -19,9 +18,19 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0"
   },
+  "peerDependencies": {
+    "lit-element": "^2.2.1"
+  },
   "scripts": {
-    "start": "lerna run start --stream",
-    "bundle": "lerna run --parallel bundle",
+    "start": "npm install && lerna run start --stream",
+    "lint:check": "lerna run --parallel lint:check",
+    "lint:format": "lerna run --parallel lint:format",
+    "bundle": "npm install && lerna run --parallel bundle",
     "build": "lerna run build"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "trailingComma": "all"
   }
 }
