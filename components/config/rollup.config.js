@@ -16,15 +16,21 @@ export default opts => {
     output: [
       { format: 'cjs', file: './dist/index.cjs.js', sourcemap: false },
       { format: 'es', file: './dist/index.es.js', sourcemap: false },
-      {format: 'esm',  file: './dist/index.esm.js', sourcemap:false}
+      { format: 'esm',  file: './dist/index.esm.js', sourcemap:false },
+      { format: 'iife', file: `dist/index.es5.min.js`, name:'main', globals: {'lit-element': 'litElement'}},
     ],
     plugins: [
-      terser(),
-      nodeResolve({
-        extensions: ['.js'],
+      terser({
+        // mandatory as we are minifying ES Modules here
+        module: true,
+        compress: {
+          // compress twice for further compressed code
+          passes: 2
+        }
       }),
+      nodeResolve(),
       commonjs({
-        include: '../../node_modules/**',
+        include: '*/node_modules/**',
       }),
       babel({
         runtimeHelpers: true,

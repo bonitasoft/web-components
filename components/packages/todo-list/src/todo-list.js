@@ -1,6 +1,5 @@
-import { LitElement, html, customElement } from 'lit-element';
+import { LitElement, html } from 'lit-element';
 
-@customElement('todo-list')
 export class TodoList extends LitElement {
   static get properties() {
     return {
@@ -13,7 +12,7 @@ export class TodoList extends LitElement {
   constructor() {
     super();
 
-    this.users = ['André'];
+    this.users = ['Steve'];
   }
 
   // To access dom nodes imperatively, you can use regular query selectors on the element instance.
@@ -58,3 +57,4 @@ export class TodoList extends LitElement {
     this.usernameInput.value = '';
   }
 }
+customElements.define('todo-list', TodoList);
