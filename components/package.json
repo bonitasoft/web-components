@@ -23,7 +23,7 @@
     "lint:check": "lerna run --parallel lint:check",
     "lint:format": "lerna run --parallel lint:format",
     "bundle": "npm install && lerna run --parallel bundle",
-    "build": "lerna run build"
+    "build": "npm install && lerna run build"
   },
   "prettier": {
     "printWidth": 100,
