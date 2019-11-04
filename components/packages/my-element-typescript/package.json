@@ -1,8 +1,8 @@
 {
-  "name": "@bonita/my-element-typescript",
-  "version": "0.0.1",
+  "name": "bo-element-typescript",
+  "version": "0.0.2",
   "description": "A simple todo-list component",
-  "homepage": "https://github.com/bonitasoft/web-components/components/packages/my-element-typescript#readme",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/bo-element-typescript#readme",
   "license": "MIT",
   "main": "src/index.js",
   "files": [
@@ -10,6 +10,7 @@
   ],
   "devDependencies": {
     "lit-element": "^2.2.0",
+    "release": "^6.1.0",
     "rollup-plugin-typescript": "^1.0.1",
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",
@@ -25,6 +26,7 @@
     "lint:format": "tsc && prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "npm install && rollup -c",
     "test": "jest",
-    "publish": "npm publish"
+    "publish": "npm publish",
+    "release": "release"
   }
 }

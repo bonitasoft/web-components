@@ -4,8 +4,8 @@
  */
 import { customElement, LitElement, property, html } from 'lit-element';
 
-@customElement('my-element')
-export class myElement extends LitElement {
+@customElement('bo-element')
+export class boElement extends LitElement {
   @property() name = 'Michel ça farte ?';
 
 
