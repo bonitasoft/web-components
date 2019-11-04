@@ -1,22 +1,15 @@
 {
-  "name": "@bonita-components/my-element-typescript",
+  "name": "@bonita/my-element-typescript",
   "version": "0.0.1",
   "description": "A simple todo-list component",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/my-element-typescript#readme",
   "license": "MIT",
-  "main": "dist/index.js",
+  "main": "src/index.js",
   "files": [
     "dist"
   ],
-  "source": true,
-  "module": "dist/index.es.js",
-  "types": "dist/index.d.ts",
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/preset-env": "^7.6.3",
     "lit-element": "^2.2.0",
-    "rollup": "^1.26.0",
-    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-typescript": "^1.0.1",
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",
@@ -27,11 +20,11 @@
     "url": "git+https://github.com/bonitasoft/web-components.git"
   },
   "scripts": {
-    "build": "tsc --build tsconfig.json",
-    "start": "tsc --build tsconfig.json && rollup -c -w",
-    "lint:check": "prettier --check \"src/**/*.js\"",
-    "lint:format": "prettier --write \"src/**/*.js\"",
-    "bundle": "rollup -c",
-    "test": "jest"
+    "start": "npm install && rollup -c -w --environment server:true",
+    "lint:check": "tsc && prettier --check \"src/**/*.{js,ts,tsx}\"",
+    "lint:format": "tsc && prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "bundle": "npm install && rollup -c",
+    "test": "jest",
+    "publish": "npm publish"
   }
 }

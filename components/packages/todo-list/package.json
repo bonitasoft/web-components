@@ -1,5 +1,5 @@
 {
-  "name": "@bonita-components/todo-list",
+  "name": "todo-list",
   "version": "0.0.1",
   "description": "A simple todo-list component",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/todo-list#readme",
@@ -8,9 +8,6 @@
   "files": [
     "src"
   ],
-  "dependencies": {
-    "lit-element": "^2.2.1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bonitasoft/web-components.git"

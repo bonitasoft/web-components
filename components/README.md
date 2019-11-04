@@ -18,3 +18,10 @@ Use Lerna to get a mono repo with multiple node package
 ## Run pretiter
 
     npm run start lint:format
+    
+    
+## Breakpoint in IntellJ
+
+Run your `npm run start` like always.
+
+On your `index.html`, Right click and select `Debug index.html` entry. After this, you can put breakpoint in your Ts or Js code.

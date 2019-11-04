@@ -1,10 +1,8 @@
-import configure from '../../config/rollup.config'
-import { dependencies } from './package.json'
+import configure from '../../config/rollup.config';
+import {name, dependencies}  from './package.json';
 
 export default configure({
   input: './src/index.js',
-  dependencies,
-  plugins:[
-    serve('dist')
-  ]
+  fileName: name,
+  dependencies
 })

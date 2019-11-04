@@ -6,18 +6,21 @@ import babel from 'rollup-plugin-babel';
 export default opts => {
   const options = Object.assign(
     {
-      css: true,
+      css: true
     },
     opts
-  )
+  );
 
   return {
     input: options.input,
     output: [
-      { format: 'cjs', file: './dist/index.cjs.js', sourcemap: false },
-      { format: 'es', file: './dist/index.es.js', sourcemap: false },
-      { format: 'esm',  file: './dist/index.esm.js', sourcemap:false },
-      { format: 'iife', file: `./dist/index.es5.min.js`, name:'main', globals: {'lit-element': 'litElement'}},
+      {
+        format: 'iife',
+        file: `./dist/${options.fileName}.es5.min.js`,
+        name: 'main',
+        sourcemap: options.sourceMap || false,
+        globals: { 'lit-element': 'litElement' }
+      }
     ],
     plugins: [
       terser({
@@ -30,12 +33,12 @@ export default opts => {
       }),
       nodeResolve(),
       commonjs({
-        include: '*/node_modules/**',
+        include: '*/node_modules/**'
       }),
       babel({
         runtimeHelpers: true,
         exclude: '../../node_modules/**'
-      }),
-    ],
-  }
+      })
+    ].concat(options.plugins)
+  };
 }

@@ -6,10 +6,14 @@ import { customElement, LitElement, property, html } from 'lit-element';
 
 @customElement('my-element')
 export class myElement extends LitElement {
+  @property() name = 'Michel ça farte ?';
 
-  @property() name = 'World';
 
+  toto(){
+    console.log('michel');
+  }
   render() {
+    this.toto();
     return html`<p>Hello, ${this.name}!</p>`;
   }
 }
