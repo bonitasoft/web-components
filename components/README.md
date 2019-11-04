@@ -25,3 +25,28 @@ Use Lerna to get a mono repo with multiple node package
 Run your `npm run start` like always.
 
 On your `index.html`, Right click and select `Debug index.html` entry. After this, you can put breakpoint in your Ts or Js code.
+
+
+## To bundle a component and publish it
+
+    lerna run --scope bonita-components/[components] [options]
+
+## Publish
+
+To make this module available on npm registry, run:
+ 
+    npm publish
+    
+To unpublished a version run:
+
+    npm unpublish <package>@<version>
+
+## Release
+
+To release a new version on this component, run this following command:
+
+    npm run release -- major|minor|patch
+    
+During development phase, you can run 
+
+    npm run release -- <suffix>
