@@ -10,7 +10,7 @@ Run:
 
     npm install bo-element-typescript
 
-Then import `node_modules/`
+Then import `node_modules/my-element-typescript/bo-element-typescript.es5.min.js`
 
 And you can use new html tag `<bo-element></element>`
 
