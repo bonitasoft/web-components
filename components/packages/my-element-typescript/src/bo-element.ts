@@ -6,10 +6,9 @@ import { customElement, LitElement, property, html } from 'lit-element';
 
 @customElement('bo-element')
 export class boElement extends LitElement {
-  @property() name = 'Michel ça farte ?';
+  @property() name = 'Michel ' + '' + 'ça mousse ?';
 
-
-  toto(){
+  toto() {
     console.log('michel');
   }
   render() {

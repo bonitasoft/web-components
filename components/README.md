@@ -12,7 +12,9 @@ Use Lerna to get a mono repo with multiple node package
     
 ## Build only one package
 
-    lerna run --scope @bonita-components/[components] [options]
+    lerna run --scope [components] [options]
+    
+For example: `lerna run --scope bo-element-typescript start --stream`
     
     
 ## Run pretiter

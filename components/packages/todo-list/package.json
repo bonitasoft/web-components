@@ -8,6 +8,9 @@
   "files": [
     "src"
   ],
+  "devDependencies": {
+    "lit-element": "^2.2.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bonitasoft/web-components.git"
@@ -15,9 +18,7 @@
   "scripts": {
     "build": "babel src -d src",
     "start": "rollup -c --watch",
-    "lint:check": "prettier --check \"src/**/*.js\"",
-    "lint:format": "prettier --write \"src/**/*.js\"",
-    "bundle": "npm install && rollup -c",
-    "test": "jest"
+    "lint": "prettier --write \"src/**/*.js\"",
+    "bundle": "npm install && rollup -c"
   }
 }

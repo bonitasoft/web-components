@@ -10,7 +10,6 @@
   ],
   "devDependencies": {
     "lit-element": "^2.2.0",
-    "release": "^6.1.0",
     "rollup-plugin-typescript": "^1.0.1",
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",
@@ -22,12 +21,8 @@
   },
   "scripts": {
     "start": "npm install && rollup -c -w --environment server:true",
-    "lint:check": "tsc && prettier --check \"src/**/*.{js,ts,tsx}\"",
-    "lint:format": "tsc && prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "npm install && rollup -c",
-    "test": "jest",
-    "release": "release",
-    "publish": "npm publish",
-    "doAll": "npm run bundle && npm run publish"
+    "publish": "npm publish"
   }
 }

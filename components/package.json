@@ -1,5 +1,6 @@
 {
   "name": "bonita-components",
+  "private": true,
   "license": "MIT",
   "workspaces": [
     "packages/*"
@@ -18,19 +19,18 @@
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.1.0",
-    "rollup-plugin-node-resolve": "^5.2.0"
+    "rollup-plugin-livereload": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.1.2"
   },
   "scripts": {
-    "bumpVersion": "lerna version minor",
-    "publish": "lerna publish from-package",
-    "start": "npm install && lerna run start --stream",
-    "lint:check": "lerna run --parallel lint:check",
-    "lint:format": "lerna run --parallel lint:format",
-    "bundle": "npm install && lerna run --parallel bundle",
-    "build": "npm install && lerna run build"
+    "start": "lerna run start --stream",
+    "lint": "lerna run --parallel lint",
+    "bundle": "lerna run --parallel bundle"
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 200,
     "singleQuote": true,
     "trailingComma": "all"
   }
