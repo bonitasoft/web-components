@@ -21,6 +21,8 @@
     "rollup-plugin-node-resolve": "^5.2.0"
   },
   "scripts": {
+    "bumpVersion": "lerna version minor",
+    "publish": "lerna publish from-package",
     "start": "npm install && lerna run start --stream",
     "lint:check": "lerna run --parallel lint:check",
     "lint:format": "lerna run --parallel lint:format",
