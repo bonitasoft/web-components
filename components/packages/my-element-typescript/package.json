@@ -20,7 +20,7 @@
     "url": "git+https://github.com/bonitasoft/web-components.git"
   },
   "scripts": {
-    "start": "npm install && rollup -c -w --environment server:true",
+    "start": "npm install && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "npm install && rollup -c",
     "publish": "npm publish"

@@ -30,7 +30,7 @@
     "bundle": "lerna run --parallel bundle"
   },
   "prettier": {
-    "printWidth": 200,
+    "printWidth": 180,
     "singleQuote": true,
     "trailingComma": "all"
   }

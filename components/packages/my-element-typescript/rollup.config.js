@@ -5,8 +5,9 @@ import livereload from 'rollup-plugin-livereload';
 import config from '../../config/rollup.config';
 import {name, dependencies} from './package.json';
 
-let devMode = process.env.server;
+let devMode = process.env.devMode;
 let plugins = [typescript()];
+
 if (devMode) {
   // Create a server for dev mode
   plugins.push(serve({ contentBase: '' }));

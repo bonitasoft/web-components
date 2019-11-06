@@ -14,19 +14,19 @@ Run `npm install -g lerna` to install lerna globally
 
 ## Build all packages
 
-You need to run `lerna bootstrap --use-workspaces` first when you cloning this repository/
+You need to run `lerna bootstrap --use-workspaces` first when you cloning this repository.
 
 Then you can run `npm run bundle`. It will be compile and bundle all components.
     
     
-## Build only one package
+## Run lerna command on only one package
 
-    lerna run --scope [components] [options]
+    lerna run --scope [packages] [options]
     
 For example: `lerna run --scope bo-element-typescript start --stream` to start dev bo-element-typescript environment
     
     
-## Run pretiter on all packages
+## Run prettier on all packages
 
     npm run start lint
     
@@ -37,24 +37,24 @@ Run your `npm run start` like always.
 
 On your `index.html`, Right click and select `Debug index.html` entry. After this, you can put breakpoint in your Ts or Js code.
 
-<!--
-## Publish
-
-To make this module available on npm registry, run:
- 
-    npm publish
+<!-- Comments on purpose
+   ## Publish
+   
+   To make this module available on npm registry, run:
     
-To unpublished a version run:
-
-    npm unpublish <package>@<version>
-
-## Release
-
-To release a new version on this component, run this following command:
-
-    npm run release -- major|minor|patch
-    
-During development phase, you can run 
-
-    npm run release -- <suffix>
+       npm publish
+       
+   To unpublished a version run:
+   
+       npm unpublish <package>@<version>
+   
+   ## Release
+   
+   To release a new version on this component, run this following command:
+   
+       npm run release -- major|minor|patch
+       
+   During development phase, you can run 
+   
+       npm run release -- <suffix>
 -->

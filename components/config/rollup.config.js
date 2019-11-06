@@ -24,6 +24,7 @@ export default opts => {
     ],
     plugins: [
       terser({
+        //FIXME: no minify in dev mode
         // mandatory as we are minifying ES Modules here
         module: true,
         compress: {
