@@ -1,0 +1,37 @@
+{
+  "name": "bonita-components",
+  "private": true,
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "version": "0.0.1",
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-decorators": "^7.6.0",
+    "@babel/preset-env": "^7.6.3",
+    "lerna": "^3.18.3",
+    "prettier": "1.16.4",
+    "pretty-quick": "^1.10.0",
+    "release": "^6.1.0",
+    "rollup": "^1.26.0",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-livereload": "^1.0.4",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-serve": "^1.0.1",
+    "rollup-plugin-terser": "^5.1.2"
+  },
+  "scripts": {
+    "start": "lerna run start --stream",
+    "lint": "lerna run --parallel lint",
+    "bundle": "lerna run --parallel bundle"
+  },
+  "prettier": {
+    "printWidth": 180,
+    "singleQuote": true,
+    "trailingComma": "all"
+  }
+}
