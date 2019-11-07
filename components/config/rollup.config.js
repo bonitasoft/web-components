@@ -1,6 +1,7 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
+import postcss from 'rollup-plugin-postcss';
 
 export default opts => {
   const options = Object.assign(
@@ -35,7 +36,11 @@ export default opts => {
       babel({
         runtimeHelpers: true,
         exclude: '../../node_modules/**'
-      })
+      }),
+      postcss({
+        inject: false,
+        plugins: []
+      }),
     ].concat(options.plugins)
   };
 }

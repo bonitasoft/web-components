@@ -10,7 +10,8 @@
   ],
   "dependencies": {
     "pagination-selector": "1.0.0",
-    "search-box": "1.0.0"
+    "search-box": "1.0.0",
+    "bootstrap": "^4.3.1"
   },
   "devDependencies": {
     "lit-element": "^2.2.1",

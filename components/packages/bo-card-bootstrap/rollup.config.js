@@ -5,7 +5,8 @@ import config from '../../config/rollup.config';
 import { name, dependencies } from './package.json';
 
 let devMode = process.env.devMode;
-let plugins = [typescript()];
+let plugins = [typescript()
+];
 
 if (devMode) {
   // Create a server for dev mode
@@ -19,5 +20,5 @@ export default config({
   sourceMap: devMode,
   fileName: name,
   plugins: plugins,
-  dependencies,
+  dependencies
 });
