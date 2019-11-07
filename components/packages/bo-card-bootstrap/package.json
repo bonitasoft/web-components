@@ -1,0 +1,33 @@
+{
+  "name": "bo-card-bootstrap",
+  "version": "0.0.1",
+  "description": "A simple card component with bootstrap",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/bo-card-bootstrap#readme",
+  "license": "MIT",
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "lit-element": "^2.2.0",
+    "node-sass": "^4.13.0",
+    "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-typescript": "^1.0.1",
+    "ts-loader": "^5.4.5",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonitasoft/web-components.git"
+  },
+  "scripts": {
+    "start": "npm install && rollup -c -w --environment devMode:true",
+    "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "bundle": "npm install && rollup -c",
+    "publish": "npm publish"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
+  }
+}
