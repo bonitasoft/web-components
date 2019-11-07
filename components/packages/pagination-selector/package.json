@@ -1,0 +1,28 @@
+{
+  "name": "pagination-selector",
+  "version": "1.0.0",
+  "description": "A pagination selector",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/pagination-selector#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "lit-element": "^2.2.1",
+    "rollup-plugin-typescript": "^1.0.1",
+    "ts-loader": "^5.4.5",
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonitasoft/web-components.git"
+  },
+  "scripts": {
+    "start": "npm install && rollup -c -w --environment devMode:true",
+    "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "bundle": "npm install && rollup -c",
+    "publish": "npm publish"
+  }
+}
