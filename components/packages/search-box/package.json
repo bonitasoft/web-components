@@ -5,6 +5,7 @@
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/search-box#readme",
   "license": "MIT",
   "main": "src/index.js",
+  "module": "build/index.js",
   "files": [
     "dist"
   ],
@@ -22,7 +23,7 @@
   "scripts": {
     "start": "npm install && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "npm install && rollup -c",
+    "bundle": "tsc && rollup -c",
     "publish": "npm publish"
   }
 }

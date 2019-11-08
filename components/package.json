@@ -27,7 +27,8 @@
   "scripts": {
     "start": "lerna run start --stream",
     "lint": "lerna run --parallel lint",
-    "bundle": "lerna run --parallel bundle"
+    "bundle": "lerna run bundle",
+    "pouet": " lerna bootstrap && npm install"
   },
   "prettier": {
     "printWidth": 180,
