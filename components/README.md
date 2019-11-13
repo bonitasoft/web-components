@@ -14,7 +14,7 @@ Run `npm install -g lerna` to install lerna globally
 
 ## Build all packages
 
-You need to run `lerna bootstrap --use-workspaces` first when you cloning this repository.
+You need to run `npm run init` first when you cloning this repository.
 
 Then you can run `npm run bundle`. It will be compile and bundle all components.
     
