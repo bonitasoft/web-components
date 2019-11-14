@@ -5,19 +5,22 @@ import 'pagination-selector';
 // @ts-ignore
 import bootstrapStyles from './style.scss';
 
+/**
+ * A query selector component
+ */
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
-  @property({ type: Object, reflect: true })
-  private queries: any;
+  /** Queries to display in our element @attr*/
+  @property({ type: Object, reflect: true, attribute:"queries"}) queries: any;
 
-  @property({ type: String })
-  private selectedQuery = '';
+  /** Selected query*/
+  @property({ type: String, attribute: false}) selectedQuery = '';
 
-  @property({ type: Array })
-  private filterArgs = [];
+  /** Value of filters when a query is selected */
+  @property({ type: Array, attribute: false }) filterArgs = [];
 
-  @property({ type: String })
-  private queryFilter = '';
+  /** Search value */
+  @property({ type: String, attribute: false }) queryFilter = '';
 
   private static readonly filterTitlePrefix = 'Filter the query of';
   private filterTitle: string = QuerySelector.filterTitlePrefix;
@@ -82,7 +85,7 @@ export class QuerySelector extends LitElement {
 
   render() {
     return html`      
-      <style>${bootstrapStyles}</style>
+      <style>${bootstrapStyles}</style>      
       <div class="guide">
         Select a query from one of the 2 lists. If any, enter the filter value(s)
       </div>
@@ -90,8 +93,8 @@ export class QuerySelector extends LitElement {
       <search-box
         id="searchbox"
         @valueChange=${(e: any) => {
-          this.filterChanged(e.detail);
-        }}
+      this.filterChanged(e.detail);
+    }}
       ></search-box>
       <div class="card-deck">
         <!-- Default Queries-->
@@ -118,14 +121,14 @@ export class QuerySelector extends LitElement {
 
       <!-- Filter card -->
       ${this.filterArgs.length > 0
-        ? html`
+      ? html`
             <div class="card">
               <div class="card-header">
                 <b>${this.filterTitle} </b>
               </div>
               <div class="filter-container">
                 ${this.filterArgs.map(
-                  (arg: any) => html`
+        (arg: any) => html`
                     <div class="filter-item required">
                       <label class="control-label" for="arg">${arg.name}</label>
                       <div class="input-group filter-input">
@@ -141,12 +144,12 @@ export class QuerySelector extends LitElement {
                         </div>
                       </div>
                     </div>
-                  `,
-                )}
+                  `
+      )}
               </div>
             </div>
           `
-        : html``}
+      : html``}
 
       <!-- Pagination -->
       <pagination-selector></pagination-selector>
@@ -163,9 +166,10 @@ export class QuerySelector extends LitElement {
   //
 
   private getDefaultQueries(query: any, index: number) {
+    console.log(query);
     return html`
       ${this.isFiltered(query.displayName)
-        ? html`
+      ? html`
             <li
               class="list-group-item list-group-item-action 
                         ${classMap(this.isDefaultSelected(index) ? { active: true } : {})}"
@@ -174,14 +178,14 @@ export class QuerySelector extends LitElement {
               ${query.displayName}
             </li>
           `
-        : html``}
+      : html``}
     `;
   }
 
   private getAdditionalQueries(query: any, index: number) {
     return html`
       ${this.isFiltered(query.displayName)
-        ? html`
+      ? html`
             <li
               class="list-group-item list-group-item-action 
                         ${classMap(this.isAdditionalSelected(index) ? { active: true } : {})}"
@@ -190,7 +194,7 @@ export class QuerySelector extends LitElement {
               ${query.query}
             </li>
           `
-        : html``}
+      : html``}
     `;
   }
 
@@ -204,12 +208,15 @@ export class QuerySelector extends LitElement {
 
   private filterArgChanged(arg: string, value: string) {
     Object.assign(arg, { value: value });
+    /**
+     * Dispatched when filter value changed
+     */
     this.dispatchEvent(
       new CustomEvent('filterChanged', {
         detail: this.filterArgs,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
@@ -217,12 +224,15 @@ export class QuerySelector extends LitElement {
     this.filterTitle = QuerySelector.filterTitlePrefix + ' ' + query.query;
     this.selectedQuery = query.query;
     this.filterArgs = query.filters;
+    /**
+     * Dispatched when a query is selected
+     */
     this.dispatchEvent(
       new CustomEvent('querySelected', {
         detail: this.selectedQuery,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API viewer demo</title>
+    <style>
+        body {
+            margin: 0;
+        }
+        api-viewer {
+            margin: 1rem auto 0;
+        }
+        @media(max-width: 799px) {
+            api-viewer {
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script type="module">
+      import 'api-viewer-element';
+    </script>
+
+    <api-viewer src="./custom-elements.json">
+    </api-viewer>
+    <script type="module" src="./packages/pagination-selector/dist/pagination-selector.es5.min.js"></script>
+    <script type="module" src="./packages/search-box/dist/search-box.es5.min.js"></script>
+    <script type="module" src="./packages/todo-list/dist/todo-list.es5.min.js"></script>
+    <script type="module" src="./packages/my-element-typescript/dist/bo-element-typescript.es5.min.js"></script>
+    <script type="module" src="./packages/bo-card-bootstrap/dist/bo-card-bootstrap.es5.min.js"></script>
+</body>
+</html>

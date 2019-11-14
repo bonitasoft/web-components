@@ -12,10 +12,13 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.6.0",
     "@babel/preset-env": "^7.6.3",
+    "api-viewer-element": "^0.2.5",
+    "es-dev-server": "^1.23.1",
     "lerna": "^3.18.3",
+    "lit-analyzer": "^1.1.9",
+    "node-sass": "^4.13.0",
     "prettier": "1.16.4",
     "pretty-quick": "^1.10.0",
-    "node-sass": "^4.13.0",
     "release": "^6.1.0",
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.2",
@@ -23,13 +26,16 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-serve": "^1.0.1",
-    "rollup-plugin-terser": "^5.1.2"
+    "rollup-plugin-terser": "^5.1.2",
+    "web-component-analyzer": "^0.1.20"
   },
   "scripts": {
     "start": "lerna run start --stream",
     "lint": "lerna run --parallel lint",
     "bundle": "lerna run bundle",
-    "init": " lerna bootstrap && npm install"
+    "init": " lerna bootstrap && npm install",
+    "doc": " wca analyze \"packages/**/*.{js,ts}\"  --format json --outFile custom-elements.json",
+    "serveDoc": "lerna run bundle && npm run doc && es-dev-server --app-index api-viewer.html --node-resolve --watch --open"
   },
   "prettier": {
     "printWidth": 180,

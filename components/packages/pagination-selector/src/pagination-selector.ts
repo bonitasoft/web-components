@@ -1,7 +1,14 @@
-import { css, customElement, html, LitElement } from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 
+/* Use this component to set pagination data */
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
+  /** Value of page number */
+  @property({ type: String, reflect: true, attribute: 'page-number' }) pageNumber = 0;
+
+  /** Element number*/
+  @property({ type: String, reflect: true, attribute: 'element-number' }) elementNumber = 10;
+
   static get styles() {
     return css`
       :host {
@@ -45,7 +52,7 @@ export class PaginationSelector extends LitElement {
                 type="text"
                 class="form-control pagination-input"
                 id="elem"
-                value="10"
+                value="${this.elementNumber}"
                 @input=${(e: any) => this.nbElementsChanged(e.target.value)}
                 placeholder="Type a number of elements"
               />
@@ -61,7 +68,7 @@ export class PaginationSelector extends LitElement {
                 type="text"
                 class="form-control pagination-input"
                 id="page"
-                value="0"
+                value="${this.pageNumber}"
                 @input=${(e: any) => this.pageNumberChanged(e.target.value)}
                 placeholder="Type a page number"
               />
@@ -80,8 +87,8 @@ export class PaginationSelector extends LitElement {
       new CustomEvent('paginationElementsChanged', {
         detail: value,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
@@ -90,8 +97,8 @@ export class PaginationSelector extends LitElement {
       new CustomEvent('paginationPagesChanged', {
         detail: value,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 }
