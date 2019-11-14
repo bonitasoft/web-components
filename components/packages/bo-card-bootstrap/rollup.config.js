@@ -1,17 +1,12 @@
-import resolve from 'rollup-plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript';
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import config from '../../config/rollup.config';
 import { name, dependencies } from './package.json';
-import postcss from 'rollup-plugin-postcss';
-
 
 let devMode = process.env.devMode;
-let plugins = [typescript(), postcss({
-  inject: false,
-  plugins: []
-})];
+let plugins = [typescript()
+];
 
 if (devMode) {
   // Create a server for dev mode
