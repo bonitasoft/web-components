@@ -5,6 +5,7 @@
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/pagination-selector#readme",
   "license": "MIT",
   "main": "src/index.js",
+  "module": "build/index.js",
   "files": [
     "dist"
   ],
@@ -20,9 +21,9 @@
     "url": "git+https://github.com/bonitasoft/web-components.git"
   },
   "scripts": {
-    "start": "npm install && rollup -c -w --environment devMode:true",
+    "start": "tsc && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "npm install && rollup -c",
+    "bundle": "tsc && rollup -c",
     "publish": "npm publish"
   }
 }

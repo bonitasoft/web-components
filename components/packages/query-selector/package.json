@@ -8,6 +8,10 @@
   "files": [
     "dist"
   ],
+  "dependencies": {
+    "pagination-selector": "1.0.0",
+    "search-box": "1.0.0"
+  },
   "devDependencies": {
     "lit-element": "^2.2.1",
     "rollup-plugin-typescript": "^1.0.1",
@@ -20,9 +24,9 @@
     "url": "git+https://github.com/bonitasoft/web-components.git"
   },
   "scripts": {
-    "start": "npm install && rollup -c -w --environment devMode:true",
+    "start": "rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "npm install && rollup -c",
+    "bundle": "rollup -c",
     "publish": "npm publish"
   }
 }

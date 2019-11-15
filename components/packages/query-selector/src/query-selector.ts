@@ -1,5 +1,7 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
+import 'search-box';
+import 'pagination-selector';
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
@@ -201,9 +203,6 @@ export class QuerySelector extends LitElement {
 
   private filterArgChanged(arg: string, value: string) {
     Object.assign(arg, { value: value });
-    console.log('filterArg updated: ');
-    console.log(arg);
-    console.log(value);
     this.dispatchEvent(
       new CustomEvent('filterChanged', {
         detail: this.filterArgs,
@@ -217,8 +216,6 @@ export class QuerySelector extends LitElement {
     this.filterTitle = QuerySelector.filterTitlePrefix + ' ' + query.query;
     this.selectedQuery = query.query;
     this.filterArgs = query.filters;
-    console.log('filterArgs=');
-    console.log(this.filterArgs);
     this.dispatchEvent(
       new CustomEvent('querySelected', {
         detail: this.selectedQuery,

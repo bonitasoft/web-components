@@ -18,7 +18,6 @@
     "release": "^6.1.0",
     "rollup": "^1.26.0",
     "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-serve": "^1.0.1",
@@ -27,7 +26,8 @@
   "scripts": {
     "start": "lerna run start --stream",
     "lint": "lerna run --parallel lint",
-    "bundle": "lerna run --parallel bundle"
+    "bundle": "lerna run bundle",
+    "init": " lerna bootstrap && npm install"
   },
   "prettier": {
     "printWidth": 180,
