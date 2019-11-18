@@ -1,7 +1,11 @@
-import { css, customElement, html, LitElement } from 'lit-element';
+import {css, customElement, html, LitElement, property} from 'lit-element';
 
 @customElement('search-box')
 export class SearchBox extends LitElement {
+
+  @property({ type: String, reflect: true })
+  private placeHolder: string = "Search queries";
+
   static get styles() {
     return css`
       :host {
@@ -19,7 +23,7 @@ export class SearchBox extends LitElement {
 
   render() {
     return html`
-      <input class="search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;Search queries" autocomplete="off" type="search" />
+      <input class="search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeHolder}" autocomplete="off" type="search" />
     `;
   }
 
