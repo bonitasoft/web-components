@@ -18,6 +18,13 @@ You need to run `npm run init` first when you cloning this repository.
 
 Then you can run `npm run bundle`. It will be compile and bundle all components.
     
+## Run tests
+
+    npm run test
+    
+- To run a single test, update `karma.conf.js` with a specific test name
+- To run/debug from IntelliJ, you may create a Karma configuration
+
     
 ## Run lerna command on only one package
 

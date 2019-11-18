@@ -1,0 +1,183 @@
+import {expect, fixture, html} from '@open-wc/testing';
+
+import '../build/query-selector.js';
+
+describe('query-selector', () => {
+    let queries1;
+    let querySel;
+
+
+    before(() => {
+        queries1 = '' +
+            '{"defaultQuery":' +
+            '[{"displayName":"name","query":"findByName","filters":[{"name":"name","type":"String"}]},' +
+            '{"displayName":"address","query":"findByAddress","filters":[{"name":"address","type":"String"}]},' +
+            '{"displayName":"phoneNumber","query":"findByPhoneNumber","filters":[{"name":"phoneNumber","type":"String"}]},' +
+            '{"displayName":"persistenceId","query":"findByPersistenceId","filters":[{"name":"persistenceId","type":"Int"}]}],' +
+            '"additionalQuery":' +
+            '[{"displayName":"find","query":"find","filters":[]},' +
+            '{"displayName":"findByNameAndPhoneNumber","query":"findByNameAndPhoneNumber","filters":[{"name":"name","type":"String"},{"name":"phoneNumber","type":"String"}]},' +
+            '{"displayName":"findByAddressAndPhoneNumberAndName","query":"findByAddressAndPhoneNumberAndName","filters":[{"name":"address","type":"String"},{"name":"phoneNumber","type":"String"},{"name":"name","type":"String"}]},' +
+            '{"displayName":"query1","query":"query1","filters":[{"name":"name","type":"String"},{"name":"address","type":"String"},{"name":"phoneNumber","type":"String"}]},' +
+            '{"displayName":"query2","query":"query2","filters":[{"name":"name","type":"String"},{"name":"address","type":"String"}]},' +
+            '{"displayName":"query3","query":"query3","filters":[]},' +
+            '{"displayName":"query4","query":"query4","filters":[]},' +
+            '{"displayName":"query5","query":"query5","filters":[]},' +
+            '{"displayName":"query6","query":"query6","filters":[]}]}'
+    });
+
+    beforeEach(async () => {
+        querySel = await getQuerySelector();
+    });
+
+
+    it('Check the default queries card contains the right number of items', async () => {
+        const queryLines = getQueries(querySel, '#defaultQueries');
+        expect(queryLines.length).equal(4);
+    });
+
+    it('Check the additional queries card contains the right number of items', async () => {
+        const queryLines = getQueries(querySel, '#additionalQueries');
+        expect(queryLines.length).equal(9);
+    });
+
+    it('When a search string is entered, check the queries are filtered correctly', async () => {
+        const searchBox = querySel.shadowRoot.querySelector('#searchbox');
+        const searchInput = searchBox.shadowRoot.querySelector('.search-input');
+        searchInput.value = "address";
+        // Value changed from js does not send the 'input' event: simulate it
+        searchInput.dispatchEvent(new Event("input"));
+        // setTimeout(0) will make sure we are the last in the event queue, so the click event has been handled by the web component
+        let promise = new Promise((resolve) => {
+            setTimeout(() => {
+                // should display 1 default query and 1 additional query
+                const defaultQueriesLines = getQueries(querySel, '#defaultQueries');
+                expect(defaultQueriesLines.length).equal(1);
+                const additionalQueriesLines = getQueries(querySel, '#additionalQueries');
+                expect(additionalQueriesLines.length).equal(1);
+                resolve();
+            }, 0);
+        });
+        // wait for the promise is done
+        await promise.then(() => {
+        });
+
+
+    });
+
+    it('Send en event when a query is selected', async () => {
+        let eventReceived = false;
+        let selectedQuery = "";
+        querySel.addEventListener(
+            'querySelected',
+            e => {
+                eventReceived = true;
+                selectedQuery = e.detail;
+            }
+        );
+        getFirstDefaultQuery(querySel).click();
+        expect(eventReceived).to.equal(true);
+        expect(selectedQuery).to.equal("findByName");
+    });
+
+    it('Display the query arguments when the query is selected', async () => {
+        // No selection: filter card should not be displayed
+        let filterCard = getfilterCard(querySel);
+        expect(filterCard).to.equal(null);
+
+        getFirstDefaultQuery(querySel).click();
+        let promise = new Promise((resolve) => {
+            setTimeout(() => {
+                // After selection, filter card should contain the right arguments
+                filterCard = getfilterCard(querySel);
+                expect(filterCard).not.to.equal(null);
+                const argLabel = filterCard.querySelectorAll('label');
+                expect(argLabel.length).to.equal(1);
+                expect(argLabel[0].innerText).to.equal("name");
+                resolve();
+            }, 0);
+        });
+        // wait for the promise is done
+        await promise.then(() => {
+        });
+
+    });
+
+    it('Send an event when a query argument value is changed', async () => {
+        let eventReceived = false;
+        let filterValue = "";
+        querySel.addEventListener(
+            'filterChanged',
+            e => {
+                eventReceived = true;
+                filterValue = e.detail[0].value;
+            }
+        );
+        getFirstDefaultQuery(querySel).click();
+        let promise = new Promise((resolve) => {
+            setTimeout(() => {
+                let filterCard = getfilterCard(querySel);
+                const argInput = filterCard.querySelectorAll('#arg');
+                argInput[0].value = "myName";
+                // Value changed from js does not send the 'input' event: simulate it
+                argInput[0].dispatchEvent(new Event("input"));
+                resolve();
+            }, 0);
+        });
+        // wait for the promise is done
+        await promise.then(() => {
+        });
+        expect(eventReceived).to.equal(true);
+        expect(filterValue).to.equal("myName");
+    });
+
+    it('Send an event when the pagination (nb elements or page number) is changed', async () => {
+        let elementValue = "";
+        let pageNumberValue = "";
+        querySel.addEventListener(
+            'paginationElementsChanged',
+            e => {
+                elementValue = e.detail;
+            }
+        );
+        querySel.addEventListener(
+            'paginationPagesChanged',
+            e => {
+                pageNumberValue = e.detail;
+            }
+        );
+        const paginationSel = querySel.shadowRoot.querySelector('pagination-selector');
+        const inputs = paginationSel.shadowRoot.querySelectorAll('input');
+        inputs[0].value = "20";
+        // simulate input event
+        inputs[0].dispatchEvent(new Event("input"));
+        inputs[1].value = "1";
+        inputs[1].dispatchEvent(new Event("input"));
+        expect(elementValue).to.equal("20");
+        expect(pageNumberValue).to.equal("1");
+    });
+
+    function getQuerySelector() {
+        return fixture(html`
+      <query-selector
+        queries = ${queries1}
+      >
+    </query-selector>
+    `);
+    }
+
+    function getQueries(querySelector, cardId) {
+        const queriesCard = querySelector.shadowRoot.querySelector(cardId);
+        expect(queriesCard).not.to.equal(null);
+        return queriesCard.querySelectorAll('div ul li');
+    }
+
+    function getfilterCard(querySelector) {
+        return querySelector.shadowRoot.querySelector('#filter');
+    }
+
+    function getFirstDefaultQuery(querySel) {
+        return getQueries(querySel, '#defaultQueries')[0];
+    }
+
+});
