@@ -19,10 +19,15 @@ You need to run `npm run init` first when you cloning this repository.
 Then you can run `npm run bundle`. It will be compile and bundle all components.
     
 ## Run tests
+Once the components are compiled, you can run the tests:
 
     npm run test
     
-- To run a single test, update `karma.conf.js` with a specific test name
+### Run a single test
+To run a single test:
+
+    npm run test -- --grep packages/search-box/test/search-box.test.js
+    
 - To run/debug from IntelliJ, you may create a Karma configuration
 
     

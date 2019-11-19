@@ -34,7 +34,8 @@
     "lint": "lerna run --parallel lint",
     "bundle": "lerna run bundle",
     "init": " lerna bootstrap && npm install",
-    "test": "karma start"
+    "test": "karma start",
+    "test:coverage": "karma start --coverage"
   },
   "prettier": {
     "printWidth": 180,

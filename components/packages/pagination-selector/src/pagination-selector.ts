@@ -3,10 +3,6 @@ import { css, customElement, html, LitElement } from 'lit-element';
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
 
-    static get tag() {
-        return "pagination-selector";
-    }
-
     static get styles() {
     return css`
       :host {

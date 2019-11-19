@@ -3,12 +3,12 @@ import {expect, fixture, html} from '@open-wc/testing';
 import '../build/query-selector.js';
 
 describe('query-selector', () => {
-    let queries1;
+    let queries;
     let querySel;
 
 
     before(() => {
-        queries1 = '' +
+        queries = '' +
             '{"defaultQuery":' +
             '[{"displayName":"name","query":"findByName","filters":[{"name":"name","type":"String"}]},' +
             '{"displayName":"address","query":"findByAddress","filters":[{"name":"address","type":"String"}]},' +
@@ -31,22 +31,26 @@ describe('query-selector', () => {
     });
 
 
-    it('Check the default queries card contains the right number of items', async () => {
+    it('Should default queries card contains the right number of items', async () => {
         const queryLines = getQueries(querySel, '#defaultQueries');
+
         expect(queryLines.length).equal(4);
     });
 
-    it('Check the additional queries card contains the right number of items', async () => {
+    it('Should additional queries card contains the right number of items', async () => {
         const queryLines = getQueries(querySel, '#additionalQueries');
+
         expect(queryLines.length).equal(9);
     });
 
-    it('When a search string is entered, check the queries are filtered correctly', async () => {
+    it('Should queries are filtered when a search string is entered', async () => {
         const searchBox = querySel.shadowRoot.querySelector('#searchbox');
         const searchInput = searchBox.shadowRoot.querySelector('.search-input');
+
         searchInput.value = "address";
         // Value changed from js does not send the 'input' event: simulate it
         searchInput.dispatchEvent(new Event("input"));
+
         // setTimeout(0) will make sure we are the last in the event queue, so the click event has been handled by the web component
         let promise = new Promise((resolve) => {
             setTimeout(() => {
@@ -61,11 +65,9 @@ describe('query-selector', () => {
         // wait for the promise is done
         await promise.then(() => {
         });
-
-
     });
 
-    it('Send en event when a query is selected', async () => {
+    it('Should send en event when a query is selected', async () => {
         let eventReceived = false;
         let selectedQuery = "";
         querySel.addEventListener(
@@ -75,17 +77,21 @@ describe('query-selector', () => {
                 selectedQuery = e.detail;
             }
         );
+
         getFirstDefaultQuery(querySel).click();
+
         expect(eventReceived).to.equal(true);
         expect(selectedQuery).to.equal("findByName");
     });
 
-    it('Display the query arguments when the query is selected', async () => {
+    it('Should display the query arguments when the query is selected', async () => {
         // No selection: filter card should not be displayed
         let filterCard = getfilterCard(querySel);
+
         expect(filterCard).to.equal(null);
 
         getFirstDefaultQuery(querySel).click();
+
         let promise = new Promise((resolve) => {
             setTimeout(() => {
                 // After selection, filter card should contain the right arguments
@@ -103,7 +109,7 @@ describe('query-selector', () => {
 
     });
 
-    it('Send an event when a query argument value is changed', async () => {
+    it('Should send an event when a query argument value is changed', async () => {
         let eventReceived = false;
         let filterValue = "";
         querySel.addEventListener(
@@ -113,6 +119,7 @@ describe('query-selector', () => {
                 filterValue = e.detail[0].value;
             }
         );
+
         getFirstDefaultQuery(querySel).click();
         let promise = new Promise((resolve) => {
             setTimeout(() => {
@@ -127,11 +134,12 @@ describe('query-selector', () => {
         // wait for the promise is done
         await promise.then(() => {
         });
+
         expect(eventReceived).to.equal(true);
         expect(filterValue).to.equal("myName");
     });
 
-    it('Send an event when the pagination (nb elements or page number) is changed', async () => {
+    it('Should send an event when the pagination (nb elements or page number) is changed', async () => {
         let elementValue = "";
         let pageNumberValue = "";
         querySel.addEventListener(
@@ -148,11 +156,13 @@ describe('query-selector', () => {
         );
         const paginationSel = querySel.shadowRoot.querySelector('pagination-selector');
         const inputs = paginationSel.shadowRoot.querySelectorAll('input');
+
         inputs[0].value = "20";
         // simulate input event
         inputs[0].dispatchEvent(new Event("input"));
         inputs[1].value = "1";
         inputs[1].dispatchEvent(new Event("input"));
+
         expect(elementValue).to.equal("20");
         expect(pageNumberValue).to.equal("1");
     });

@@ -12,13 +12,14 @@ beforeEach(async () => {
 
 
 describe('search-box', () => {
-  it('Shows initially an empty input element', async () => {
+  it('Should show initially an empty input element', async () => {
     const input = searchBox.shadowRoot.querySelector('input');
+
     expect(input).not.to.equal(null);
     expect(input.value).equal("");
   });
 
-  it('Send en event when an input value is entered', async () => {
+  it('Should send en event when an input value is entered', async () => {
     let eventReceived = false;
     let value = "";
     searchBox.addEventListener(
@@ -28,8 +29,8 @@ describe('search-box', () => {
           value = e.detail;
         }
     );
-
     const input = searchBox.shadowRoot.querySelector('input');
+
     input.value = "at";
     // Value changed from js does not send the 'input' event: simulate it
     input.dispatchEvent(new Event("input"));
