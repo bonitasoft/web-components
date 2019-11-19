@@ -3,7 +3,7 @@ import {css, customElement, html, LitElement, property} from 'lit-element';
 @customElement('search-box')
 export class SearchBox extends LitElement {
 
-  @property({ type: String, reflect: true })
+  @property({ attribute: 'placeholder', type: String, reflect: true })
   private placeHolder: string = "Search queries";
 
   static get styles() {

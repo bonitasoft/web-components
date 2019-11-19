@@ -18,4 +18,8 @@ Run:
 
 Then import `node_modules/query-selector/query-selector.es5.min.js`
 
-And you can use new html tag `<query-selector></query-selector>`
+And you can use new html tag, for example:
+ 
+ `<query-selector queries='{"defaultQuery": [{"displayName": "name", "query": "findByName", "filters": [{"name": "name", "type": "String"}]}], "additionalQuery": [{"displayName": "find", "query": "find", "filters": []}]}'></query-selector>`
+
+

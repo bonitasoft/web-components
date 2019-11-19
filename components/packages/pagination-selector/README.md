@@ -22,4 +22,4 @@ Run:
 
 Then import `node_modules/pagination-selector/pagination-selector.es5.min.js`
 
-And you can use new html tag `<pagination-selector nbElements="20" pageIndex="1"></pagination-selector>`
+And you can use new html tag `<pagination-selector nb-elements="20" page-index="1"></pagination-selector>`

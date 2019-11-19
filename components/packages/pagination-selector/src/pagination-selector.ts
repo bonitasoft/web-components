@@ -3,10 +3,10 @@ import {css, customElement, html, LitElement, property} from 'lit-element';
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
 
-    @property({type: Number, reflect: true})
+    @property({attribute: 'nb-elements', type: Number, reflect: true})
     private nbElements: number = 10;
 
-    @property({type: Number, reflect: true})
+    @property({attribute: 'page-index', type: Number, reflect: true})
     private pageIndex: number = 0;
 
     static get tag() {
