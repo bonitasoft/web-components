@@ -170,7 +170,7 @@ describe('query-selector', () => {
     function getQuerySelector() {
         return fixture(html`
       <query-selector
-        queries = ${queries1}
+        queries = ${queries}
       >
     </query-selector>
     `);
