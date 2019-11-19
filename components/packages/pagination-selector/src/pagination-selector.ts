@@ -2,7 +2,8 @@ import { css, customElement, html, LitElement } from 'lit-element';
 
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
-  static get styles() {
+
+    static get styles() {
     return css`
       :host {
         display: block;
@@ -77,7 +78,7 @@ export class PaginationSelector extends LitElement {
 
   private pageNumberChanged(value: string) {
     this.dispatchEvent(
-      new CustomEvent('paginationElementsChanged', {
+      new CustomEvent('paginationPagesChanged', {
         detail: value,
         bubbles: true,
         composed: true,
@@ -87,7 +88,7 @@ export class PaginationSelector extends LitElement {
 
   private nbElementsChanged(value: string) {
     this.dispatchEvent(
-      new CustomEvent('paginationPagesChanged', {
+      new CustomEvent('paginationElementsChanged', {
         detail: value,
         bubbles: true,
         composed: true,

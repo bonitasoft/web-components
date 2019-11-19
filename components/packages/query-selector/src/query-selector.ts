@@ -89,12 +89,12 @@ export class QuerySelector extends LitElement {
       <search-box
         id="searchbox"
         @valueChange=${(e: any) => {
-          this.filterChanged(e.detail);
+          this.queryFilterChanged(e.detail);
         }}
       ></search-box>
       <div class="card-deck">
         <!-- Default Queries-->
-        <div class="card">
+        <div id="defaultQueries" class="card">
           <div class="card-header">
             <b>"Find By" queries on an attribute</b>
           </div>
@@ -104,7 +104,7 @@ export class QuerySelector extends LitElement {
         </div>
 
         <!-- Additional Queries-->
-        <div class="card">
+        <div id="additionalQueries" class="card">
           <div class="card-header">
             <b>Additional queries</b>
           </div>
@@ -118,7 +118,7 @@ export class QuerySelector extends LitElement {
       <!-- Filter card -->
       ${this.filterArgs.length > 0
         ? html`
-            <div class="card">
+            <div id="filter" class="card">
               <div class="card-header">
                 <b>${this.filterTitle} </b>
               </div>
@@ -194,10 +194,10 @@ export class QuerySelector extends LitElement {
   }
 
   private isFiltered(query: string) {
-    return query.includes(this.queryFilter);
+    return query.toLowerCase().includes(this.queryFilter);
   }
 
-  private filterChanged(value: string) {
+  private queryFilterChanged(value: string) {
     this.queryFilter = value;
   }
 
