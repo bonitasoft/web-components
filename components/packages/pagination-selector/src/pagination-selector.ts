@@ -8,10 +8,6 @@ export class PaginationSelector extends LitElement {
 
     @property({attribute: 'page-index', type: Number, reflect: true})
     private pageIndex: number = 0;
-
-    static get tag() {
-        return "pagination-selector";
-    }
     
     static get styles() {
     return css`
@@ -88,7 +84,7 @@ export class PaginationSelector extends LitElement {
 
   private pageNumberChanged(value: string) {
     this.dispatchEvent(
-      new CustomEvent('paginationElementsChanged', {
+      new CustomEvent('paginationPagesChanged', {
         detail: value,
         bubbles: true,
         composed: true,
@@ -98,7 +94,7 @@ export class PaginationSelector extends LitElement {
 
   private nbElementsChanged(value: string) {
     this.dispatchEvent(
-      new CustomEvent('paginationPagesChanged', {
+      new CustomEvent('paginationElementsChanged', {
         detail: value,
         bubbles: true,
         composed: true,
