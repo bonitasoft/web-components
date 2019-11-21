@@ -1,6 +1,8 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
+import minifyHTML from 'rollup-plugin-minify-html-literals';
+
 import postcss from 'rollup-plugin-postcss';
 
 export default opts => {
@@ -23,6 +25,7 @@ export default opts => {
       }
     ],
     plugins: [
+      minifyHTML(),
       terser({
         //FIXME: no minify in dev mode
         // mandatory as we are minifying ES Modules here

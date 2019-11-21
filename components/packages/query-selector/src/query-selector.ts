@@ -78,6 +78,9 @@ export class QuerySelector extends LitElement {
         text-align: center;
         font-style: italic;
       }
+      search-box {
+        --max-width :100%;
+      }
     `;
   }
 
@@ -142,12 +145,12 @@ export class QuerySelector extends LitElement {
                         </div>
                       </div>
                     </div>
-                  `,
-                )}
+                  `
+      )}
               </div>
             </div>
           `
-        : html``}
+      : html``}
 
       <!-- Pagination -->
       <pagination-selector></pagination-selector>
@@ -191,7 +194,7 @@ export class QuerySelector extends LitElement {
               ${query.query}
             </li>
           `
-        : html``}
+      : html``}
     `;
   }
 
@@ -209,8 +212,8 @@ export class QuerySelector extends LitElement {
       new CustomEvent('filterChanged', {
         detail: this.filterArgs,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
@@ -222,8 +225,8 @@ export class QuerySelector extends LitElement {
       new CustomEvent('querySelected', {
         detail: this.selectedQuery,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
