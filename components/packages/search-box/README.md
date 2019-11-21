@@ -4,6 +4,10 @@
 
 Simple search box web component
 
+## Attributes
+
+- `placeHolder`
+
 ## Usage
 
 Run:
@@ -12,4 +16,4 @@ Run:
 
 Then import `node_modules/search-box/search-box.es5.min.js`
 
-And you can use new html tag `<search-box></search-box>`
+And you can use new html tag `<search-box placeholder="search"></search-box>`

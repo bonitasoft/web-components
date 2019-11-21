@@ -5,7 +5,8 @@ import 'pagination-selector';
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
-  @property({ type: Object, reflect: true })
+
+  @property({ attribute: 'queries', type: Object, reflect: true })
   private queries: any = JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
 
   @property({ type: String })

@@ -1,8 +1,14 @@
-import { css, customElement, html, LitElement } from 'lit-element';
+import {css, customElement, html, LitElement, property} from 'lit-element';
 
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
 
+    @property({attribute: 'nb-elements', type: Number, reflect: true})
+    private nbElements: number = 10;
+
+    @property({attribute: 'page-index', type: Number, reflect: true})
+    private pageIndex: number = 0;
+    
     static get styles() {
     return css`
       :host {
@@ -46,7 +52,7 @@ export class PaginationSelector extends LitElement {
                 type="text"
                 class="form-control pagination-input"
                 id="elem"
-                value="10"
+                value=${this.nbElements}
                 @input=${(e: any) => this.nbElementsChanged(e.target.value)}
                 placeholder="Type a number of elements"
               />
@@ -56,15 +62,15 @@ export class PaginationSelector extends LitElement {
             </div>
           </div>
           <div class="pagination-item">
-            <label for="page">Page number (p)</label>
+            <label for="page">Page index (p)</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
                 class="form-control pagination-input"
                 id="page"
-                value="0"
+                value=${this.pageIndex}
                 @input=${(e: any) => this.pageNumberChanged(e.target.value)}
-                placeholder="Type a page number"
+                placeholder="Type a page index"
               />
               <div class="input-group-append">
                 <span class="input-group-text pagination-input">¶</span>
