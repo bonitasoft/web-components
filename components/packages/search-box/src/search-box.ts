@@ -23,7 +23,7 @@ export class SearchBox extends LitElement {
 
   render() {
     return html`
-      <input class="search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeHolder}" autocomplete="off" type="search" />
+      <input class="search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeholder}" autocomplete="off" type="search" />
     `;
   }
 
