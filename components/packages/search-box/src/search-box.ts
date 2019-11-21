@@ -4,7 +4,7 @@ import {css, customElement, html, LitElement, property} from 'lit-element';
 export class SearchBox extends LitElement {
 
   @property({ attribute: 'placeholder', type: String, reflect: true })
-  private placeHolder: string = "Search queries";
+  private placeholder: string = "Search queries";
 
   static get styles() {
     return css`
