@@ -1,4 +1,6 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
+// @ts-ignore
+import bootstrapStyle from './style.scss';
 
 @customElement('search-box')
 export class SearchBox extends LitElement {
@@ -13,6 +15,7 @@ export class SearchBox extends LitElement {
         font-family: sans-serif;
         text-align: left;
         padding: 10px 10px 10px 0px;
+        max-width: var(--max-width,50%);
       }
 
       .search-input {
@@ -23,7 +26,8 @@ export class SearchBox extends LitElement {
 
   render() {
     return html`
-      <input class="search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeholder}" autocomplete="off" type="search" />
+      <style>${bootstrapStyle}</style>
+      <input class="form-control search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeholder}" autocomplete="off" type="search" />
     `;
   }
 

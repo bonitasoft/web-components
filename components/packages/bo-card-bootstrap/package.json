@@ -1,19 +1,16 @@
 {
-  "name": "search-box",
-  "version": "1.0.0",
-  "description": "A simple search box",
-  "homepage": "https://github.com/bonitasoft/web-components/components/packages/search-box#readme",
+  "name": "bo-card-bootstrap",
+  "version": "0.0.1",
+  "description": "A simple card component with bootstrap",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/bo-card-bootstrap#readme",
   "license": "MIT",
-  "main": "src/index.js",
-  "module": "dist/search-box.es5.min.js",
+  "main": "src/index.ts",
   "files": [
     "dist"
   ],
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "lit-element": "^2.2.1"
-  },
   "devDependencies": {
+    "lit-element": "^2.2.0",
+    "node-sass": "^4.13.0",
     "rollup-plugin-typescript": "^1.0.1",
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",
@@ -26,7 +23,10 @@
   "scripts": {
     "start": "npm install && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "tsc && rollup -c",
+    "bundle": "npm install && rollup -c",
     "publish": "npm publish"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1"
   }
 }

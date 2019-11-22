@@ -2,6 +2,8 @@ import { css, customElement, html, LitElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import 'search-box';
 import 'pagination-selector';
+// @ts-ignore
+import bootstrapStyles from './style.scss';
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
@@ -76,13 +78,15 @@ export class QuerySelector extends LitElement {
         text-align: center;
         font-style: italic;
       }
+      search-box {
+        --max-width :100%;
+      }
     `;
   }
 
   render() {
-    return html`
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-
+    return html`      
+      <style>${bootstrapStyles}</style>
       <div class="guide">
         Select a query from one of the 2 lists. If any, enter the filter value(s)
       </div>
@@ -141,12 +145,12 @@ export class QuerySelector extends LitElement {
                         </div>
                       </div>
                     </div>
-                  `,
-                )}
+                  `
+      )}
               </div>
             </div>
           `
-        : html``}
+      : html``}
 
       <!-- Pagination -->
       <pagination-selector></pagination-selector>
@@ -190,7 +194,7 @@ export class QuerySelector extends LitElement {
               ${query.query}
             </li>
           `
-        : html``}
+      : html``}
     `;
   }
 
@@ -208,8 +212,8 @@ export class QuerySelector extends LitElement {
       new CustomEvent('filterChanged', {
         detail: this.filterArgs,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
@@ -221,8 +225,8 @@ export class QuerySelector extends LitElement {
       new CustomEvent('querySelected', {
         detail: this.selectedQuery,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 

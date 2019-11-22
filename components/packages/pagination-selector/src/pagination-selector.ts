@@ -1,4 +1,6 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
+// @ts-ignore
+import bootstrapStyles from './style.scss';
 
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
@@ -37,8 +39,7 @@ export class PaginationSelector extends LitElement {
 
   render() {
     return html`
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-
+      <style>${bootstrapStyles}</style>
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header">
