@@ -1,0 +1,11 @@
+{
+  "lang": "en",
+  "query": {
+    "help": "Select a query from one of the 2 lists. If any, enter the filter value(s)",
+    "defaultQueriesTitle": "'Find By' queries on an attribute",
+    "additionalQueriesTitle": "Additional queries",
+    "filterTitlePrefix": "Filter the query of",
+    "tip1": "Now, add the widgets to the whiteboard that will use this variable.",
+    "tip2": "The return type of this variable is an array."
+  }
+}

@@ -9,8 +9,12 @@
   "files": [
     "dist"
   ],
-  "devDependencies": {
+  "dependencies": {
     "lit-element": "^2.2.1",
+    "lit-translate": "^1.1.20"
+  },
+  "devDependencies": {
+    "@rollup/plugin-json": "^4.0.0",
     "rollup-plugin-typescript": "^1.0.1",
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",

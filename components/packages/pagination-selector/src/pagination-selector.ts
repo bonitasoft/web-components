@@ -1,14 +1,28 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
+import {registerTranslateConfig, translate, use} from "lit-translate";
+
+// Registers i18n loader
+registerTranslateConfig({
+    loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
+});
 
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
+
+    @property({ attribute: 'lang', type: String, reflect: true })
+    lang: string = "en";
 
     @property({attribute: 'nb-elements', type: Number, reflect: true})
     private nbElements: number = 10;
 
     @property({attribute: 'page-index', type: Number, reflect: true})
     private pageIndex: number = 0;
-    
+
+    async connectedCallback() {
+        use(this.lang).then();
+        super.connectedCallback();
+    }
+
     static get styles() {
     return css`
       :host {
@@ -42,11 +56,11 @@ export class PaginationSelector extends LitElement {
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header">
-          <b>Pagination</b>
+          <b>${translate("pagination.title")}</b>
         </div>
         <div class="pagination-container">
           <div class="pagination-item">
-            <label for="elem">Element (c)</label>
+            <label for="elem">${translate("pagination.nbelements")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
@@ -54,7 +68,7 @@ export class PaginationSelector extends LitElement {
                 id="elem"
                 value=${this.nbElements}
                 @input=${(e: any) => this.nbElementsChanged(e.target.value)}
-                placeholder="Type a number of elements"
+                placeholder=${translate("pagination.nbelementsPlaceholder")}
               />
               <div class="input-group-append">
                 <span class="input-group-text pagination-input">¶</span>
@@ -62,7 +76,7 @@ export class PaginationSelector extends LitElement {
             </div>
           </div>
           <div class="pagination-item">
-            <label for="page">Page index (p)</label>
+            <label for="page">${translate("pagination.pageindex")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
@@ -70,7 +84,7 @@ export class PaginationSelector extends LitElement {
                 id="page"
                 value=${this.pageIndex}
                 @input=${(e: any) => this.pageNumberChanged(e.target.value)}
-                placeholder="Type a page index"
+                placeholder=${translate("pagination.pageindexPlaceholder")}
               />
               <div class="input-group-append">
                 <span class="input-group-text pagination-input">¶</span>

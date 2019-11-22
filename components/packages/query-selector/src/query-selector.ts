@@ -2,11 +2,20 @@ import { css, customElement, html, LitElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import 'search-box';
 import 'pagination-selector';
+import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
+
+// Registers i18n loader
+registerTranslateConfig({
+    loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
+});
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
 
-  @property({ attribute: 'queries', type: Object, reflect: true })
+    @property({ attribute: 'lang', type: String, reflect: true })
+    lang: string = "en";
+
+    @property({ attribute: 'queries', type: Object, reflect: true })
   private queries: any = JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
 
   @property({ type: String })
@@ -18,16 +27,25 @@ export class QuerySelector extends LitElement {
   @property({ type: String })
   private queryFilter = '';
 
-  private static readonly filterTitlePrefix = 'Filter the query of';
-  private filterTitle: string = QuerySelector.filterTitlePrefix;
+  private filterTitlePrefix:string = "";
+  private filterTitle: string = "";
   private defaultSelectedIndex: number | undefined = undefined;
   private additionalSelectedIndex: number | undefined = undefined;
 
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+        listenForLangChanged(() => {
+            this.filterTitlePrefix = get("query.filterTitlePrefix");
+            this.filterTitle = this.filterTitlePrefix;
+        });
+    }
 
-  static get styles() {
+    async connectedCallback() {
+        use(this.lang).then();
+        super.connectedCallback();
+    }
+
+    static get styles() {
     return css`
       :host {
         display: block;
@@ -84,7 +102,7 @@ export class QuerySelector extends LitElement {
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 
       <div class="guide">
-        Select a query from one of the 2 lists. If any, enter the filter value(s)
+        ${translate("query.help")}
       </div>
       <!-- Query card -->
       <search-box
@@ -97,7 +115,7 @@ export class QuerySelector extends LitElement {
         <!-- Default Queries-->
         <div id="defaultQueries" class="card">
           <div class="card-header">
-            <b>"Find By" queries on an attribute</b>
+            <b>${translate("query.defaultQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
             ${this.queries.defaultQuery.map((query: any, index: number) => this.getDefaultQueries(query, index))}
@@ -107,7 +125,7 @@ export class QuerySelector extends LitElement {
         <!-- Additional Queries-->
         <div id="additionalQueries" class="card">
           <div class="card-header">
-            <b>Additional queries</b>
+            <b>${translate("query.additionalQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
             ${this.queries.additionalQuery.map((query: any, index: number) => this.getAdditionalQueries(query, index))}
@@ -153,8 +171,8 @@ export class QuerySelector extends LitElement {
       <br />
 
       <!-- Tips-->
-      <p><span class="tip">Tip:</span> Now, add the widgets to the whiteboard that will use this variable.</p>
-      <p><span class="tip">Tip:</span> The return type of this variable is an array.</p>
+      <p><span class="tip">Tip:</span> ${translate("query.tip1")}</p>
+      <p><span class="tip">Tip:</span> ${translate("query.tip2")}</p>
     `;
   }
 
@@ -214,7 +232,7 @@ export class QuerySelector extends LitElement {
   }
 
   private select(query: any) {
-    this.filterTitle = QuerySelector.filterTitlePrefix + ' ' + query.query;
+    this.filterTitle = this.filterTitlePrefix + ' ' + query.query;
     this.selectedQuery = query.query;
     this.filterArgs = query.filters;
     this.dispatchEvent(

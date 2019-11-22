@@ -10,7 +10,8 @@
     "dist"
   ],
   "dependencies": {
-    "lit-element": "^2.2.1"
+    "lit-element": "^2.2.1",
+    "lit-translate": "^1.1.20"
   },
   "devDependencies": {
     "rollup-plugin-typescript": "^1.0.1",
