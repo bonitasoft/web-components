@@ -1,17 +1,17 @@
-import {css, customElement, html, LitElement, property} from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 // @ts-ignore
 import bootstrapStyles from './style.scss';
 
 @customElement('pagination-selector')
 export class PaginationSelector extends LitElement {
 
-    @property({attribute: 'nb-elements', type: Number, reflect: true})
-    private nbElements: number = 10;
+  @property({ attribute: 'nb-elements', type: Number, reflect: true })
+  private nbElements: number = 10;
 
-    @property({attribute: 'page-index', type: Number, reflect: true})
-    private pageIndex: number = 0;
-    
-    static get styles() {
+  @property({ attribute: 'page-index', type: Number, reflect: true })
+  private pageIndex: number = 0;
+
+  static get styles() {
     return css`
       :host {
         display: block;

@@ -1,4 +1,4 @@
-import {css, customElement, html, LitElement, property} from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 // @ts-ignore
 import bootstrapStyle from './style.scss';
 
@@ -6,7 +6,7 @@ import bootstrapStyle from './style.scss';
 export class SearchBox extends LitElement {
 
   @property({ attribute: 'placeholder', type: String, reflect: true })
-  private placeholder: string = "Search queries";
+  private placeholder: string = 'Search queries';
 
   static get styles() {
     return css`
@@ -15,7 +15,7 @@ export class SearchBox extends LitElement {
         font-family: sans-serif;
         text-align: left;
         padding: 10px 10px 10px 0px;
-        max-width: var(--max-width,50%);
+        max-width: var(--max-width, 50%);
       }
 
       .search-input {
