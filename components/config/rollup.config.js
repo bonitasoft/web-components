@@ -4,6 +4,7 @@ import babel from 'rollup-plugin-babel';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript';
+import copy from 'rollup-plugin-copy';
 
 import postcss from 'rollup-plugin-postcss';
 
@@ -15,28 +16,39 @@ export default opts => {
     opts
   );
 
+  /**
+   * Apply this plugin only when prod bundled is called
+   */
+  const prodPlugin = !options.isProductionBundle ? [
+    minifyHTML(),
+    // Minify file
+    terser({
+      module: true,
+      compress: {
+        passes: 2
+      }
+    }),
+    // Prepare artifact to publish in note repository
+    copy({
+      targets: [
+        { src: 'index.html', dest: 'dist' },
+        { src: 'README.md', dest: 'dist' }
+      ]
+    })] : [];
+
   return {
     input: options.input,
-    output: [
+    output: options.output || [
       {
         format: 'iife',
-        file: `./dist/${options.fileName}.es5.min.js`,
+        file: `./dist/lib/${options.fileName}.es5.min.js`,
         name: 'main',
         sourcemap: options.sourceMap || false,
         globals: { 'lit-element': 'litElement' }
       }
     ],
-    plugins: [
-      minifyHTML(),
-      terser({
-        //FIXME: no minify in dev mode
-        // mandatory as we are minifying ES Modules here
-        module: true,
-        compress: {
-          // compress twice for further compressed code
-          passes: 2
-        }
-      }),
+    context: 'this',
+    plugins: [...prodPlugin,
       nodeResolve(),
       babel({
         runtimeHelpers: true,
@@ -46,7 +58,6 @@ export default opts => {
         inject: false,
         plugins: []
       }),
-      typescript(),
       json()
     ].concat(options.plugins)
   };

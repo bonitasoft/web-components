@@ -1,6 +1,6 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property, unsafeCSS} from 'lit-element';
 // @ts-ignore
-import bootstrapStyles from './style.scss';
+import style from './style.scss';
 import {registerTranslateConfig, translate, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -36,12 +36,11 @@ export class PaginationSelector extends LitElement {
         }
     }
 
-
   @property({ type: Boolean})
   private isCollapsed: boolean = true;
 
   static get styles() {
-    return css`
+    return [css`${unsafeCSS(style)}`,css`
       :host {
         display: block;
         font-family: sans-serif;
@@ -74,12 +73,11 @@ export class PaginationSelector extends LitElement {
         transition: max-height 0.2s ease;
          overflow:hidden;
       }                
-    `;
+    `];
   }
 
   render() {
-    return html`
-      <style>${bootstrapStyles}</style>
+    return html`      
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header" @click="${this.handleCollapse}">                      
@@ -132,8 +130,8 @@ export class PaginationSelector extends LitElement {
       new CustomEvent('paginationPagesChanged', {
         detail: value,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 
@@ -142,8 +140,8 @@ export class PaginationSelector extends LitElement {
       new CustomEvent('paginationElementsChanged', {
         detail: value,
         bubbles: true,
-        composed: true,
-      }),
+        composed: true
+      })
     );
   }
 }

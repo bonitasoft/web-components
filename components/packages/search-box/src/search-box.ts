@@ -1,6 +1,6 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
 // @ts-ignore
-import bootstrapStyle from './style.scss';
+import style from './style.scss';
 import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -46,7 +46,7 @@ export class SearchBox extends LitElement {
   }
 
   static get styles() {
-    return css`
+    return [css`${unsafeCSS(style)}`,css`
       :host {
         display: block;
         font-family: sans-serif;
@@ -58,12 +58,11 @@ export class SearchBox extends LitElement {
       .search-input {
         font-size: 16px;
       }
-    `;
+    `];
   }
 
   render() {
-    return html`
-      <style>${bootstrapStyle}</style>
+    return html`      
       <input class="form-control search-input" @input=${(e: any) => this.valueChanged(e.target.value)} placeholder="&#x1F50D;${this.placeholder}" autocomplete="off" type="search" />
     `;
   }

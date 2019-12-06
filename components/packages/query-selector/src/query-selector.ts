@@ -1,9 +1,8 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
 import 'search-box';
 import 'pagination-selector';
-// @ts-ignore
-import bootstrapStyles from './style.scss';
+import style from './style.scss';
 import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -12,6 +11,9 @@ import * as i18n_fr from "./i18n/fr.json";
 registerTranslateConfig({
     loader: (lang) => Promise.resolve(QuerySelector.getCatalog(lang))
 });
+
+
+
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
@@ -36,6 +38,7 @@ export class QuerySelector extends LitElement {
   private defaultSelectedIndex: number | undefined = undefined;
   private additionalSelectedIndex: number | undefined = undefined;
 
+
     constructor() {
         super();
         listenForLangChanged(() => {
@@ -58,8 +61,8 @@ export class QuerySelector extends LitElement {
         }
     }
 
-    static get styles() {
-    return css`
+  static get styles() {
+    return [css`${unsafeCSS(style)}`,css`
       :host {
         display: block;
         font-family: sans-serif;
@@ -112,13 +115,11 @@ export class QuerySelector extends LitElement {
       }
       .card-deck {
         margin-bottom: 15px;
-      }
-    `;
+      }`];
   }
 
   render() {
-    return html`
-      <style>${bootstrapStyles}</style>
+    return html`      
       <div class="guide">
         ${translate("query.help")}
       </div>
