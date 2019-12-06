@@ -12,7 +12,7 @@ export class PaginationSelector extends LitElement {
   private pageIndex: number = 0;
 
   @property({ type: Boolean})
-  private isCollapse: boolean = true;
+  private isCollapsed: boolean = true;
 
   static get styles() {
     return css`
@@ -20,7 +20,7 @@ export class PaginationSelector extends LitElement {
         display: block;
         font-family: sans-serif;
         text-align: left;
-        padding: 10px 0px 10px 0px;        
+        padding: 10px 0px 10px 0px;      
       }
 
       .pagination-container {
@@ -57,10 +57,10 @@ export class PaginationSelector extends LitElement {
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header" @click="${this.handleCollapse}">                      
-          <i>${this.isCollapse ? '►' : '▼'}</i>  
+          <i>${this.isCollapsed ? '►' : '▼'}</i>  
           <b>Pagination</b>
         </div>
-        <div class="pagination-container ${this.isCollapse ? 'accordion-close' : 'accordion-open'}">
+        <div class="pagination-container ${this.isCollapsed ? 'accordion-close' : 'accordion-open'}">
           <div class="pagination-item">
             <label for="elem">Element (c)</label>
             <div class="input-group pagination-input">
@@ -99,7 +99,7 @@ export class PaginationSelector extends LitElement {
   }
 
   private handleCollapse() {
-    this.isCollapse = !this.isCollapse;
+    this.isCollapsed = !this.isCollapsed;
   }
 
   private pageNumberChanged(value: string) {
