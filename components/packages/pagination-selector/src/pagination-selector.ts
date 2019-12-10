@@ -1,9 +1,11 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 import {registerTranslateConfig, translate, use} from "lit-translate";
+import * as i18n_en from "./i18n/en.json";
+import * as i18n_fr from "./i18n/fr.json";
 
 // Registers i18n loader
 registerTranslateConfig({
-    loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
+    loader: (lang) => Promise.resolve(PaginationSelector.getCatalog(lang))
 });
 
 @customElement('pagination-selector')
@@ -21,6 +23,15 @@ export class PaginationSelector extends LitElement {
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
+    }
+
+    static getCatalog(lang: string) {
+        switch(lang) {
+            case "fr":
+                return i18n_fr;
+            default:
+                return i18n_en;
+        }
     }
 
     static get styles() {

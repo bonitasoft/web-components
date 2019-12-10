@@ -1,9 +1,12 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
+import * as i18n_en from "./i18n/en.json";
+import * as i18n_fr from "./i18n/fr.json";
 
 // Registers i18n loader
 registerTranslateConfig({
-  loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
+  loader: (lang) => Promise.resolve(SearchBox.getCatalog(lang))
+  // loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
 });
 
 @customElement('search-box')
@@ -55,5 +58,14 @@ export class SearchBox extends LitElement {
 
   private valueChanged(value: string) {
     this.dispatchEvent(new CustomEvent('valueChange', { detail: value }));
+  }
+
+  public static getCatalog(lang: string) {
+    switch(lang) {
+      case "fr":
+        return i18n_fr;
+      default:
+        return i18n_en;
+    }
   }
 }

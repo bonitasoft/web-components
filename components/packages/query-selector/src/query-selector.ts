@@ -3,10 +3,12 @@ import { classMap } from 'lit-html/directives/class-map.js';
 import 'search-box';
 import 'pagination-selector';
 import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
+import * as i18n_en from "./i18n/en.json";
+import * as i18n_fr from "./i18n/fr.json";
 
 // Registers i18n loader
 registerTranslateConfig({
-    loader: lang => fetch(`dist/assets/i18n/${lang}.json`).then(res => res.json())
+    loader: (lang) => Promise.resolve(QuerySelector.getCatalog(lang))
 });
 
 @customElement('query-selector')
@@ -43,6 +45,15 @@ export class QuerySelector extends LitElement {
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
+    }
+
+    static getCatalog(lang: string) {
+        switch(lang) {
+            case "fr":
+                return i18n_fr;
+            default:
+                return i18n_en;
+        }
     }
 
     static get styles() {
@@ -106,6 +117,7 @@ export class QuerySelector extends LitElement {
       </div>
       <!-- Query card -->
       <search-box
+      lang="${this.lang}"
         id="searchbox"
         @valueChange=${(e: any) => {
           this.queryFilterChanged(e.detail);
@@ -167,7 +179,9 @@ export class QuerySelector extends LitElement {
         : html``}
 
       <!-- Pagination -->
-      <pagination-selector></pagination-selector>
+      <pagination-selector
+        lang="${this.lang}"
+      ></pagination-selector>
       <br />
 
       <!-- Tips-->
