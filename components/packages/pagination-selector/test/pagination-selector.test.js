@@ -1,6 +1,6 @@
 import {expect, fixture, html} from '@open-wc/testing';
 
-import '../build/pagination-selector.js';
+import '../dist/pagination-selector.es5.min.js';
 
 describe('pagination-selector', () => {
 
@@ -30,6 +30,15 @@ describe('pagination-selector', () => {
 
         expect(elementValue).to.equal("20");
         expect(pageNumberValue).to.equal("1");
+    });
+
+    it('Should display french labels when lang attribute is fr', async () => {
+        let paginationSel = await fixture(html`
+      <pagination-selector lang="fr"></pagination-selector>
+    `);
+        const labels = paginationSel.shadowRoot.querySelectorAll('label');
+        expect(labels.length).to.equal(2);
+        expect(labels[1].innerText).to.equal("Index de la page (p)");
     });
 
     function getPaginationSelector() {

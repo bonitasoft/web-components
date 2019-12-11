@@ -1,12 +1,49 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 // @ts-ignore
 import bootstrapStyle from './style.scss';
+import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
+import * as i18n_en from "./i18n/en.json";
+import * as i18n_fr from "./i18n/fr.json";
+
+// Registers i18n loader
+registerTranslateConfig({
+  loader: (lang) => Promise.resolve(SearchBox.getCatalog(lang))
+});
 
 @customElement('search-box')
 export class SearchBox extends LitElement {
 
   @property({ attribute: 'placeholder', type: String, reflect: true })
-  private placeholder: string = 'Search queries';
+  private placeholder: string = "";
+
+  @property({ attribute: 'lang', type: String, reflect: true })
+  lang: string = "en";
+
+
+  constructor() {
+    super();
+    listenForLangChanged(() => {
+      // We do not use translate() directive in render() since placeholder is an exposed attribute
+      this.placeholder = get("app.placeholder");
+    });
+  }
+
+  async connectedCallback() {
+    // do not use i18n strings if attribute is set
+    if (!this.placeholder) {
+      use(this.lang).then();
+    }
+    super.connectedCallback();
+  }
+
+  static getCatalog(lang: string) {
+    switch(lang) {
+      case "fr":
+        return i18n_fr;
+      default:
+        return i18n_en;
+    }
+  }
 
   static get styles() {
     return css`

@@ -1,0 +1,11 @@
+{
+  "lang": "fr",
+  "query": {
+    "help": "Sélectionner une requête dans une des 2 listes. Si il y a des filtres, entrer une valeur pour chacun d'eux",
+    "defaultQueriesTitle": "Requêtes 'Find By' sur un attribut",
+    "additionalQueriesTitle" : "Requêtes additionelles",
+    "filterTitlePrefix": "Filtrer la requête",
+    "tip1": "Maintenant, ajouter les widgets qui utiliseront cette variable sur le tableau blanc.",
+    "tip2": "Le type de retour de cette variable est un tableau."
+  }
+}
