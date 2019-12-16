@@ -13,11 +13,11 @@ node('web-components') {
     }
 
     slackStage('🔧 Build', isBaseBranch) {
-        sh 'cd components && npm run build'
+        sh 'cd components && npm run build && npm run test'
     }
 
     slackStage('📦 Archive', isBaseBranch) {
-        archiveArtifacts 'components/packages/**/dist/*'
+        archiveArtifacts 'components/packages/**/dist'
     }
 }
 
