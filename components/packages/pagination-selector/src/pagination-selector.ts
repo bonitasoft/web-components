@@ -57,8 +57,7 @@ export class PaginationSelector extends LitElement {
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header" @click="${this.handleCollapse}">                      
-          <i>${this.isCollapsed ? '►' : '▼'}</i>  
-          <b>Pagination</b>
+          <b>${this.isCollapsed ? '►' : '▼'} Pagination</b>
         </div>
         <div class="pagination-container ${this.isCollapsed ? 'accordion-close' : 'accordion-open'}">
           <div class="pagination-item">
