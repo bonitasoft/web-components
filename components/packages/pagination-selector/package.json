@@ -6,7 +6,6 @@
   "license": "MIT",
   "main": "src/index.ts",
   "module": "dist/pagination-selector.es5.min.js",
-  "typings": "src/index.d.ts",
   "files": [
     "dist"
   ],
@@ -27,7 +26,7 @@
   "scripts": {
     "start": "tsc && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "rollup -c",
+    "bundle": "tsc && rollup -c",
     "tsc": "tsc",
     "publish": "npm publish"
   }

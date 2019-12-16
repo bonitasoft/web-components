@@ -1,7 +1,7 @@
 {
   "extends": "../../config/tsconfig.json",
-  "outDir": "./build" /* Redirect output structure to the directory. */,
+  "outDir": "./src" /* Redirect output structure to the directory. */,
   "rootDir": "./src" /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */,
-  "include": ["./src/**/*.ts"],
+  "include": ["./src/*.ts"],
   "exclude": ["node_modules"]
 }
