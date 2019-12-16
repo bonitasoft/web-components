@@ -70,7 +70,7 @@ export class QuerySelector extends LitElement {
       }
 
       .tip {
-        font-weight: bold;
+        padding-left: 10px;
       }
 
       .guide {
@@ -80,6 +80,9 @@ export class QuerySelector extends LitElement {
       }
       search-box {
         --max-width: 100%;
+      }
+      .card-deck {
+        margin-bottom: 15px;
       }
     `;
   }
@@ -117,8 +120,7 @@ export class QuerySelector extends LitElement {
             ${this.queries.additionalQuery.map((query: any, index: number) => this.getAdditionalQueries(query, index))}
           </ul>
         </div>
-      </div>
-      <br />
+      </div>      
 
       <!-- Filter card -->
       ${this.filterArgs.length > 0
@@ -157,8 +159,10 @@ export class QuerySelector extends LitElement {
       <br />
 
       <!-- Tips-->
-      <p><span class="tip">Tip:</span> Now, add the widgets to the whiteboard that will use this variable.</p>
-      <p><span class="tip">Tip:</span> The return type of this variable is an array.</p>
+      <div class="tip">
+      <p>💡 Now, add the widgets to the whiteboard that will use this variable.</p>
+      <p>💡 The return type of this variable is an array.</p>
+      </div>
     `;
   }
 
