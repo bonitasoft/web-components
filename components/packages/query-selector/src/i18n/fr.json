@@ -5,7 +5,7 @@
     "defaultQueriesTitle": "Requêtes 'Find By' sur un attribut",
     "additionalQueriesTitle" : "Requêtes additionelles",
     "filterTitlePrefix": "Filtrer la requête",
-    "tip1": "Maintenant, ajouter les widgets qui utiliseront cette variable sur le tableau blanc.",
+    "tip1": "Maintenant, ajouter les widgets qui utiliseront cette variable sur le whiteboard.",
     "tip2": "Le type de retour de cette variable est un tableau."
   }
 }

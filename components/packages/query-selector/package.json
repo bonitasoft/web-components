@@ -10,11 +10,11 @@
     "dist"
   ],
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "lit-element": "^2.2.1",
     "lit-translate": "^1.1.20",
     "pagination-selector": "1.0.0",
-    "search-box": "1.0.0",
-    "bootstrap": "^4.3.1"
+    "search-box": "1.0.0"
   },
   "devDependencies": {
     "rollup-plugin-typescript": "^1.0.1",
