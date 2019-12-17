@@ -1,6 +1,6 @@
 import {expect, fixture, html} from '@open-wc/testing';
 
-import '../build/query-selector.js';
+import '../dist/query-selector.es5.min.js';
 
 describe('query-selector', () => {
     let queries;
@@ -174,6 +174,18 @@ describe('query-selector', () => {
 
         expect(queryLinesDefault.length).equal(0);
         expect(queryLinesAdditional.length).equal(0);
+    });
+
+    it('Should display english labels by default', async () => {
+        querySel = await fixture(html`<query-selector></query-selector>`);
+        const additionalQueriesCard = querySel.shadowRoot.querySelector('#additionalQueries');
+        expect(additionalQueriesCard.innerText).to.equal("Additional queries");
+    });
+
+    it('Should display french labels when lang attribute is fr', async () => {
+        querySel = await fixture(html`<query-selector lang="fr"></query-selector>`);
+        const additionalQueriesCard = querySel.shadowRoot.querySelector('#additionalQueries');
+        expect(additionalQueriesCard.innerText).to.equal("Requêtes additionelles");
     });
 
     function getQuerySelector() {

@@ -1,6 +1,6 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
-import '../build/search-box.js';
+import '../dist/search-box.es5.min.js';
 
 let searchBox;
 
@@ -37,6 +37,14 @@ describe('search-box', () => {
 
     expect(eventReceived).to.equal(true);
     expect(value).to.equal("at");
+  });
+
+  it('Should display french labels when lang attribute is fr', async () => {
+    searchBox = await fixture(html`
+      <search-box lang="fr"></search-box>
+    `);
+    const input = searchBox.shadowRoot.querySelector('input');
+    expect(input.placeholder).equal("🔍Filtrer les requêtes");
   });
 
 });

@@ -2,6 +2,8 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 import babel from 'rollup-plugin-babel';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
+import json from '@rollup/plugin-json';
+import typescript from 'rollup-plugin-typescript';
 
 import postcss from 'rollup-plugin-postcss';
 
@@ -44,6 +46,8 @@ export default opts => {
         inject: false,
         plugins: []
       }),
+      typescript(),
+      json()
     ].concat(options.plugins)
   };
 }
