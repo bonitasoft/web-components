@@ -2,6 +2,7 @@ import { css, customElement, html, LitElement, property, unsafeCSS } from 'lit-e
 import { classMap } from 'lit-html/directives/class-map.js';
 import 'search-box';
 import 'pagination-selector';
+// @ts-ignore
 import style from './style.scss';
 import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
@@ -11,9 +12,6 @@ import * as i18n_fr from "./i18n/fr.json";
 registerTranslateConfig({
     loader: (lang) => Promise.resolve(QuerySelector.getCatalog(lang))
 });
-
-
-
 
 @customElement('query-selector')
 export class QuerySelector extends LitElement {

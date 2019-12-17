@@ -1,6 +1,5 @@
 import {expect, fixture, html} from '@open-wc/testing';
-import '../src/pagination-selector.js';
-
+import '../dist/lib/pagination-selector.es5.min';
 
 describe('pagination-selector', () => {
 

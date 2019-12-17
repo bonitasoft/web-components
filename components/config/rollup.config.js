@@ -58,7 +58,8 @@ export default opts => {
         inject: false,
         plugins: []
       }),
-      json()
+      json(),
+      typescript()
     ].concat(options.plugins)
   };
 }
