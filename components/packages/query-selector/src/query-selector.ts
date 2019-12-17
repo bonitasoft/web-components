@@ -99,7 +99,7 @@ export class QuerySelector extends LitElement {
       }
 
       .tip {
-        font-weight: bold;
+        padding-left: 10px;
       }
 
       .guide {
@@ -109,6 +109,9 @@ export class QuerySelector extends LitElement {
       }
       search-box {
         --max-width: 100%;
+      }
+      .card-deck {
+        margin-bottom: 15px;
       }
     `;
   }
@@ -147,8 +150,7 @@ export class QuerySelector extends LitElement {
             ${this.queries.additionalQuery.map((query: any, index: number) => this.getAdditionalQueries(query, index))}
           </ul>
         </div>
-      </div>
-      <br />
+      </div>      
 
       <!-- Filter card -->
       ${this.filterArgs.length > 0
@@ -189,8 +191,10 @@ export class QuerySelector extends LitElement {
       <br />
 
       <!-- Tips-->
-      <p><span class="tip">Tip:</span> ${translate("query.tip1")}</p>
-      <p><span class="tip">Tip:</span> ${translate("query.tip2")}</p>
+      <div class="tip">
+      <p>💡 ${translate("query.tip1")}</p>
+      <p>💡 ${translate("query.tip2")}</p>
+      </div>
     `;
   }
 

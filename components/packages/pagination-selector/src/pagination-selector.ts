@@ -36,17 +36,22 @@ export class PaginationSelector extends LitElement {
         }
     }
 
-    static get styles() {
+
+  @property({ type: Boolean})
+  private isCollapsed: boolean = true;
+
+  static get styles() {
     return css`
       :host {
         display: block;
         font-family: sans-serif;
         text-align: left;
-        padding: 10px 0px 10px 0px;
+        padding: 10px 0px 10px 0px;      
       }
 
       .pagination-container {
         display: flex;
+        max-height:100px;
         flex-wrap: wrap;
       }
 
@@ -59,6 +64,16 @@ export class PaginationSelector extends LitElement {
       .pagination-input {
         font-size: 14px;
       }
+      .accordion-close {
+        max-height:0;
+        transition: max-height 0.2s ease;           
+        overflow: hidden;   
+      } 
+      .accordion-open {
+        max-height: 100px;
+        transition: max-height 0.2s ease;
+         overflow:hidden;
+      }                
     `;
   }
 
@@ -67,10 +82,10 @@ export class PaginationSelector extends LitElement {
       <style>${bootstrapStyles}</style>
       <!-- Pagination card -->
       <div class="card">
-        <div class="card-header">
-          <b>${translate("pagination.title")}</b>
+        <div class="card-header" @click="${this.handleCollapse}">                      
+          <b>${this.isCollapsed ? '►' : '▼'} ${translate("pagination.title")}</b>
         </div>
-        <div class="pagination-container">
+        <div class="pagination-container ${this.isCollapsed ? 'accordion-close' : 'accordion-open'}">
           <div class="pagination-item">
             <label for="elem">${translate("pagination.nbelements")}</label>
             <div class="input-group pagination-input">
@@ -106,6 +121,10 @@ export class PaginationSelector extends LitElement {
         </div>
       </div>
     `;
+  }
+
+  private handleCollapse() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
   private pageNumberChanged(value: string) {
