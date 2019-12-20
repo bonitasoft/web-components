@@ -2,9 +2,19 @@
 const { createDefaultConfig } = require('@open-wc/testing-karma');
 const merge = require('webpack-merge');
 
+process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = config => {
   config.set(
     merge(createDefaultConfig(config), {
+      browsers: ['ChromeWithoutSecurity'],
+      // you can define custom flags
+      customLaunchers: {
+        ChromeWithoutSecurity: {
+          base: 'ChromeHeadless',
+          flags: ['--no-sandbox']
+        }
+      },
       files: [
         // runs all files ending with .test in the test folder,
         // can be overwritten by passing a --grep flag. examples:
