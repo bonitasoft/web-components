@@ -26,7 +26,7 @@ Once the components are compiled, you can run the tests:
 ### Run a single test
 To run a single test:
 
-    npm run test -- --grep packages/search-box/test/search-box.test.js
+    npm run test:single -- --grep packages/search-box/test/search-box.test.js
     
 - To run/debug from IntelliJ, you may create a Karma configuration
 
