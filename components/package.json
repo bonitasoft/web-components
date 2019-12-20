@@ -43,7 +43,7 @@
     "init": "  npm install && lerna bootstrap",
     "test": "karma start && karma start --grep packages/query-selector/test/*.test.complex.js",
     "test:single": "karma start",
-    "test:ci": "npm run bundle && npm run test",
+    "test:ci": "npm run build && npm run test",
     "test:coverage": "karma start --coverage",
     "build": "npm run init && npm run bundle"
   },
