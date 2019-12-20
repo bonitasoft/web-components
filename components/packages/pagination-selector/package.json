@@ -4,8 +4,8 @@
   "description": "A pagination selector",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/pagination-selector#readme",
   "license": "MIT",
-  "main": "src/index.js",
-  "module": "dist/pagination-selector.es5.min.js",
+  "main": "src/index.ts",
+  "module": "dist/lib/pagination-selector.es5.min.js",
   "files": [
     "dist"
   ],

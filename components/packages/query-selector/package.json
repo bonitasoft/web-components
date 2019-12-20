@@ -4,8 +4,8 @@
   "description": "A query selector",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/query-selector#readme",
   "license": "MIT",
-  "main": "src/index.js",
-  "module": "dist/query-selector.es5.min.js",
+  "main": "src/index.ts",
+  "module": "dist/lib/query-selector.es5.min.js",
   "files": [
     "dist"
   ],

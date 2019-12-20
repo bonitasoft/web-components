@@ -17,7 +17,7 @@ node('web-components') {
     }
 
     slackStage('📦 Archive', isBaseBranch) {
-        archiveArtifacts 'components/packages/**/dist/*'
+        archiveArtifacts 'components/packages/*/dist/**'
     }
 }
 

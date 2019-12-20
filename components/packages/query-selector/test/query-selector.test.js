@@ -1,6 +1,6 @@
 import {expect, fixture, html} from '@open-wc/testing';
 
-import '../dist/query-selector.es5.min.js';
+import '../dist/lib/query-selector.es5.min.js';
 
 describe('query-selector', () => {
     let queries;
