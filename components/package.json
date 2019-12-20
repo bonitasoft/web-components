@@ -39,7 +39,8 @@
     "lint": "lerna run --parallel lint",
     "bundle": "lerna run bundle",
     "init": "  npm install && lerna bootstrap",
-    "test": "karma start",
+    "test": "karma start && karma start --grep packages/query-selector/test/*.test.complex.js",
+    "test:single": "karma start",
     "test:coverage": "karma start --coverage",
     "build": "npm run init && npm run bundle"
   },
