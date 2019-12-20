@@ -4,8 +4,8 @@
   "description": "A simple search box",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/search-box#readme",
   "license": "MIT",
-  "main": "src/index.js",
-  "module": "dist/search-box.es5.min.js",
+  "main": "src/index.ts",
+  "module": "dist/lib/search-box.es5.min.js",
   "files": [
     "dist"
   ],

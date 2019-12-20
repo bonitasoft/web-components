@@ -1,6 +1,6 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
-import '../dist/search-box.es5.min.js';
+import '../dist/lib/search-box.es5.min.js';
 
 let searchBox;
 
