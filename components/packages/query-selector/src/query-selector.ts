@@ -39,7 +39,7 @@ export class QuerySelector extends LitElement {
     constructor() {
         super();
         listenForLangChanged(() => {
-            this.filterTitlePrefix = get("query.filterTitlePrefix");
+            this.filterTitlePrefix = get("filterTitlePrefix");
             this.filterTitle = this.filterTitlePrefix;
         });
     }
@@ -120,7 +120,7 @@ export class QuerySelector extends LitElement {
     return html`
       <style>${bootstrapStyles}</style>
       <div class="guide">
-        ${translate("query.help")}
+        ${translate("help")}
       </div>
       <!-- Query card -->
       <search-box
@@ -134,7 +134,7 @@ export class QuerySelector extends LitElement {
         <!-- Default Queries-->
         <div id="defaultQueries" class="card">
           <div class="card-header">
-            <b>${translate("query.defaultQueriesTitle")}</b>
+            <b>${translate("defaultQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
             ${this.queries.defaultQuery.map((query: any, index: number) => this.getDefaultQueries(query, index))}
@@ -144,7 +144,7 @@ export class QuerySelector extends LitElement {
         <!-- Additional Queries-->
         <div id="additionalQueries" class="card">
           <div class="card-header">
-            <b>${translate("query.additionalQueriesTitle")}</b>
+            <b>${translate("additionalQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
             ${this.queries.additionalQuery.map((query: any, index: number) => this.getAdditionalQueries(query, index))}
@@ -192,8 +192,8 @@ export class QuerySelector extends LitElement {
 
       <!-- Tips-->
       <div class="tip">
-      <p>💡 ${translate("query.tip1")}</p>
-      <p>💡 ${translate("query.tip2")}</p>
+      <p>💡 ${translate("tip1")}</p>
+      <p>💡 ${translate("tip2")}</p>
       </div>
     `;
   }

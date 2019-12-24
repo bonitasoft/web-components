@@ -83,11 +83,11 @@ export class PaginationSelector extends LitElement {
       <!-- Pagination card -->
       <div class="card">
         <div class="card-header" @click="${this.handleCollapse}">                      
-          <b>${this.isCollapsed ? '►' : '▼'} ${translate("pagination.title")}</b>
+          <b>${this.isCollapsed ? '►' : '▼'} ${translate("title")}</b>
         </div>
         <div class="pagination-container ${this.isCollapsed ? 'accordion-close' : 'accordion-open'}">
           <div class="pagination-item">
-            <label for="elem">${translate("pagination.nbelements")}</label>
+            <label for="elem">${translate("nbelements")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
@@ -95,7 +95,7 @@ export class PaginationSelector extends LitElement {
                 id="elem"
                 value=${this.nbElements}
                 @input=${(e: any) => this.nbElementsChanged(e.target.value)}
-                placeholder=${translate("pagination.nbelementsPlaceholder")}
+                placeholder=${translate("nbelementsPlaceholder")}
               />
               <div class="input-group-append">
                 <span class="input-group-text pagination-input">¶</span>
@@ -103,7 +103,7 @@ export class PaginationSelector extends LitElement {
             </div>
           </div>
           <div class="pagination-item">
-            <label for="page">${translate("pagination.pageindex")}</label>
+            <label for="page">${translate("pageindex")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
@@ -111,7 +111,7 @@ export class PaginationSelector extends LitElement {
                 id="page"
                 value=${this.pageIndex}
                 @input=${(e: any) => this.pageNumberChanged(e.target.value)}
-                placeholder=${translate("pagination.pageindexPlaceholder")}
+                placeholder=${translate("pageindexPlaceholder")}
               />
               <div class="input-group-append">
                 <span class="input-group-text pagination-input">¶</span>

@@ -1,10 +1,8 @@
 {
-  "lang": "fr",
-  "pagination": {
-    "title": "Pagination",
-    "nbelements": "Element (c)",
-    "nbelementsPlaceholder": "Entrer un nombre d'elements",
-    "pageindex": "Index de la page (p)",
-    "pageindexPlaceholder": "Entrer un index de page"
-  }
+  "title": "Pagination",
+  "nbelements": "Element (c)",
+  "nbelementsPlaceholder": "Entrez un nombre d'elements",
+  "pageindex": "Index de la page (p)",
+  "pageindexPlaceholder": "Entrez un index de page",
+  "newKey": "traduction de la nouvelle clé"
 }
