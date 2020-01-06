@@ -15,7 +15,7 @@ configs[0].plugins.push(
   serve({
     contentBase: '',
     open: true,
-    openPage: `/elements/${folder}/index.html`,
+    openPage: `/${folder}/index.html`,
     host: 'localhost',
     port: 10001
   }),
