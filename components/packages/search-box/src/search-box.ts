@@ -24,7 +24,7 @@ export class SearchBox extends LitElement {
     super();
     listenForLangChanged(() => {
       // We do not use translate() directive in render() since placeholder is an exposed attribute
-      this.placeholder = get("app.placeholder");
+      this.placeholder = get("placeholder");
     });
   }
 
