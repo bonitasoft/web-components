@@ -95,12 +95,15 @@ echo "**************************************************************************
 
 echo "Downloading translations..."
 curl --output "$BUILD_DIR"/all.zip https://api.crowdin.com/api/project/"$CROWDIN_PROJECT"/download/all.zip?key="$CROWDINKEY"
-unzip -o "$BUILD_DIR"/all.zip -d "$BUILD_DIR"
+unzip -o "$BUILD_DIR"/crowdin/all.zip -d "$BUILD_DIR"
 
-echo "Copying downloading translations in source dir..."
-languages=("fr" "es-ES" "ja" "pt-BR")
-for lang in "${languages[@]}"
+echo "Copying downloaded translations in source dir..."
+# shellcheck disable=SC2045
+# shellcheck disable=SC2035
+for langdir in $(ls -d */)
 do
+  # Remove trailer '/'
+  lang=${langdir%%/}
   cp "$BUILD_DIR"/"$lang"/"$BRANCH_NAME"/web-components/"$WC"/messages.json "$BASE_DIR"/packages/"$WC"/src/i18n/"$lang".json
 done
 
