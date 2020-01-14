@@ -11,7 +11,7 @@ let folder = process.env.folder;
 // default config is for modern browsers (with ES6 support)
 function defaultProdConfig(output, babelConfig) {
   return {
-    input: `elements/${folder}/index.js`,
+    input: `${folder}/index.js`,
     output: output || {
       prefix: 'esm', //added just for rollup.dev.config.js
       file: `dist/${folder}.${version}.esm.min.js`,
