@@ -15,7 +15,7 @@ usage() {
   echo -e "OPTIONS"
   echo -e "  --branch                 Crowdin branch on which we want to upload keys (default: current branch)"
   echo -e "  --upload-translations    Also upload local translations to crowdin"
-  echo -e "  --crowdin-project        Crowdin project on which files will be uploaded (default: bonita-bpm)"
+  echo -e "  --crowdin-project        Crowdin project on which files will be uploaded (default: bonita)"
   echo -e "  --help                   display this help"
   echo ""
   exit 1;

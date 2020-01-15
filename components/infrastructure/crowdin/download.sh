@@ -15,7 +15,7 @@ usage() {
     echo "  --github-api-key    the github api key of currently logged in user"
     echo ""
     echo -e "OPTIONS"
-    echo "  --crowdin-project   the targeted crowdin project (default: bonita-bpm)"
+    echo "  --crowdin-project   the targeted crowdin project (default: bonita)"
     echo "  --branch            the branch on which download translation keys (default: current branch)"
     echo "  --help              display this help"
     echo ""
