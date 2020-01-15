@@ -13,20 +13,22 @@ usage() {
     echo -e "ARGUMENTS"
     echo "  --crowdin-api-key   the crowdin api key of crowdin project"
     echo "  --github-api-key    the github api key of currently logged in user"
-    echo "  --web-component     web component name for which files will be uploaded"
     echo ""
     echo -e "OPTIONS"
-    echo "  --crowdin-project   the targeted crowdin project (default: bonita-bpm)"
+    echo "  --crowdin-project   the targeted crowdin project (default: bonita)"
     echo "  --branch            the branch on which download translation keys (default: current branch)"
     echo "  --help              display this help"
     echo ""
     exit 1
 }
 
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-BASE_DIR=$SCRIPT_DIR/..
+# Supported languages for web components
+languages=("fr" "es-ES" "ja" "pt-BR")
 
-CROWDIN_PROJECT="bonita-bpm"
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+BASE_DIR=$SCRIPT_DIR/../..
+
+CROWDIN_PROJECT="bonita"
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 for i in "$@"; do
     case $i in
@@ -46,16 +48,11 @@ for i in "$@"; do
         CROWDIN_PROJECT="${i#*=}"
         shift
         ;;
-        --web-component=*)
-        WC="${i#*=}"
-        shift
-        ;;
          --help)
         usage
         ;;
     esac
 done
-BUILD_DIR=$BASE_DIR/packages/$WC/build
 if [ -z "$CROWDINKEY" ]; then
   echo "ERROR crowdin API key is needed";
   usage;
@@ -65,18 +62,6 @@ if [ -z "$GITHUBKEY" ]; then
   echo "ERROR github API key is needed";
   usage;
   exit 1
-fi
-if [ -z "$WC" ]; then
-  echo "ERROR: web component name is required";
-  usage;
-fi
-if [ ! -d "$BASE_DIR/packages/$WC" ]; then
-  echo "Error: $BASE_DIR/packages/$WC directory does not exist";
-  usage;
-fi
-if [ ! -d "$BUILD_DIR" ]; then
-  echo "Error: $BUILD_DIR directory does not exist";
-  usage;
 fi
 
 
@@ -90,22 +75,35 @@ pull_request() {
 }
 
 echo "***********************************************************************************"
-echo "WEB COMPONENT '$WC' TRANSLATION DOWNLOAD"
+echo "WEB COMPONENTS TRANSLATION DOWNLOAD"
 echo "***********************************************************************************"
 
 echo "Downloading translations..."
-curl --output "$BUILD_DIR"/all.zip https://api.crowdin.com/api/project/"$CROWDIN_PROJECT"/download/all.zip?key="$CROWDINKEY"
-unzip -o "$BUILD_DIR"/crowdin/all.zip -d "$BUILD_DIR"
+CROWDIN_DOWNLOAD_DIR="$BASE_DIR"/crowdin
+mkdir "$CROWDIN_DOWNLOAD_DIR"
+curl --output "$CROWDIN_DOWNLOAD_DIR"/all.zip https://api.crowdin.com/api/project/"$CROWDIN_PROJECT"/download/all.zip?key="$CROWDINKEY"
+unzip -o "$CROWDIN_DOWNLOAD_DIR"/all.zip -d "$CROWDIN_DOWNLOAD_DIR"
 
 echo "Copying downloaded translations in source dir..."
+cd "$BASE_DIR"/packages || exit
+
 # shellcheck disable=SC2045
 # shellcheck disable=SC2035
-for langdir in $(ls -d */)
+
+# Loop on web components
+for wcdir in $(ls -d */)
 do
   # Remove trailer '/'
-  lang=${langdir%%/}
-  cp "$BUILD_DIR"/"$lang"/"$BRANCH_NAME"/web-components/"$WC"/messages.json "$BASE_DIR"/packages/"$WC"/src/i18n/"$lang".json
+  wc=${wcdir%%/}
+  cd "$CROWDIN_DOWNLOAD_DIR" || exit
+  # Loop on langs
+  for lang in "${languages[@]}"
+  do
+    cp "$CROWDIN_DOWNLOAD_DIR"/"$lang"/"$BRANCH_NAME"/web-components/"$wc"/messages.json "$BASE_DIR"/packages/"$wc"/src/i18n/"$lang".json
+  done
 done
+rm -rf "$CROWDIN_DOWNLOAD_DIR"
+cd "$BASE_DIR" || exit
 
 git checkout -B feat/"$BRANCH_NAME"/update-translations
 
