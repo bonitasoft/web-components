@@ -1,8 +1,8 @@
 {
-  "help": "Sélectionner une requête dans une des 2 listes. Si il y a des filtres, entrer une valeur pour chacun d'eux",
-  "defaultQueriesTitle": "Requêtes 'Find By' sur un attribut",
-  "additionalQueriesTitle": "Requêtes additionelles",
-  "filterTitlePrefix": "Filtrer la requête",
-  "tip1": "Maintenant, ajouter les widgets qui utiliseront cette variable sur le whiteboard.",
-  "tip2": "Le type de retour de cette variable est un tableau."
+  "help": "Select a query from one of the 2 lists. If any, enter the filter value(s)",
+  "defaultQueriesTitle": "'Find By' queries on an attribute",
+  "additionalQueriesTitle": "Additional queries",
+  "filterTitlePrefix": "Filter the query of",
+  "tip1": "Now, add the widgets to the whiteboard that will use this variable.",
+  "tip2": "The return type of this variable is an array."
 }
