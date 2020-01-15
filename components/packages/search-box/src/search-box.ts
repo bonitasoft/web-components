@@ -3,7 +3,10 @@ import { css, customElement, html, LitElement, property } from 'lit-element';
 import bootstrapStyle from './style.scss';
 import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
+import * as i18n_es from "./i18n/es-ES.json";
 import * as i18n_fr from "./i18n/fr.json";
+import * as i18n_ja from "./i18n/ja.json";
+import * as i18n_pt from "./i18n/pt-BR.json";
 
 // Registers i18n loader
 registerTranslateConfig({
@@ -38,8 +41,14 @@ export class SearchBox extends LitElement {
 
   static getCatalog(lang: string) {
     switch(lang) {
+      case "es":
+        return i18n_es;
       case "fr":
         return i18n_fr;
+      case "ja":
+        return i18n_ja;
+      case "pt":
+        return i18n_pt;
       default:
         return i18n_en;
     }
