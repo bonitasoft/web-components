@@ -71,7 +71,7 @@ pull_request() {
   echo "Create new pull request $PR"
 
   curl -i -X POST -d "$PR" \
-     https://api.github.com/repos/bonitasoft/bonita-ui-designer-sp/pulls?access_token="$1"
+     https://api.github.com/repos/bonitasoft/web-components/pulls?access_token="$1"
 }
 
 echo "***********************************************************************************"
