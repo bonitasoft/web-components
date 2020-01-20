@@ -1,9 +1,9 @@
 {
-  "name": "pagination-selector",
-  "version": "1.0.0",
+  "name": "@bonitasoft/pagination-selector",
+  "version": "1.0.1",
   "description": "A pagination selector",
-  "homepage": "https://github.com/bonitasoft/web-components/components/packages/pagination-selector#readme",
-  "license": "MIT",
+  "homepage": "https://github.com/bonitasoft/web-components/tree/master/components/packages/pagination-selector",
+  "license": "LicenseRef-LICENSE",
   "main": "src/index.ts",
   "module": "dist/lib/pagination-selector.es5.min.js",
   "files": [

@@ -1,7 +1,7 @@
 import { css, customElement, html, LitElement, property } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map.js';
-import 'search-box';
-import 'pagination-selector';
+import '@bonitasoft/search-box';
+import '@bonitasoft/pagination-selector';
 // @ts-ignore
 import bootstrapStyles from './style.scss';
 import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";

@@ -1,9 +1,9 @@
 # `query-selector`
 
-![npmVersion](https://img.shields.io/npm/v/query-selector?color=blue&style=plastic)
+![npmVersion](https://img.shields.io/npm/v/@bonitasoft/query-selector?color=blue&style=plastic)
 
 Query selector web component. Display, filter, select queries. Provide values if arguments are required.
-Depends on `search-box` and `pagination-selector` web components.
+Depends on `@bonitasoft/search-box` and `@bonitasoft/pagination-selector` web components.
 Generates events when:
 
 - A query is selected: `querySelected`
@@ -14,9 +14,9 @@ Generates events when:
 
 Run:
 
-    npm install query-selector
+    npm install @bonitasoft/query-selector
 
-Then import `node_modules/query-selector/query-selector.es5.min.js`
+Then import `node_modules/@bonitasoft/query-selector/query-selector.es5.min.js`
 
 And you can use new html tag, for example:
  
