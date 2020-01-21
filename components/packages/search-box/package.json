@@ -1,13 +1,12 @@
 {
-  "name": "search-box",
-  "version": "1.0.0",
+  "name": "@bonitasoft/search-box",
+  "version": "1.0.1",
   "description": "A simple search box",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/search-box#readme",
-  "license": "MIT",
-  "main": "src/index.ts",
-  "module": "dist/lib/search-box.es5.min.js",
+  "license": "LicenseRef-LICENSE",
+  "module": "lib/search-box.es5.min.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "dependencies": {
     "bootstrap": "^4.3.1",
@@ -27,6 +26,6 @@
     "start": "npm install && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "tsc && rollup -c",
-    "publish": "npm publish"
+    "pack": "npm pack"
   }
 }
