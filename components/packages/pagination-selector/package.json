@@ -26,6 +26,8 @@
     "start": "tsc && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "tsc && rollup -c",
-    "pack": "npm pack"
+    "clean": "rm -rf build lib node_modules",
+    "pack": "npm pack",
+    "publish": "npm publish"
   }
 }
