@@ -16,8 +16,12 @@ node('web-components') {
         sh 'cd components && npm run test:ci'
     }
 
+    slackStage('⚒ Packages', isBaseBranch) {
+        sh 'cd components && npm run pack'
+    }
+
     slackStage('📦 Archive', isBaseBranch) {
-        archiveArtifacts 'components/packages/*/dist/**'
+        archiveArtifacts 'components/packages/*/lib/**,components/packages/*/*.tgz'
     }
 }
 

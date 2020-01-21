@@ -39,6 +39,7 @@
   "scripts": {
     "start": "lerna run start --stream",
     "lint": "lerna run --parallel lint",
+    "pack": "lerna run pack",
     "bundle": "lerna run bundle",
     "init": "  npm install && lerna bootstrap",
     "test": "karma start && karma start --grep packages/query-selector/test/*.test.complex.js",
