@@ -4,7 +4,6 @@ import babel from 'rollup-plugin-babel';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript';
-import copy from 'rollup-plugin-copy';
 import postcss from 'rollup-plugin-postcss';
 
 export default opts => {
@@ -26,13 +25,6 @@ const prodPlugin = !options.isProductionBundle ? [
     compress: {
       passes: 2
     }
-  }),
-  // Prepare artifact to publish in note repository
-  copy({
-    targets: [
-      { src: 'index.html', dest: 'dist' },
-      { src: 'README.md', dest: 'dist' }
-    ]
   })] : [];
 
   // Split on slash to avoid scoped dependencies
@@ -43,7 +35,7 @@ const prodPlugin = !options.isProductionBundle ? [
     output: options.output || [
       {
         format: 'iife',
-        file: `./dist/lib/${options.fileName}.es5.min.js`,
+        file: `./lib/${options.fileName}.es5.min.js`,
         name: 'main',
         sourcemap: options.sourceMap || false,
         globals: { 'lit-element': 'litElement' }

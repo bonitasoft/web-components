@@ -4,10 +4,9 @@
   "description": "A pagination selector",
   "homepage": "https://github.com/bonitasoft/web-components/tree/master/components/packages/pagination-selector",
   "license": "LicenseRef-LICENSE",
-  "main": "src/index.ts",
-  "module": "dist/lib/pagination-selector.es5.min.js",
+  "module": "lib/pagination-selector.es5.min.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "dependencies": {
     "bootstrap": "^4.3.1",

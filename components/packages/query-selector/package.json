@@ -4,10 +4,9 @@
   "description": "A query selector",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/query-selector#readme",
   "license": "LicenseRef-LICENSE",
-  "main": "src/index.ts",
-  "module": "dist/lib/query-selector.es5.min.js",
+  "module": "lib/query-selector.es5.min.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "dependencies": {
     "bootstrap": "^4.3.1",
