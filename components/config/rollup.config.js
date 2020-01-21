@@ -35,6 +35,8 @@ const prodPlugin = !options.isProductionBundle ? [
     ]
   })] : [];
 
+  // Split on slash to avoid scoped dependencies
+  options.fileName = options.fileName.includes('/') ? options.fileName.split('/')[1] : options.fileName;
 
   return {
     input: options.input,
