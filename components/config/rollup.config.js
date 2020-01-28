@@ -1,6 +1,5 @@
 import nodeResolve from 'rollup-plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
-import babel from 'rollup-plugin-babel';
 import minifyHTML from 'rollup-plugin-minify-html-literals';
 import json from '@rollup/plugin-json';
 import typescript from 'rollup-plugin-typescript';
@@ -45,10 +44,6 @@ const prodPlugin = !options.isProductionBundle ? [
     plugins: [
       ...prodPlugin,
       nodeResolve(),
-      babel({
-        runtimeHelpers: true,
-        exclude: '../../node_modules/**'
-      }),
       postcss({
         inject: false,
         plugins: []
