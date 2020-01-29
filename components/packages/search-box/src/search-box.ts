@@ -65,7 +65,7 @@ export class SearchBox extends LitElement {
       }
 
       .search-input {
-        font-size: 16px;
+        font-size: 14px;
       }
     `;
   }
