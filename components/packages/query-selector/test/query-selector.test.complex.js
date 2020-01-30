@@ -209,12 +209,22 @@ describe('query-selector', () => {
         expect(inputs[0].value).to.equal("myName");
         expect(inputs[1].value).to.equal("myPhoneNumber");
 
-        // Pagination should contain th init parameters
+        // Pagination should contain the init parameters
         const paginationSel = querySel.shadowRoot.querySelector('pagination-selector');
         inputs = paginationSel.shadowRoot.querySelectorAll('input');
         expect(inputs[0].value).to.equal("20");
         expect(inputs[1].value).to.equal("2");
 
+    });
+
+    it('Should support an empty init attribute', async () => {
+        init = '{}'
+
+        querySel = await getQuerySelectorWithInit();
+
+        // filter card should not be displayed
+        let filterCard = getfilterCard(querySel);
+        expect(filterCard).to.equal(null);
     });
 
     function getQuerySelector() {

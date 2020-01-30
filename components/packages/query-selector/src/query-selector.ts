@@ -53,7 +53,7 @@ export class QuerySelector extends LitElement {
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
-        if (this.init) {
+        if (this.init && this.init.query) {
           this.initSelect(this.init.query.name);
         }
     }
@@ -321,7 +321,7 @@ export class QuerySelector extends LitElement {
 
   private getFilterValue(queryName: string, filterName: string) : string {
     let value = '';
-    if (this.init && queryName === this.init.query.name) {
+    if (this.init && this.init.query && this.init.filters && queryName === this.init.query.name) {
       this.init.filters.forEach((filter: any) => {
         if (filter.name === filterName) {
           value = filter.value;
@@ -332,14 +332,14 @@ export class QuerySelector extends LitElement {
   }
 
   private getPaginationNbElements(): number {
-    if (this.init) {
+    if (this.init && this.init.pagination) {
       return this.init.pagination.c;
     }
     return 10;
   }
 
   private getPaginationPageIndex(): number {
-    if (this.init) {
+    if (this.init && this.init.pagination) {
       return this.init.pagination.p;
     }
     return 0;
