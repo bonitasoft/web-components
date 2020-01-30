@@ -4,6 +4,7 @@ import '../lib/query-selector.es5.min.js';
 
 describe('query-selector', () => {
     let queries;
+    let init;
     let querySel;
 
 
@@ -168,6 +169,15 @@ describe('query-selector', () => {
     });
 
     it('Should component behave correctly when queries attribute is not provided', async () => {
+        querySel = await fixture(html`<query-selector queries='{}'></query-selector>`);
+        const queryLinesDefault = getQueries(querySel, '#defaultQueries');
+        const queryLinesAdditional = getQueries(querySel, '#additionalQueries');
+
+        expect(queryLinesDefault.length).equal(0);
+        expect(queryLinesAdditional.length).equal(0);
+    });
+
+    it('Should component behave correctly when queries attribute is empty', async () => {
         querySel = await fixture(html`<query-selector></query-selector>`);
         const queryLinesDefault = getQueries(querySel, '#defaultQueries');
         const queryLinesAdditional = getQueries(querySel, '#additionalQueries');
@@ -188,10 +198,58 @@ describe('query-selector', () => {
         expect(additionalQueriesCard.innerText).to.equal("Requêtes additionelles");
     });
 
+    it('Should display the init parameters when the init attribute is used', async () => {
+        init = '{"query": ' +
+            '{"name":"findByNameAndPhoneNumber"},' +
+            '"filters":[{"name":"name","type":"String","value":"myName"},{"name":"phoneNumber","type":"String","value":"myPhoneNumber"}],' +
+            '"pagination": {"p":2,"c":20}}'
+
+        querySel = await getQuerySelectorWithInit();
+
+        // filter card should be displayed
+        let filterCard = getfilterCard(querySel);
+        expect(filterCard).not.to.equal(null);
+
+        // filter card should contain the init arguments
+        filterCard = getfilterCard(querySel);
+        expect(filterCard).not.to.equal(null);
+        let inputs = filterCard.querySelectorAll('input');
+        expect(inputs.length).to.equal(2);
+        expect(inputs[0].value).to.equal("myName");
+        expect(inputs[1].value).to.equal("myPhoneNumber");
+
+        // Pagination should contain the init parameters
+        const paginationSel = querySel.shadowRoot.querySelector('pagination-selector');
+        inputs = paginationSel.shadowRoot.querySelectorAll('input');
+        expect(inputs[0].value).to.equal("20");
+        expect(inputs[1].value).to.equal("2");
+
+    });
+
+    it('Should support an empty init attribute', async () => {
+        init = '{}'
+
+        querySel = await getQuerySelectorWithInit();
+
+        // filter card should not be displayed
+        let filterCard = getfilterCard(querySel);
+        expect(filterCard).to.equal(null);
+    });
+
     function getQuerySelector() {
         return fixture(html`
       <query-selector
         queries = ${queries}
+      >
+    </query-selector>
+    `);
+    }
+
+    function getQuerySelectorWithInit() {
+        return fixture(html`
+      <query-selector
+        queries = ${queries}
+        init = ${init}
       >
     </query-selector>
     `);

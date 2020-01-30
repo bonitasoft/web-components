@@ -1,5 +1,5 @@
-import { css, customElement, html, LitElement, property } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map.js';
+import {css, customElement, html, LitElement, property} from 'lit-element';
+import {classMap} from 'lit-html/directives/class-map.js';
 import '@bonitasoft/search-box';
 import '@bonitasoft/pagination-selector';
 // @ts-ignore
@@ -19,11 +19,14 @@ registerTranslateConfig({
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
 
-    @property({ attribute: 'lang', type: String, reflect: true })
-    lang: string = "en";
+  @property({ attribute: 'lang', type: String, reflect: true })
+  lang: string = "en";
 
-    @property({ attribute: 'queries', type: Object, reflect: true })
-  private queries: any = JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
+  @property({ attribute: 'queries', type: Object, reflect: true })
+  private queries: any = QuerySelector.getDefaultQueriesAttribute();
+
+  @property({ attribute: 'init', type: Object, reflect: true})
+  private init: any;
 
   @property({ type: String })
   private selectedQuery = '';
@@ -50,6 +53,12 @@ export class QuerySelector extends LitElement {
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
+        if (Object.entries(this.queries).length === 0) {
+          this.queries = QuerySelector.getDefaultQueriesAttribute();
+        }
+        if (this.init && this.init.query) {
+          this.initSelect(this.init.query.name);
+        }
     }
 
     static getCatalog(lang: string) {
@@ -178,6 +187,7 @@ export class QuerySelector extends LitElement {
                           type="text"
                           class="form-control filter-input"
                           id="arg"
+                          value=${this.getFilterValue(this.selectedQuery, arg.name)}
                           placeholder="Type a ${arg.type}"
                           @input=${(e: any) => this.filterArgChanged(arg, e.target.value)}
                         />
@@ -196,6 +206,8 @@ export class QuerySelector extends LitElement {
       <!-- Pagination -->
       <pagination-selector
         lang="${this.lang}"
+        nb-elements="${this.getPaginationNbElements()}" 
+        page-index="${this.getPaginationPageIndex()}"
       ></pagination-selector>
       <br />
 
@@ -218,7 +230,7 @@ export class QuerySelector extends LitElement {
             <li
               class="list-group-item list-group-item-action 
                         ${classMap(this.isDefaultSelected(index) ? { active: true } : {})}"
-              @click="${() => this.defaultSelect(query, index)}"
+              @click="${() => this.defaultSelect(query, index, true)}"
             >
               ${query.displayName}
             </li>
@@ -234,7 +246,7 @@ export class QuerySelector extends LitElement {
             <li
               class="list-group-item list-group-item-action 
                         ${classMap(this.isAdditionalSelected(index) ? { active: true } : {})}"
-              @click="${() => this.additionalSelect(query, index)}"
+              @click="${() => this.additionalSelect(query, index, true)}"
             >
               ${query.query}
             </li>
@@ -262,27 +274,29 @@ export class QuerySelector extends LitElement {
     );
   }
 
-  private select(query: any) {
+  private select(query: any, sendEvent: boolean) {
     this.filterTitle = this.filterTitlePrefix + ' ' + query.query;
     this.selectedQuery = query.query;
     this.filterArgs = query.filters;
-    this.dispatchEvent(
-      new CustomEvent('querySelected', {
-        detail: this.selectedQuery,
-        bubbles: true,
-        composed: true,
-      }),
-    );
+    if (sendEvent) {
+      this.dispatchEvent(
+        new CustomEvent('querySelected', {
+          detail: this.selectedQuery,
+          bubbles: true,
+          composed: true,
+        }),
+      );
+    }
   }
 
-  private defaultSelect(query: any, index: number) {
-    this.select(query);
+  private defaultSelect(query: any, index: number, sendEvent: boolean) {
+    this.select(query, sendEvent);
     this.defaultSelectedIndex = index;
     this.additionalSelectedIndex = undefined;
   }
 
-  private additionalSelect(query: any, index: number) {
-    this.select(query);
+  private additionalSelect(query: any, index: number, sendEvent: boolean) {
+    this.select(query, sendEvent);
     this.additionalSelectedIndex = index;
     this.defaultSelectedIndex = undefined;
   }
@@ -293,5 +307,48 @@ export class QuerySelector extends LitElement {
 
   private isAdditionalSelected(index: number) {
     return index === this.additionalSelectedIndex;
+  }
+
+  private initSelect(initQueryName: string) {
+    this.queries.defaultQuery.map((query: any, index: number) => {
+      if (query.query === initQueryName) {
+        this.defaultSelect(query, index, false);
+      }
+    });
+    this.queries.additionalQuery.map((query: any, index: number) => {
+      if (query.query === initQueryName) {
+        this.additionalSelect(query, index, false);
+      }
+    });
+  }
+
+  private getFilterValue(queryName: string, filterName: string) : string {
+    let value = '';
+    if (this.init && this.init.query && this.init.filters && queryName === this.init.query.name) {
+      this.init.filters.forEach((filter: any) => {
+        if (filter.name === filterName) {
+          value = filter.value;
+        }
+      });
+    }
+    return value;
+  }
+
+  private getPaginationNbElements(): number {
+    if (this.init && this.init.pagination) {
+      return this.init.pagination.c;
+    }
+    return 10;
+  }
+
+  private getPaginationPageIndex(): number {
+    if (this.init && this.init.pagination) {
+      return this.init.pagination.p;
+    }
+    return 0;
+  }
+
+  private static getDefaultQueriesAttribute(): Object {
+    return JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
   }
 }
