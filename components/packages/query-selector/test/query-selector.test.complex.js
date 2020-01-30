@@ -169,6 +169,15 @@ describe('query-selector', () => {
     });
 
     it('Should component behave correctly when queries attribute is not provided', async () => {
+        querySel = await fixture(html`<query-selector queries='{}'></query-selector>`);
+        const queryLinesDefault = getQueries(querySel, '#defaultQueries');
+        const queryLinesAdditional = getQueries(querySel, '#additionalQueries');
+
+        expect(queryLinesDefault.length).equal(0);
+        expect(queryLinesAdditional.length).equal(0);
+    });
+
+    it('Should component behave correctly when queries attribute is empty', async () => {
         querySel = await fixture(html`<query-selector></query-selector>`);
         const queryLinesDefault = getQueries(querySel, '#defaultQueries');
         const queryLinesAdditional = getQueries(querySel, '#additionalQueries');

@@ -23,7 +23,7 @@ export class QuerySelector extends LitElement {
   lang: string = "en";
 
   @property({ attribute: 'queries', type: Object, reflect: true })
-  private queries: any = JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
+  private queries: any = QuerySelector.getDefaultQueriesAttribute();
 
   @property({ attribute: 'init', type: Object, reflect: true})
   private init: any;
@@ -53,6 +53,9 @@ export class QuerySelector extends LitElement {
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
+        if (Object.entries(this.queries).length === 0) {
+          this.queries = QuerySelector.getDefaultQueriesAttribute();
+        }
         if (this.init && this.init.query) {
           this.initSelect(this.init.query.name);
         }
@@ -343,5 +346,9 @@ export class QuerySelector extends LitElement {
       return this.init.pagination.p;
     }
     return 0;
+  }
+
+  private static getDefaultQueriesAttribute(): Object {
+    return JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
   }
 }
