@@ -41,6 +41,7 @@ export class QuerySelector extends LitElement {
   private filterTitle: string = "";
   private defaultSelectedIndex: number | undefined = undefined;
   private additionalSelectedIndex: number | undefined = undefined;
+  private initialized: boolean = false;
 
     constructor() {
         super();
@@ -48,6 +49,17 @@ export class QuerySelector extends LitElement {
             this.filterTitlePrefix = get("filterTitlePrefix");
             this.filterTitle = this.filterTitlePrefix;
         });
+    }
+
+    async performUpdate() {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve()));
+      // Initialize if we have the 'init' attribute and the queries has been set
+      if (!this.initialized && this.init && this.init.query && !this.isDefaultQueries(this.queries)) {
+        this.initSelect(this.init.query.name);
+        this.initialized = true;
+        this.render();
+      }
+      super.performUpdate();
     }
 
     async connectedCallback() {
@@ -265,9 +277,11 @@ export class QuerySelector extends LitElement {
 
   private filterArgChanged(arg: string, value: string) {
     Object.assign(arg, { value: value });
+    let event: any = {"query": {"name": this.selectedQuery}};
+    event.filters = this.filterArgs;
     this.dispatchEvent(
       new CustomEvent('filterChanged', {
-        detail: this.filterArgs,
+        detail: event,
         bubbles: true,
         composed: true,
       }),
@@ -350,5 +364,9 @@ export class QuerySelector extends LitElement {
 
   private static getDefaultQueriesAttribute(): Object {
     return JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
+  }
+
+  private isDefaultQueries(newQueries: Object) : boolean {
+      return JSON.stringify(QuerySelector.getDefaultQueriesAttribute()) === JSON.stringify(newQueries);
   }
 }
