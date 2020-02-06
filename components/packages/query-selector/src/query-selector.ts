@@ -51,6 +51,13 @@ export class QuerySelector extends LitElement {
         });
     }
 
+    async attributeChangedCallback(name: string, old: string|null, value: string|null) {
+      super.attributeChangedCallback(name, old, value);
+      if (name === 'lang') {
+        use(this.lang).then();
+      }
+    }
+
     async performUpdate() {
       await new Promise((resolve) => requestAnimationFrame(() => resolve()));
       // Initialize if we have the 'init' attribute and the queries has been set
