@@ -58,7 +58,6 @@ export class QuerySelector extends LitElement {
     }
 
     async connectedCallback() {
-        use(this.lang).then();
         super.connectedCallback();
         if (Object.entries(this.queries).length === 0) {
           this.queries = QuerySelector.getDefaultQueriesAttribute();

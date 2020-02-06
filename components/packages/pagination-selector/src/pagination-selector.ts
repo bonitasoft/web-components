@@ -25,10 +25,6 @@ export class PaginationSelector extends LitElement {
     @property({attribute: 'page-index', type: Number, reflect: true})
     private pageIndex: number = 0;
 
-    async connectedCallback() {
-        super.connectedCallback();
-    }
-
   async attributeChangedCallback(name: string, old: string|null, value: string|null) {
     super.attributeChangedCallback(name, old, value);
     if (name === 'lang') {
