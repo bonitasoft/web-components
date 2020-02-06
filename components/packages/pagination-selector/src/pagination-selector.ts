@@ -26,11 +26,17 @@ export class PaginationSelector extends LitElement {
     private pageIndex: number = 0;
 
     async connectedCallback() {
-        use(this.lang).then();
         super.connectedCallback();
     }
 
-    static getCatalog(lang: string) {
+  async attributeChangedCallback(name: string, old: string|null, value: string|null) {
+    super.attributeChangedCallback(name, old, value);
+    if (name === 'lang') {
+      use(this.lang).then();
+    }
+  }
+
+  static getCatalog(lang: string) {
         switch(lang) {
             case "es":
                 return i18n_es;

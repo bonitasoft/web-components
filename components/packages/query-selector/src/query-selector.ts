@@ -50,6 +50,13 @@ export class QuerySelector extends LitElement {
         });
     }
 
+    async attributeChangedCallback(name: string, old: string|null, value: string|null) {
+      super.attributeChangedCallback(name, old, value);
+      if (name === 'lang') {
+        use(this.lang).then();
+      }
+    }
+
     async connectedCallback() {
         use(this.lang).then();
         super.connectedCallback();
