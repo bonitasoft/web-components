@@ -23,16 +23,7 @@ export class QuerySelector extends LitElement {
     lang: string = "en";
 
     @property({
-        attribute: 'queries', type: Object, reflect: true, hasChanged(value: any): boolean {
-            if (!value.hasOwnProperty('defaultQuery')) {
-                value.defaultQuery = [];
-            }
-            if (!value.hasOwnProperty('additionalQuery')) {
-                value.additionalQuery = [];
-            }
-            return true;
-        }
-    })
+        attribute: 'queries', type: Object, reflect: true})
     private queries: any = {"defaultQuery": [], "additionalQuery": []};
 
     @property({
@@ -70,6 +61,15 @@ export class QuerySelector extends LitElement {
                 this.filterTitle = this.filterTitlePrefix + ' ' + valueInit.query.name;
                 this.selectedQuery = valueInit.query.name;
                 this.filterArgs = valueInit.filters;
+            }
+        }
+        if(name === 'queries'){
+            let valueQueries = JSON.parse(value!);
+            if (!valueQueries.hasOwnProperty('defaultQuery')) {
+                valueQueries.defaultQuery = [];
+            }
+            if (!valueQueries.hasOwnProperty('additionalQuery')) {
+                valueQueries.additionalQuery = [];
             }
         }
         super.attributeChangedCallback(name, old, value);
