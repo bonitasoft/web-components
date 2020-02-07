@@ -61,7 +61,7 @@ describe('query-selector', () => {
                 const additionalQueriesLines = getQueries(querySel, '#additionalQueries');
                 expect(additionalQueriesLines.length).equal(1);
                 resolve();
-            }, 0);
+            }, 100);
         });
         // wait for the promise is done
         await promise.then(() => {
@@ -102,7 +102,7 @@ describe('query-selector', () => {
                 expect(argLabel.length).to.equal(1);
                 expect(argLabel[0].innerText).to.equal("name");
                 resolve();
-            }, 0);
+            }, 100);
         });
         // wait for the promise is done
         await promise.then(() => {
@@ -117,7 +117,7 @@ describe('query-selector', () => {
             'filterChanged',
             e => {
                 eventReceived = true;
-                filterValue = e.detail[0].value;
+                filterValue = e.detail.filters[0].value;
             }
         );
 
@@ -130,7 +130,7 @@ describe('query-selector', () => {
                 // Value changed from js does not send the 'input' event: simulate it
                 argInput[0].dispatchEvent(new Event("input"));
                 resolve();
-            }, 0);
+            }, 100);
         });
         // wait for the promise is done
         await promise.then(() => {
