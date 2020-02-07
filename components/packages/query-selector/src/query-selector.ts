@@ -19,28 +19,31 @@ registerTranslateConfig({
 @customElement('query-selector')
 export class QuerySelector extends LitElement {
 
-  @property({ attribute: 'lang', type: String, reflect: true })
-  lang: string = "en";
+    @property({attribute: 'lang', type: String, reflect: true})
+    lang: string = "en";
 
-  @property({ attribute: 'queries', type: Object, reflect: true })
-  private queries: any = QuerySelector.getDefaultQueriesAttribute();
+    @property({attribute: 'queries', type: Object, reflect: true})
+    private queries: any = {"defaultQuery": [], "additionalQuery": []};
 
-  @property({ attribute: 'init', type: Object, reflect: true})
-  private init: any;
+    @property({
+        attribute: 'init', type: Object, reflect: true
+    })
+    private init: any;
 
-  @property({ type: String })
-  private selectedQuery = '';
+    @property({
+        type: String
+    })
+    private selectedQuery = '';
 
-  @property({ type: Array })
-  private filterArgs = [];
+    @property({type: Array})
+    private filterArgs = [];
 
-  @property({ type: String })
-  private queryFilter = '';
+    @property({type: String})
+    private queryFilter = '';
 
-  private filterTitlePrefix:string = "";
-  private filterTitle: string = "";
-  private defaultSelectedIndex: number | undefined = undefined;
-  private additionalSelectedIndex: number | undefined = undefined;
+    private filterTitlePrefix: string = "";
+    private filterTitle: string = "";
+
 
     constructor() {
         super();
@@ -50,25 +53,36 @@ export class QuerySelector extends LitElement {
         });
     }
 
-    async attributeChangedCallback(name: string, old: string|null, value: string|null) {
-      super.attributeChangedCallback(name, old, value);
-      if (name === 'lang') {
-        use(this.lang).then();
-      }
+    attributeChangedCallback(name: string, old: string | null, value: string | null): void {
+        if (name === 'init') {
+            let valueInit = JSON.parse(value!);
+            if (valueInit.query) {
+                this.filterTitle = this.filterTitlePrefix + ' ' + valueInit.query.name;
+                this.selectedQuery = valueInit.query.name;
+                this.filterArgs = valueInit.filters;
+            }
+        }
+        if(name === 'queries'){
+            let valueQueries = JSON.parse(value!);
+            if (!valueQueries.hasOwnProperty('defaultQuery')) {
+                valueQueries.defaultQuery = [];
+            }
+            if (!valueQueries.hasOwnProperty('additionalQuery')) {
+                valueQueries.additionalQuery = [];
+            }
+        }
+        if (name === 'lang') {
+          use(this.lang).then();
+        }
+        super.attributeChangedCallback(name, old, value);
     }
 
     async connectedCallback() {
         super.connectedCallback();
-        if (Object.entries(this.queries).length === 0) {
-          this.queries = QuerySelector.getDefaultQueriesAttribute();
-        }
-        if (this.init && this.init.query) {
-          this.initSelect(this.init.query.name);
-        }
     }
 
     static getCatalog(lang: string) {
-        switch(lang) {
+        switch (lang) {
             case "es":
                 return i18n_es;
             case "fr":
@@ -83,7 +97,7 @@ export class QuerySelector extends LitElement {
     }
 
     static get styles() {
-    return css`
+        return css`
       :host {
         display: block;
         font-family: sans-serif;
@@ -138,10 +152,10 @@ export class QuerySelector extends LitElement {
         margin-bottom: 15px;
       }
     `;
-  }
+    }
 
-  render() {
-    return html`
+    render() {
+        return html`
       <style>${bootstrapStyles}</style>
       <div class="guide">
         ${translate("help")}
@@ -151,7 +165,7 @@ export class QuerySelector extends LitElement {
         lang="${this.lang}"
         id="searchbox"
         @valueChange=${(e: any) => {
-          this.queryFilterChanged(e.detail);
+            this.queryFilterChanged(e.detail);
         }}
       ></search-box>
       <div class="card-deck">
@@ -160,8 +174,8 @@ export class QuerySelector extends LitElement {
           <div class="card-header">
             <b>${translate("defaultQueriesTitle")}</b>
           </div>
-          <ul class="list-group scroll" id="queries">
-            ${this.queries.defaultQuery.map((query: any, index: number) => this.getDefaultQueries(query, index))}
+          <ul class="list-group scroll" id="queries">          
+            ${this.queries.hasOwnProperty('defaultQuery') ? this.queries.defaultQuery.map((query: any) => this.getDefaultQueries(query)):''}
           </ul>
         </div>
 
@@ -171,21 +185,21 @@ export class QuerySelector extends LitElement {
             <b>${translate("additionalQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
-            ${this.queries.additionalQuery.map((query: any, index: number) => this.getAdditionalQueries(query, index))}
+            ${this.queries.hasOwnProperty('additionalQuery') ? this.queries.additionalQuery!.map((query: any) => this.getAdditionalQueries(query)):''}
           </ul>
         </div>
       </div>      
 
       <!-- Filter card -->
       ${this.filterArgs.length > 0
-        ? html`
+            ? html`
             <div id="filter" class="card">
               <div class="card-header">
                 <b>${this.filterTitle} </b>
               </div>
               <div class="filter-container">
                 ${this.filterArgs.map(
-                  (arg: any) => html`
+                (arg: any) => html`
                     <div class="filter-item required">
                       <label class="control-label" for="arg">${arg.name}</label>
                       <div class="input-group filter-input">
@@ -203,11 +217,11 @@ export class QuerySelector extends LitElement {
                       </div>
                     </div>
                   `,
-                )}
+            )}
               </div>
             </div>
           `
-        : html``}
+            : html``}
 
       <!-- Pagination -->
       <pagination-selector
@@ -223,138 +237,105 @@ export class QuerySelector extends LitElement {
       <p>💡 ${translate("tip2")}</p>
       </div>
     `;
-  }
+    }
 
-  //
-  // Private methods
-  //
-
-  private getDefaultQueries(query: any, index: number) {
-    return html`
+    //
+    // Private methods
+    //
+    private getDefaultQueries(query: any) {
+        return html`
       ${this.isFiltered(query.displayName)
-        ? html`
+            ? html`
             <li
-              class="list-group-item list-group-item-action 
-                        ${classMap(this.isDefaultSelected(index) ? { active: true } : {})}"
-              @click="${() => this.defaultSelect(query, index, true)}"
+              class="list-group-item list-group-item-action ${classMap(this.isSelected(query.query) ? {active: true} : {})}"
+              @click="${() => this.select(query, true)}"
             >
               ${query.displayName}
             </li>
           `
-        : html``}
+            : html``}
     `;
-  }
+    }
 
-  private getAdditionalQueries(query: any, index: number) {
-    return html`
+    private getAdditionalQueries(query: any) {
+        return html`
       ${this.isFiltered(query.displayName)
-        ? html`
+            ? html`
             <li
               class="list-group-item list-group-item-action 
-                        ${classMap(this.isAdditionalSelected(index) ? { active: true } : {})}"
-              @click="${() => this.additionalSelect(query, index, true)}"
+                        ${classMap(this.isSelected(query.query) ? {active: true} : {})}"
+              @click="${() => this.select(query, true)}"
             >
               ${query.query}
             </li>
           `
-        : html``}
+            : html``}
     `;
-  }
-
-  private isFiltered(query: string) {
-    return query.toLowerCase().includes(this.queryFilter);
-  }
-
-  private queryFilterChanged(value: string) {
-    this.queryFilter = value;
-  }
-
-  private filterArgChanged(arg: string, value: string) {
-    Object.assign(arg, { value: value });
-    this.dispatchEvent(
-      new CustomEvent('filterChanged', {
-        detail: this.filterArgs,
-        bubbles: true,
-        composed: true,
-      }),
-    );
-  }
-
-  private select(query: any, sendEvent: boolean) {
-    this.filterTitle = this.filterTitlePrefix + ' ' + query.query;
-    this.selectedQuery = query.query;
-    this.filterArgs = query.filters;
-    if (sendEvent) {
-      this.dispatchEvent(
-        new CustomEvent('querySelected', {
-          detail: this.selectedQuery,
-          bubbles: true,
-          composed: true,
-        }),
-      );
     }
-  }
 
-  private defaultSelect(query: any, index: number, sendEvent: boolean) {
-    this.select(query, sendEvent);
-    this.defaultSelectedIndex = index;
-    this.additionalSelectedIndex = undefined;
-  }
+    private isFiltered(query: string) {
+        return query.toLowerCase().includes(this.queryFilter);
+    }
 
-  private additionalSelect(query: any, index: number, sendEvent: boolean) {
-    this.select(query, sendEvent);
-    this.additionalSelectedIndex = index;
-    this.defaultSelectedIndex = undefined;
-  }
+    private queryFilterChanged(value: string) {
+        this.queryFilter = value;
+    }
 
-  private isDefaultSelected(index: number) {
-    return index === this.defaultSelectedIndex;
-  }
+    private filterArgChanged(arg: string, value: string) {
+        Object.assign(arg, {value: value});
+        let event: any = {"query": {"name": this.selectedQuery}};
+        event.filters = this.filterArgs;
+        this.dispatchEvent(
+            new CustomEvent('filterChanged', {
+                detail: event,
+                bubbles: true,
+                composed: true,
+            }),
+        );
+    }
 
-  private isAdditionalSelected(index: number) {
-    return index === this.additionalSelectedIndex;
-  }
-
-  private initSelect(initQueryName: string) {
-    this.queries.defaultQuery.map((query: any, index: number) => {
-      if (query.query === initQueryName) {
-        this.defaultSelect(query, index, false);
-      }
-    });
-    this.queries.additionalQuery.map((query: any, index: number) => {
-      if (query.query === initQueryName) {
-        this.additionalSelect(query, index, false);
-      }
-    });
-  }
-
-  private getFilterValue(queryName: string, filterName: string) : string {
-    let value = '';
-    if (this.init && this.init.query && this.init.filters && queryName === this.init.query.name) {
-      this.init.filters.forEach((filter: any) => {
-        if (filter.name === filterName) {
-          value = filter.value;
+    private select(query: any, sendEvent: boolean) {
+        this.filterTitle = this.filterTitlePrefix + ' ' + query.name;
+        this.selectedQuery = query.query || query.name;
+        this.filterArgs = query.filters;
+        if (sendEvent) {
+            this.dispatchEvent(
+                new CustomEvent('querySelected', {
+                    detail: this.selectedQuery,
+                    bubbles: true,
+                    composed: true,
+                }),
+            );
         }
-      });
     }
-    return value;
-  }
 
-  private getPaginationNbElements(): number {
-    if (this.init && this.init.pagination) {
-      return this.init.pagination.c;
+    private isSelected(queryName: string) {
+        return queryName === this.selectedQuery;
     }
-    return 10;
-  }
 
-  private getPaginationPageIndex(): number {
-    if (this.init && this.init.pagination) {
-      return this.init.pagination.p;
+    private getFilterValue(queryName: string, filterName: string): string {
+        let value = '';
+        if (this.init && this.init.query && this.init.filters && queryName === this.init.query.name) {
+            this.init.filters.forEach((filter: any) => {
+                if (filter.name === filterName) {
+                    value = filter.value;
+                }
+            });
+        }
+        return value;
     }
-    return 0;
-  }
 
-  private static getDefaultQueriesAttribute(): Object {
-    return JSON.parse('{"defaultQuery": [], "additionalQuery": []}');
-  }
+    private getPaginationNbElements(): number {
+        if (this.init && this.init.pagination && (this.init.query && this.selectedQuery === this.init.query.name)) {
+            return this.init.pagination.c;
+        }
+        return 10;
+    }
+
+    private getPaginationPageIndex(): number {
+        if (this.init && this.init.pagination &&(this.init.query && this.selectedQuery === this.init.query.name)) {
+            return this.init.pagination.p;
+        }
+        return 0;
+    }
 }
