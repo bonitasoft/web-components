@@ -71,11 +71,13 @@ export class QuerySelector extends LitElement {
                 valueQueries.additionalQuery = [];
             }
         }
+        if (name === 'lang') {
+          use(this.lang).then();
+        }
         super.attributeChangedCallback(name, old, value);
     }
 
     async connectedCallback() {
-        use(this.lang).then();
         super.connectedCallback();
     }
 
