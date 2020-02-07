@@ -55,24 +55,32 @@ export class QuerySelector extends LitElement {
 
     attributeChangedCallback(name: string, old: string | null, value: string | null): void {
         if (name === 'init') {
-            let valueInit = JSON.parse(value!);
-            if (valueInit.query) {
-                this.filterTitle = this.filterTitlePrefix + ' ' + valueInit.query.name;
-                this.selectedQuery = valueInit.query.name;
-                this.filterArgs = valueInit.filters;
+            try {
+                let valueInit = JSON.parse(value!);
+                if (valueInit.hasOwnProperty('query')) {
+                    this.filterTitle = this.filterTitlePrefix + ' ' + valueInit.query.name;
+                    this.selectedQuery = valueInit.query.name;
+                    this.filterArgs = valueInit.filters;
+                }
+            } catch (e) {
+                //do nothing
             }
         }
-        if(name === 'queries'){
-            let valueQueries = JSON.parse(value!);
-            if (!valueQueries.hasOwnProperty('defaultQuery')) {
-                valueQueries.defaultQuery = [];
-            }
-            if (!valueQueries.hasOwnProperty('additionalQuery')) {
-                valueQueries.additionalQuery = [];
+        if (name === 'queries') {
+            try {
+                let valueQueries = JSON.parse(value!);
+                if (!valueQueries.hasOwnProperty('defaultQuery')) {
+                    valueQueries.defaultQuery = [];
+                }
+                if (!valueQueries.hasOwnProperty('additionalQuery')) {
+                    valueQueries.additionalQuery = [];
+                }
+            } catch (e) {
+                //do nothing
             }
         }
         if (name === 'lang') {
-          use(this.lang).then();
+            use(this.lang).then();
         }
         super.attributeChangedCallback(name, old, value);
     }
