@@ -22,8 +22,7 @@ export class QuerySelector extends LitElement {
     @property({attribute: 'lang', type: String, reflect: true})
     lang: string = "en";
 
-    @property({
-        attribute: 'queries', type: Object, reflect: true})
+    @property({attribute: 'queries', type: Object, reflect: true})
     private queries: any = {"defaultQuery": [], "additionalQuery": []};
 
     @property({
@@ -173,8 +172,8 @@ export class QuerySelector extends LitElement {
           <div class="card-header">
             <b>${translate("defaultQueriesTitle")}</b>
           </div>
-          <ul class="list-group scroll" id="queries">
-            ${this.queries.defaultQuery.map((query: any) => this.getDefaultQueries(query))}
+          <ul class="list-group scroll" id="queries">          
+            ${this.queries.hasOwnProperty('defaultQuery') ? this.queries.defaultQuery.map((query: any) => this.getDefaultQueries(query)):''}
           </ul>
         </div>
 
@@ -184,7 +183,7 @@ export class QuerySelector extends LitElement {
             <b>${translate("additionalQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">
-            ${this.queries.additionalQuery.map((query: any) => this.getAdditionalQueries(query))}
+            ${this.queries.hasOwnProperty('additionalQuery') ? this.queries.additionalQuery!.map((query: any) => this.getAdditionalQueries(query)):''}
           </ul>
         </div>
       </div>      
