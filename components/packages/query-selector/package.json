@@ -17,6 +17,7 @@
     "ts-loader": "^5.4.5",
     "tslib": "^1.10.0",
     "typescript": "^3.6.4",
+    "@open-wc/lit-helpers": "^0.2.9",
     "@bonitasoft/pagination-selector": "^1.0.1",
     "@bonitasoft/search-box": "^1.0.1"
   },
