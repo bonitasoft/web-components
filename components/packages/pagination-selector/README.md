@@ -5,10 +5,8 @@
 Pagination selector web component. Provide a UI to enter number of elements and page number.
 
 ## Events
-Generates events when a value is entered:
+Generates a `paginationChanged` event when a value is entered
 
-- `paginationElementsChanged`
-- `paginationPagesChanged`
 
 ## Attributes
 - `nbElements`  (default: 10)

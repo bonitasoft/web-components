@@ -19,11 +19,11 @@ export class PaginationSelector extends LitElement {
     @property({ attribute: 'lang', type: String, reflect: true })
     lang: string = "en";
 
-    @property({attribute: 'nb-elements', type: Number, reflect: true})
-    private nbElements: number = 10;
+    @property({attribute: 'nb-elements', type: String, reflect: true})
+    private nbElements: string = "10";
 
-    @property({attribute: 'page-index', type: Number, reflect: true})
-    private pageIndex: number = 0;
+    @property({attribute: 'page-index', type: String, reflect: true})
+    private pageIndex: string = "0";
 
   async attributeChangedCallback(name: string, old: string|null, value: string|null) {
     super.attributeChangedCallback(name, old, value);
@@ -75,6 +75,12 @@ export class PaginationSelector extends LitElement {
       .pagination-input {
         font-size: 14px;
       }
+      
+      .pagination-item.required .control-label:after {
+        content: '*';
+        color: red;
+      }
+
       .accordion-close {
         max-height:0;
         transition: max-height 0.2s ease;           
@@ -97,8 +103,8 @@ export class PaginationSelector extends LitElement {
           <b>${this.isCollapsed ? '►' : '▼'} ${translate("title")}</b>
         </div>
         <div class="pagination-container ${this.isCollapsed ? 'accordion-close' : 'accordion-open'}">
-          <div class="pagination-item">
-            <label for="elem">${translate("nbelements")}</label>
+          <div class="pagination-item required">
+            <label class="control-label" for="elem">${translate("nbelements")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
@@ -113,15 +119,15 @@ export class PaginationSelector extends LitElement {
               </div>
             </div>
           </div>
-          <div class="pagination-item">
-            <label for="page">${translate("pageindex")}</label>
+          <div class="pagination-item required">
+            <label class="control-label" for="page">${translate("pageindex")}</label>
             <div class="input-group pagination-input">
               <input
                 type="text"
                 class="form-control pagination-input"
                 id="page"
                 value=${this.pageIndex}
-                @input=${(e: any) => this.pageNumberChanged(e.target.value)}
+                @input=${(e: any) => this.pageIndexChanged(e.target.value)}
                 placeholder=${translate("pageindexPlaceholder")}
               />
               <div class="input-group-append">
@@ -138,23 +144,22 @@ export class PaginationSelector extends LitElement {
     this.isCollapsed = !this.isCollapsed;
   }
 
-  private pageNumberChanged(value: string) {
-    this.dispatchEvent(
-      new CustomEvent('paginationPagesChanged', {
-        detail: value,
-        bubbles: true,
-        composed: true,
-      }),
-    );
+  private pageIndexChanged(value: string) {
+    this.pageIndex = value;
+    this.sendPaginationChangedEvent();
   }
 
   private nbElementsChanged(value: string) {
+    this.nbElements = value;
+    this.sendPaginationChangedEvent();
+  }
+
+  private sendPaginationChangedEvent() {
+    let paginationElement = { nbElements: this.nbElements, pageIndex: this.pageIndex };
+    console.log("Event paginationChanged sent: ");
+    console.log(paginationElement);
     this.dispatchEvent(
-      new CustomEvent('paginationElementsChanged', {
-        detail: value,
-        bubbles: true,
-        composed: true,
-      }),
+      new CustomEvent('paginationChanged', {detail: paginationElement}),
     );
   }
 }

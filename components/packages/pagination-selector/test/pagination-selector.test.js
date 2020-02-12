@@ -9,15 +9,10 @@ describe('pagination-selector', () => {
         let elementValue = "";
         let pageNumberValue = "";
         paginationSel.addEventListener(
-            'paginationElementsChanged',
+            'paginationChanged',
             e => {
-                elementValue = e.detail;
-            }
-        );
-        paginationSel.addEventListener(
-            'paginationPagesChanged',
-            e => {
-                pageNumberValue = e.detail;
+                elementValue = e.detail.nbElements;
+                pageNumberValue = e.detail.pageIndex;
             }
         );
         const inputs = paginationSel.shadowRoot.querySelectorAll('input');

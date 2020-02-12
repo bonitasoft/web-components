@@ -6,11 +6,7 @@ Query selector web component. Display, filter, select queries. Provide values if
 Depends on `@bonitasoft/search-box` and `@bonitasoft/pagination-selector` web components.
 
 ## Events
-Generates events when:
-
-- A query is selected: `querySelected`
-- A filter argument is entered: `filterChanged`
-- Pagination info is entered (see `pagination-selector`)
+Generates a `queryChanged` event at each change in the query selector.
 
 ## Attributes
 - `queries`     (default: empty)
