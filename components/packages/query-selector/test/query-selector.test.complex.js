@@ -71,17 +71,20 @@ describe('query-selector', () => {
     it('Should send en event when a query is selected', async () => {
         let eventReceived = false;
         let selectedQuery = "";
+        let validity;
         querySel.addEventListener(
-            'querySelected',
+            'queryChanged',
             e => {
                 eventReceived = true;
-                selectedQuery = e.detail;
+                selectedQuery = e.detail.query;
+                validity = e.detail.validity;
             }
         );
 
         getFirstDefaultQuery(querySel).click();
 
         expect(eventReceived).to.equal(true);
+        expect(validity).to.equal(false);
         expect(selectedQuery).to.equal("findByName");
     });
 
@@ -113,11 +116,13 @@ describe('query-selector', () => {
     it('Should send an event when a query argument value is changed', async () => {
         let eventReceived = false;
         let filterValue = "";
+        let validity;
         querySel.addEventListener(
-            'filterChanged',
+            'queryChanged',
             e => {
                 eventReceived = true;
                 filterValue = e.detail.filters[0].value;
+                validity = e.detail.validity;
             }
         );
 
@@ -137,22 +142,20 @@ describe('query-selector', () => {
         });
 
         expect(eventReceived).to.equal(true);
+        expect(validity).to.equal(true);
         expect(filterValue).to.equal("myName");
     });
 
     it('Should send an event when the pagination (nb elements or page number) is changed', async () => {
         let elementValue = "";
         let pageNumberValue = "";
+        let validity;
         querySel.addEventListener(
-            'paginationElementsChanged',
+            'queryChanged',
             e => {
-                elementValue = e.detail;
-            }
-        );
-        querySel.addEventListener(
-            'paginationPagesChanged',
-            e => {
-                pageNumberValue = e.detail;
+                validity = e.detail.validity;
+                elementValue = e.detail.pagination.nbElements;
+                pageNumberValue = e.detail.pagination.pageIndex;
             }
         );
         const paginationSel = querySel.shadowRoot.querySelector('pagination-selector');
@@ -164,6 +167,7 @@ describe('query-selector', () => {
         inputs[1].value = "1";
         inputs[1].dispatchEvent(new Event("input"));
 
+        expect(validity).to.equal(false);
         expect(elementValue).to.equal("20");
         expect(pageNumberValue).to.equal("1");
     });

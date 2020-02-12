@@ -36,14 +36,14 @@ export class QuerySelector extends LitElement {
     private selectedQuery = '';
 
     @property({type: Array})
-    private filterArgs = [];
+    private filterArgs : any = [];
 
     @property({type: String})
     private queryFilter = '';
 
     private filterTitlePrefix: string = "";
     private filterTitle: string = "";
-
+    private paginationElement: PaginationElement = { pageIndex: "0", nbElements: "10"};
 
     constructor() {
         super();
@@ -236,6 +236,9 @@ export class QuerySelector extends LitElement {
         lang="${this.lang}"
         nb-elements="${this.getPaginationNbElements()}" 
         page-index="${this.getPaginationPageIndex()}"
+        @paginationChanged=${(e: any) => {
+            this.paginationChanged(e.detail);
+        }}
       ></pagination-selector>
       <br />
 
@@ -256,7 +259,7 @@ export class QuerySelector extends LitElement {
             ? html`
             <li
               class="list-group-item list-group-item-action ${classMap(this.isSelected(query.query) ? {active: true} : {})}"
-              @click="${() => this.select(query, true)}"
+              @click="${() => this.select(query)}"
             >
               ${query.displayName}
             </li>
@@ -272,7 +275,7 @@ export class QuerySelector extends LitElement {
             <li
               class="list-group-item list-group-item-action 
                         ${classMap(this.isSelected(query.query) ? {active: true} : {})}"
-              @click="${() => this.select(query, true)}"
+              @click="${() => this.select(query)}"
             >
               ${query.query}
             </li>
@@ -293,28 +296,14 @@ export class QuerySelector extends LitElement {
         Object.assign(arg, {value: value});
         let event: any = {"query": {"name": this.selectedQuery}};
         event.filters = this.filterArgs;
-        this.dispatchEvent(
-            new CustomEvent('filterChanged', {
-                detail: event,
-                bubbles: true,
-                composed: true,
-            }),
-        );
+        this.sendEvent();
     }
 
-    private select(query: any, sendEvent: boolean) {
+    private select(query: any) {
         this.filterTitle = this.filterTitlePrefix + ' ' + query.name;
         this.selectedQuery = query.query || query.name;
         this.filterArgs = query.filters;
-        if (sendEvent) {
-            this.dispatchEvent(
-                new CustomEvent('querySelected', {
-                    detail: this.selectedQuery,
-                    bubbles: true,
-                    composed: true,
-                }),
-            );
-        }
+        this.sendEvent();
     }
 
     private isSelected(queryName: string) {
@@ -326,24 +315,69 @@ export class QuerySelector extends LitElement {
         if (this.init && this.init.query && this.init.filters && queryName === this.init.query.name) {
             this.init.filters.forEach((filter: any) => {
                 if (filter.name === filterName) {
-                    value = filter.value;
+                    value = filter.value ? filter.value : '';
                 }
             });
         }
         return value;
     }
 
-    private getPaginationNbElements(): number {
-        if (this.init && this.init.pagination && (this.init.query && this.selectedQuery === this.init.query.name)) {
-            return this.init.pagination.c;
-        }
-        return 10;
+    private paginationChanged(value: PaginationElement) {
+        this.paginationElement = value;
+        this.sendEvent();
     }
 
-    private getPaginationPageIndex(): number {
-        if (this.init && this.init.pagination &&(this.init.query && this.selectedQuery === this.init.query.name)) {
-            return this.init.pagination.p;
+    private getPaginationNbElements(): string {
+        if (this.init && this.init.pagination && (this.init.query && this.selectedQuery === this.init.query.name)) {
+            this.paginationElement.nbElements = this.init.pagination.c;
         }
-        return 0;
+        return this.paginationElement.nbElements;
+    }
+
+    private getPaginationPageIndex(): string {
+        if (this.init && this.init.pagination &&(this.init.query && this.selectedQuery === this.init.query.name)) {
+            this.paginationElement.pageIndex = this.init.pagination.p;
+        }
+        return this.paginationElement.pageIndex;
+    }
+
+    private sendEvent() {
+        let valid = true;
+        // check a query is selected
+        if (!this.selectedQuery) {
+            valid = false;
+        }
+        // check every filter has a value
+        for (let filter of this.filterArgs) {
+            if (!filter.value) {
+                valid = false;
+                break;
+            }
+        }
+        // check paginationElement is all set
+        if (!this.paginationElement.pageIndex || !this.paginationElement.nbElements) {
+            valid = false;
+        }
+
+        // Send event
+        let eventDetail = {
+            validity: valid,
+            query: this.selectedQuery,
+            filters: this.filterArgs,
+            pagination: this.paginationElement
+        };
+        this.dispatchEvent(
+          new CustomEvent('queryChanged', {
+              detail: eventDetail,
+              bubbles: true,
+              composed: true,
+          }),
+        );
     }
 }
+
+interface PaginationElement {
+    pageIndex: string;
+    nbElements: string;
+}
+
