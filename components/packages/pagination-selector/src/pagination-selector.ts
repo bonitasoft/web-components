@@ -156,8 +156,6 @@ export class PaginationSelector extends LitElement {
 
   private sendPaginationChangedEvent() {
     let paginationElement = { nbElements: this.nbElements, pageIndex: this.pageIndex };
-    console.log("Event paginationChanged sent: ");
-    console.log(paginationElement);
     this.dispatchEvent(
       new CustomEvent('paginationChanged', {detail: paginationElement}),
     );

@@ -351,6 +351,7 @@ export class QuerySelector extends LitElement {
         for (let filter of this.filterArgs) {
             if (!filter.value) {
                 valid = false;
+                break;
             }
         }
         // check paginationElement is all set
