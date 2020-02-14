@@ -6,7 +6,7 @@ import '@bonitasoft/search-box';
 import '@bonitasoft/pagination-selector';
 // @ts-ignore
 import bootstrapStyles from './style.scss';
-import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
+import {registerTranslateConfig, translate, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_es from "./i18n/es-ES.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -43,15 +43,7 @@ export class QuerySelector extends LitElement {
     @property({type: String})
     private queryFilter = '';
 
-    private filterTitlePrefix: string = "";
     private paginationElement: PaginationElement = { pageIndex: "0", nbElements: "10"};
-
-    constructor() {
-        super();
-        listenForLangChanged(() => {
-            this.filterTitlePrefix = get("filterTitlePrefix");
-        });
-    }
 
     attributeChangedCallback(name: string, old: string | null, value: string | null): void {
         if (name === 'init') {
@@ -198,7 +190,8 @@ export class QuerySelector extends LitElement {
             ? html`
             <div id="filter" class="card">
               <div class="card-header">
-                <b>${this.filterTitlePrefix  + ' ' + this.selectedQuery} </b>
+                <b>${translate("filterTitlePrefix")} </b>
+                <b>${this.selectedQuery} </b>
               </div>
               <div class="filter-container">                
                 ${this.filterArgs.map(

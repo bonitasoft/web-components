@@ -70,3 +70,7 @@ On your `index.html`, Right click and select `Debug index.html` entry. After thi
    
        npm run release -- <suffix>
 -->
+
+## Issue
+
+When LitElement release a new version, @open-wc/lit-helpers dependency can be remove. See this [fix](https://github.com/Polymer/lit-html/commit/9d8d3f82f08573cb3e98053e679b1f87fff85dbc).
