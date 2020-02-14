@@ -1,10 +1,12 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 import {classMap} from 'lit-html/directives/class-map.js';
+// @ts-ignore
+import {live} from '@open-wc/lit-helpers';
 import '@bonitasoft/search-box';
 import '@bonitasoft/pagination-selector';
 // @ts-ignore
 import bootstrapStyles from './style.scss';
-import {get, listenForLangChanged, registerTranslateConfig, translate, use} from "lit-translate";
+import {registerTranslateConfig, translate, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_es from "./i18n/es-ES.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -41,24 +43,13 @@ export class QuerySelector extends LitElement {
     @property({type: String})
     private queryFilter = '';
 
-    private filterTitlePrefix: string = "";
-    private filterTitle: string = "";
     private paginationElement: PaginationElement = { pageIndex: "0", nbElements: "10"};
-
-    constructor() {
-        super();
-        listenForLangChanged(() => {
-            this.filterTitlePrefix = get("filterTitlePrefix");
-            this.filterTitle = this.filterTitlePrefix;
-        });
-    }
 
     attributeChangedCallback(name: string, old: string | null, value: string | null): void {
         if (name === 'init') {
             try {
                 let valueInit = JSON.parse(value!);
                 if (valueInit.hasOwnProperty('query')) {
-                    this.filterTitle = this.filterTitlePrefix + ' ' + valueInit.query.name;
                     this.selectedQuery = valueInit.query.name;
                     this.filterArgs = valueInit.filters;
                 }
@@ -83,10 +74,6 @@ export class QuerySelector extends LitElement {
             use(this.lang).then();
         }
         super.attributeChangedCallback(name, old, value);
-    }
-
-    async connectedCallback() {
-        super.connectedCallback();
     }
 
     static getCatalog(lang: string) {
@@ -183,7 +170,7 @@ export class QuerySelector extends LitElement {
             <b>${translate("defaultQueriesTitle")}</b>
           </div>
           <ul class="list-group scroll" id="queries">          
-            ${this.queries.hasOwnProperty('defaultQuery') ? this.queries.defaultQuery.map((query: any) => this.getDefaultQueries(query)):''}
+            ${this.queries.hasOwnProperty('defaultQuery') ? this.queries.defaultQuery!.map((query: any) => this.getDefaultQueries(query)):''}
           </ul>
         </div>
 
@@ -203,11 +190,12 @@ export class QuerySelector extends LitElement {
             ? html`
             <div id="filter" class="card">
               <div class="card-header">
-                <b>${this.filterTitle} </b>
+                <b>${translate("filterTitlePrefix")} </b>
+                <b>${this.selectedQuery} </b>
               </div>
-              <div class="filter-container">
+              <div class="filter-container">                
                 ${this.filterArgs.map(
-                (arg: any) => html`
+                (arg: any) => html`                    
                     <div class="filter-item required">
                       <label class="control-label" for="arg">${arg.name}</label>
                       <div class="input-group filter-input">
@@ -215,7 +203,7 @@ export class QuerySelector extends LitElement {
                           type="text"
                           class="form-control filter-input"
                           id="arg"
-                          value=${this.getFilterValue(this.selectedQuery, arg.name)}
+                          .value=${live(this.getFilterValue(this.selectedQuery, arg.name))}
                           placeholder="Type a ${arg.type}"
                           @input=${(e: any) => this.filterArgChanged(arg, e.target.value)}
                         />
@@ -300,9 +288,8 @@ export class QuerySelector extends LitElement {
     }
 
     private select(query: any) {
-        this.filterTitle = this.filterTitlePrefix + ' ' + query.name;
         this.selectedQuery = query.query || query.name;
-        this.filterArgs = query.filters;
+        this.filterArgs= query.filters;
         this.sendEvent();
     }
 
