@@ -61,12 +61,12 @@ SEMVER_VERSION=${SEMVER_VERSION:1}
 
 # Commit and push release
 git commit -a -m "$COMPONENT: release packages v$SEMVER_VERSION"
-git tag -a "$COMPONENT@$SEMVER_VERSION" -m "$COMPONENT@$SEMVER_VERSION: release packages v$SEMVER_VERSION"
+git tag "$COMPONENT@$SEMVER_VERSION" -m "$COMPONENT@$SEMVER_VERSION: release packages v$SEMVER_VERSION"
 
 ## Push commit and tag
 if [ "$GIT_PUSH" = true ]
 then
-  git push --follow-tags
+  git push origin "$COMPONENT@$SEMVER_VERSION"
 fi
 
 echo "Release $COMPONENT@$SEMVER_VERSION success !";
