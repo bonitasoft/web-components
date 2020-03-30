@@ -204,7 +204,7 @@ export class QuerySelector extends LitElement {
                           class="form-control filter-input"
                           id="arg"
                           .value=${live(this.getFilterValue(this.selectedQuery, arg.name))}
-                          placeholder="Type a ${arg.type}"
+                          placeholder=${QuerySelector.getFilterPlaceholder(arg.type)}
                           @input=${(e: any) => this.filterArgChanged(arg, e.target.value)}
                         />
                         <div class="input-group-append">
@@ -326,6 +326,14 @@ export class QuerySelector extends LitElement {
             this.paginationElement.pageIndex = this.init.pagination.p;
         }
         return this.paginationElement.pageIndex;
+    }
+
+    private static getFilterPlaceholder(type: string) {
+        return "Type a " + QuerySelector.capitalizeFirstLetter(type.toLowerCase());
+    }
+
+    private static capitalizeFirstLetter(str: string): string {
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
     private sendEvent() {
