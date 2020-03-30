@@ -1,36 +1,36 @@
 {
-  "name": "@bonitasoft/query-selector",
-  "version": "1.0.4",
-  "description": "A query selector",
-  "homepage": "https://github.com/bonitasoft/web-components/components/packages/query-selector#readme",
-  "license": "LicenseRef-LICENSE",
-  "module": "lib/query-selector.es5.min.js",
-  "files": [
-    "lib"
-  ],
-  "dependencies": {
-    "bootstrap": "^4.3.1",
-    "lit-element": "^2.2.1",
-    "lit-translate": "^1.1.20"
-  },
-  "devDependencies": {
-    "ts-loader": "^5.4.5",
-    "tslib": "^1.10.0",
-    "typescript": "^3.6.4",
-    "@open-wc/lit-helpers": "^0.2.9",
-    "@bonitasoft/pagination-selector": "^1.0.1",
-    "@bonitasoft/search-box": "^1.0.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bonitasoft/web-components.git"
-  },
-  "scripts": {
-    "start": "rollup -c -w --environment devMode:true",
-    "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
-    "bundle": "tsc && rollup -c",
-    "clean": "rm -rf build lib node_modules",
-    "pack": "npm pack",
-    "publish": "npm publish"
-  }
+	"name": "@bonitasoft/query-selector",
+	"version": "1.0.4",
+	"description": "A query selector",
+	"homepage": "https://github.com/bonitasoft/web-components/components/packages/query-selector#readme",
+	"license": "LicenseRef-LICENSE",
+	"module": "lib/query-selector.es5.min.js",
+	"files": [
+		"lib"
+	],
+	"dependencies": {
+		"bootstrap": "^4.4.1",
+		"lit-element": "^2.3.1",
+		"lit-translate": "^1.2.1"
+	},
+	"devDependencies": {
+		"@open-wc/lit-helpers": "^0.2.10",
+		"@bonitasoft/pagination-selector": "^1.0.1",
+		"@bonitasoft/search-box": "^1.0.1",
+		"ts-loader": "^6.2.2",
+		"tslib": "^1.11.1",
+		"typescript": "^3.8.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bonitasoft/web-components.git"
+	},
+	"scripts": {
+		"start": "rollup -c -w --environment devMode:true",
+		"lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+		"bundle": "tsc && rollup -c",
+		"clean": "rm -rf build lib node_modules",
+		"pack": "npm pack",
+		"publish": "npm publish"
+	}
 }
