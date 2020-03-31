@@ -1,7 +1,7 @@
 {
-  "title": "Pagination",
-  "nbelements": "Element (c)",
-  "nbelementsPlaceholder": "Type a number of elements",
-  "pageindex": "Page index (p)",
-  "pageindexPlaceholder": "Type a page index"
+  "title": "Paginación",
+  "nbelements": "Elementos (c)",
+  "nbelementsPlaceholder": "Defina un número de elementos",
+  "pageindex": "Índice de página (p)",
+  "pageindexPlaceholder": "Defina un índice de página"
 }
