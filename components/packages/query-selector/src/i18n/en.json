@@ -3,6 +3,6 @@
   "defaultQueriesTitle": "'Find By' queries on an attribute",
   "additionalQueriesTitle": "Additional queries",
   "filterTitlePrefix": "Filter the query of",
-  "tip1": "Now, add the widgets to the whiteboard that will use this variable.",
-  "tip2": "The return type of this variable is an array."
+  "tip1": "If you dragged and dropped a Business Object, you can now use the generated user interface, or adapt it to your needs. If you created a new variable, you can create your own user interface using this variable.",
+  "tip2": "The return type of the generated Business Data variable is an array."
 }
