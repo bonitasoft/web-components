@@ -9,18 +9,15 @@ describe('query-selector', () => {
 
 
     before(() => {
-        queries = '' +
-            '{"defaultQuery":' +
-            '[{"displayName":"name","query":"findByName","filters":[{"name":"name","type":"String"}]},' +
-            '{"displayName":"address","query":"findByAddress","filters":[{"name":"address","type":"String"}]},' +
-            '{"displayName":"phoneNumber","query":"findByPhoneNumber","filters":[{"name":"phoneNumber","type":"String"}]},' +
-            '{"displayName":"persistenceId","query":"findByPersistenceId","filters":[{"name":"persistenceId","type":"Int"}]}],' +
-            '"additionalQuery":' +
-            '[{"displayName":"find","query":"find","filters":[]},' +
-            '{"displayName":"findByNameAndPhoneNumber","query":"findByNameAndPhoneNumber","filters":[{"name":"name","type":"String"},{"name":"phoneNumber","type":"String"}]},' +
-            '{"displayName":"findByAddressAndPhoneNumberAndName","query":"findByAddressAndPhoneNumberAndName","filters":[{"name":"address","type":"String"},{"name":"phoneNumber","type":"String"},{"name":"name","type":"String"}]},' +
-            '{"displayName":"query1","query":"query1","filters":[{"name":"name","type":"String"},{"name":"address","type":"String"},{"name":"phoneNumber","type":"String"}]},' +
-            '{"displayName":"query2","query":"query2","filters":[{"name":"name","type":"String"},{"name":"address","type":"String"}]},' +
+        queries='{"defaultQuery":[{"displayName":"name","query":"findByName","filters":[{"name":"name","type":"STRING","collection":false}]},' +
+            '{"displayName":"address","query":"findByAddress","filters":[{"name":"address","type":"STRING","collection":false}]},' +
+            '{"displayName":"phoneNumber","query":"findByPhoneNumber","filters":[{"name":"phoneNumber","type":"STRING","collection":false}]},' +
+            '{"displayName":"persistenceId","query":"findByPersistenceId","filters":[{"name":"persistenceId","type":"INTEGER","collection":false}]}],' +
+            '"additionalQuery":[{"displayName":"find","query":"find","filters":[]},' +
+            '{"displayName":"findByNameAndPhoneNumber","query":"findByNameAndPhoneNumber","filters":[{"name":"name","type":"STRING","collection":false},{"name":"phoneNumber","type":"STRING"}]},' +
+            '{"displayName":"findByAddressAndPhoneNumberAndName","query":"findByAddressAndPhoneNumberAndName","filters":[{"name":"address","type":"STRING","collection":false},{"name":"phoneNumber","type":"STRING","collection":false},{"name":"name","type":"STRING","collection":false}]},' +
+            '{"displayName":"query1","query":"query1","filters":[{"name":"name","type":"STRING","collection":false},{"name":"address","type":"STRING","collection":false},{"name":"phoneNumber","type":"STRING","collection":false}]},' +
+            '{"displayName":"query2","query":"query2","filters":[{"name":"name","type":"STRING","collection":false},{"name":"address","type":"STRING","collection":false}]},' +
             '{"displayName":"query3","query":"query3","filters":[]},' +
             '{"displayName":"query4","query":"query4","filters":[]},' +
             '{"displayName":"query5","query":"query5","filters":[]},' +
@@ -205,7 +202,7 @@ describe('query-selector', () => {
     it('Should display the init parameters when the init attribute is used', async () => {
         init = '{"query": ' +
             '{"name":"findByNameAndPhoneNumber"},' +
-            '"filters":[{"name":"name","type":"String","value":"myName"},{"name":"phoneNumber","type":"String","value":"myPhoneNumber"}],' +
+            '"filters":[{"name":"name","type":"String","value":"myName"},{"name":"phoneNumber","type":"String","collection":"false","value":"myPhoneNumber"}],' +
             '"pagination": {"p":2,"c":20}}'
 
         querySel = await getQuerySelectorWithInit();

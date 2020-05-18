@@ -1,8 +1,8 @@
 {
-  "help": "Select a query from one of the 2 lists. If any, enter the filter value(s)",
-  "defaultQueriesTitle": "'Find By' queries on an attribute",
-  "additionalQueriesTitle": "Additional queries",
-  "filterTitlePrefix": "Filter the query of",
-  "tip1": "Now, add the widgets to the whiteboard that will use this variable.",
-  "tip2": "The return type of this variable is an array."
+  "help": "Seleccione una consulta de entre las 2 listas. Si existen, defina los valores de los filtros",
+  "defaultQueriesTitle": "Consultas 'Find by' basadas en un atributo",
+  "additionalQueriesTitle": "Consultas adicionales",
+  "filterTitlePrefix": "Filtros de la consulta",
+  "tip1": "Ahora, añada en el whiteboard los widget que usarán esta variable.",
+  "tip2": "Esta variable devolverá una colección (array)."
 }
