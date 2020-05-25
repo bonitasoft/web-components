@@ -3,6 +3,6 @@
   "defaultQueriesTitle": "Requêtes 'Find By' sur un attribut",
   "additionalQueriesTitle": "Requêtes additionelles",
   "filterTitlePrefix": "Filtrer la requête",
-  "tip1": "Si vous avez glissé-déposé un Business Object, vous pouvez maintenent utiliser l'interface utilisateur généré, ou l'adapter à vos besoins. Si vous avez créé une nouvelle variable, vous pouvez créer votre propre interface utilisateur en utilisant cette variable.",
+  "tip1": "Si vous avez glissé-déposé un Objet Métier, vous pouvez maintenent utiliser l'interface utilisateur généré, ou l'adapter à vos besoins. Si vous avez créé une nouvelle variable, vous pouvez créer votre propre interface utilisateur en utilisant cette variable.",
   "tip2": "Le type de retour de la variable Business Data générée est un tableau."
 }
