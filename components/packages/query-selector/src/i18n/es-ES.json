@@ -3,6 +3,6 @@
   "defaultQueriesTitle": "Consultas 'Find by' basadas en un atributo",
   "additionalQueriesTitle": "Consultas adicionales",
   "filterTitlePrefix": "Filtros de la consulta",
-  "tip1": "Ahora, añada en el whiteboard los widget que usarán esta variable.",
-  "tip2": "Esta variable devolverá una colección (array)."
+  "tip1": "Si arrastra y suelta un Objeto de Negocio, ahora puede utilizar la interfaz de usuario generada, o adaptarlo a sus necesidades. Si ha creado una nueva variable, puede crear su propia interfaz de usuario usando esta variable.",
+  "tip2": "El tipo de retorno de la variable de datos de negocio generada es un array."
 }
