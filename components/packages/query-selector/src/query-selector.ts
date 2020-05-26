@@ -79,12 +79,14 @@ export class QuerySelector extends LitElement {
     static getCatalog(lang: string) {
         switch (lang) {
             case "es":
+            case "es-ES":
                 return i18n_es;
             case "fr":
                 return i18n_fr;
             case "ja":
                 return i18n_ja;
             case "pt":
+            case "pt-BR":
                 return i18n_pt;
             default:
                 return i18n_en;
