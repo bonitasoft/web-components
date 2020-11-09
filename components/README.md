@@ -49,6 +49,14 @@ Run your `npm run start` like always.
 
 On your `index.html`, Right click and select `Debug index.html` entry. After this, you can put breakpoint in your Ts or Js code.
 
+
+## To bump all dependencies to latest versions
+`npm i -g npm-check-updates`
+
+`ncu -u`
+
+`npm install`
+
 <!-- Comments on purpose
    ## Publish
    
