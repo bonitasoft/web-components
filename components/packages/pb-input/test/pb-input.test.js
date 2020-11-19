@@ -19,6 +19,14 @@ describe('pb-input', () => {
     expect(input.value).equal("");
   });
 
+  it('Should set the id when attribute id is set', async () => {
+    pbInput = await fixture(html`
+      <pb-input id="MyPbInput"></pb-input>
+    `);
+    const rootDiv = pbInput.shadowRoot.querySelector('div');
+    expect(rootDiv.id).equals("MyPbInput");
+  });
+
   it('Should set the label when attribute label is set', async () => {
     pbInput = await fixture(html`
       <pb-input label="My label"></pb-input>

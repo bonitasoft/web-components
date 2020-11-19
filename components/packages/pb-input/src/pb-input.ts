@@ -1,7 +1,6 @@
 import {css, customElement, html, LitElement, property} from 'lit-element';
 // @ts-ignore
 import bootstrapStyle from './style.scss';
-// import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
 import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_es from "./i18n/es-ES.json";
@@ -32,6 +31,9 @@ export class PbInput extends LitElement {
   //
   // @property({ attribute: 'hidden', type: Boolean, reflect: true })
   // private hidden: boolean = false;
+
+  @property({ attribute: 'id', type: String, reflect: true })
+  private idRoot: string = "";
 
   @property({ attribute: 'required', type: Boolean, reflect: true })
   private required: boolean = false;
@@ -142,7 +144,7 @@ export class PbInput extends LitElement {
   render() {
     return html`
       <style>${bootstrapStyle}</style>
-      <div class="container">
+      <div id="${this.idRoot}" class="container">
         <div class="row">
           ${this.getLabel()}
           <input 

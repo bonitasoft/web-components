@@ -6,6 +6,7 @@ Simple input web component
 
 ## Attributes
 
+- `id`              (default: empty)
 - `lang`            en|es-ES|fr|ja|pt-BR (default: en)
 - `required`        (default: false)
 - `min-length`      (default: 0)
