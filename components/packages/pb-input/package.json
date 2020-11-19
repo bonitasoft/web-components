@@ -1,7 +1,7 @@
 {
   "name": "@bonitasoft/pb-input",
   "version": "0.1.0",
-  "description": "A simple search box",
+  "description": "An input with label",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/pb-input#readme",
   "license": "GPLv2",
   "module": "lib/pb-input.es5.min.js",

@@ -43,26 +43,24 @@ describe('pb-input', () => {
     expect(label.classList.value).to.include("label-required");
   });
 
-  it('Should set the css class col-xs-xxx the when attribute label-position/label-width are set', async () => {
+  it('Should set the css class col-xxx the when attribute label-position/label-width are set', async () => {
     pbInput = await fixture(html`
       <pb-input label-position="left" label-width="5"></pb-input>
     `);
     let label = pbInput.shadowRoot.querySelector('label');
     // If position left, take the label-width
-    expect(label.classList.value).to.include("col-xs-5");
+    expect(label.classList.value).to.include("col-5");
     let input = pbInput.shadowRoot.querySelector('input');
-    // If position left, take (12 - label-width)
-    expect(input.classList.value).to.include("col-xs-7");
+    expect(input.classList.value).to.include("col");
 
     pbInput = await fixture(html`
       <pb-input label-position="right" label-width="5"></pb-input>
     `);
     label = pbInput.shadowRoot.querySelector('label');
     // If position is not left, take 12
-    expect(label.classList.value).to.include("col-xs-12");
+    expect(label.classList.value).to.include("col-12");
     input = pbInput.shadowRoot.querySelector('input');
-    // If position is not left, take 12
-    expect(input.classList.value).to.include("col-xs-12");
+    expect(input.classList.value).to.include("col");
   });
 
   it('Should set the placeholder when attribute placeholder is set', async () => {
@@ -136,12 +134,12 @@ describe('pb-input', () => {
     expect(value).to.equal("at");
   });
 
-  // it('Should display french labels when lang attribute is fr', async () => {
-  //   pbInput = await fixture(html`
-  //     <pb-input lang="fr"></pb-input>
-  //   `);
-  //   const input = pbInput.shadowRoot.querySelector('input');
-  //   expect(input.placeholder).equal("🔍Filtrer les requêtes");
-  // });
+  it('Should display french labels when lang attribute is fr', async () => {
+    pbInput = await fixture(html`
+      <pb-input lang="fr"></pb-input>
+    `);
+    const label = pbInput.shadowRoot.querySelector('label');
+    expect(label.textContent).equal("Label par défaut");
+  });
 
 });

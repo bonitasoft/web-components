@@ -6,14 +6,14 @@ Simple input web component
 
 ## Attributes
 
-- `lang`            (default: en)
+- `lang`            en|es-ES|fr|ja|pt-BR (default: en)
 - `required`        (default: false)
 - `min-length`      (default: 0)
 - `max-length`      (default: Number.MAX_VALUE)
 - `readonly`        (default: false)
 - `label-hidden`    (default: false)
 - `label`           (default: "Default label")
-- `label-position`  (default: top)
+- `label-position`  left | top (default: top)
 - `label-width`     (default: 4)
 - `value`           (default: empty)
 - `type`            (default: text)
@@ -31,4 +31,4 @@ Run:
 
 Then import `node_modules/@bonitasoft/pb-input/lib/pb-input.es5.min.js`
 
-And you can use new html tag `<pb-input lang="fr" placeholder="Type a value"></pb-input>`
+And you can use new html tag `<pb-input placeholder="Type a value"></pb-input>`

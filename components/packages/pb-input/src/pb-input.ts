@@ -2,7 +2,7 @@ import {css, customElement, html, LitElement, property} from 'lit-element';
 // @ts-ignore
 import bootstrapStyle from './style.scss';
 // import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
-import {listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
+import {get, listenForLangChanged, registerTranslateConfig, use} from "lit-translate";
 import * as i18n_en from "./i18n/en.json";
 import * as i18n_es from "./i18n/es-ES.json";
 import * as i18n_fr from "./i18n/fr.json";
@@ -37,10 +37,10 @@ export class PbInput extends LitElement {
   private required: boolean = false;
 
   @property({ attribute: 'min-length', type: String, reflect: true })
-  private minLength: number = 0;
+  private minLength: string = "";
 
   @property({ attribute: 'max-length', type: String, reflect: true })
-  private maxLength: number = Number.MAX_VALUE;
+  private maxLength: string = "";
 
   @property({ attribute: 'readonly', type: Boolean, reflect: true })
   private readOnly: boolean = false;
@@ -49,13 +49,13 @@ export class PbInput extends LitElement {
   private labelHidden: boolean = false;
 
   @property({ attribute: 'label', type: String, reflect: true })
-  private label: string = "Default label";
+  private label: string = "";
 
   @property({ attribute: 'label-position', type: String, reflect: true })
   private labelPosition: string = "top";
 
   @property({ attribute: 'label-width', type: String, reflect: true })
-  private labelWidth: number = 4;
+  private labelWidth: string = "4";
 
   @property({ attribute: 'placeholder', type: String, reflect: true })
   private placeholder: string = "";
@@ -79,9 +79,9 @@ export class PbInput extends LitElement {
   constructor() {
     super();
     listenForLangChanged(() => {
-      // TODO: enable translation
-      // We do not use translate() directive in render() since placeholder is an exposed attribute
-      // this.placeholder = get("placeholder");
+      if (this.label === "") {
+        this.label = get("defaultLabel");
+      }
     });
   }
 
@@ -127,12 +127,12 @@ export class PbInput extends LitElement {
       .label-elem {
         font-size: 14px;
         font-weight: 700;
-        margin-bottom: 5px;
+        padding-left: 0
       }
       
       /* Add a red star after required inputs */
       .label-required:after {
-        content: "*";
+        content: " *";
         color: #C00;
       }
 
@@ -142,22 +142,26 @@ export class PbInput extends LitElement {
   render() {
     return html`
       <style>${bootstrapStyle}</style>
-      ${this.getLabel()}
-      <input 
-        class="${this.getInputCssClass()}"
-        id="input"
-        name="${this.name}"
-        type="${this.type}"
-        min="${this.min}"
-        max="${this.max}"
-        step="${this.step}"
-        value="${this.value}"
-        @input=${(e: any) => this.valueChanged(e.target.value)} 
-        placeholder="${this.placeholder}"
-        minlength="${this.minLength}"
-        maxlength="${this.maxLength}"
-        ?readonly="${this.readOnly}"
-      />
+      <div class="container">
+        <div class="row">
+          ${this.getLabel()}
+          <input 
+            class="${this.getInputCssClass()}"
+            id="input"
+            name="${this.name}"
+            type="${this.type}"
+            min="${this.min}"
+            max="${this.max}"
+            step="${this.step}"
+            value="${this.value}"
+            @input=${(e: any) => this.valueChanged(e.target.value)} 
+            placeholder="${this.placeholder}"
+            minlength="${this.minLength}"
+            maxlength="${this.maxLength}"
+            ?readonly="${this.readOnly}"
+          />
+        </div>
+      </div>
     `;
   }
 
@@ -174,13 +178,12 @@ export class PbInput extends LitElement {
   }
 
   private getLabelCssClass() : string {
-    return "control-label label-elem " + (this.required ? "label-required" : "") +
-      " col-xs-" + (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 12);
+    return (this.required ? "label-required " : "") + "label-elem form-horizontal col-form-label " +
+      "col-" + (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 12);
   }
 
   private getInputCssClass() : string {
-    return "form-control input-elem " +
-      "col-xs-" + (12 - (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 0));
+    return "form-control input-elem col";
   }
 
   private valueChanged(value: string) {
