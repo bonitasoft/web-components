@@ -51,22 +51,24 @@ describe('pb-input', () => {
     expect(label.classList.value).to.include("label-required");
   });
 
-  it('Should set the css class col-xxx the when attribute label-position/label-width are set', async () => {
+  it('Should set the css classes col-xxx and text-right the when attribute label-position/label-width are set', async () => {
     pbInput = await fixture(html`
       <pb-input label-position="left" label-width="5"></pb-input>
     `);
     let label = pbInput.shadowRoot.querySelector('label');
     // If position left, take the label-width
     expect(label.classList.value).to.include("col-5");
+    expect(label.classList.value).to.include("text-right");
     let input = pbInput.shadowRoot.querySelector('input');
     expect(input.classList.value).to.include("col");
 
     pbInput = await fixture(html`
-      <pb-input label-position="right" label-width="5"></pb-input>
+      <pb-input label-position="top" label-width="5"></pb-input>
     `);
     label = pbInput.shadowRoot.querySelector('label');
     // If position is not left, take 12
     expect(label.classList.value).to.include("col-12");
+    expect(label.classList.value).not.to.include("text-right");
     input = pbInput.shadowRoot.querySelector('input');
     expect(input.classList.value).to.include("col");
   });

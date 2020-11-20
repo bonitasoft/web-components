@@ -137,6 +137,10 @@ export class PbInput extends LitElement {
         content: " *";
         color: #C00;
       }
+      
+      .text-right {
+        text-align: right; 
+      }
 
     `;
   }
@@ -181,7 +185,7 @@ export class PbInput extends LitElement {
 
   private getLabelCssClass() : string {
     return (this.required ? "label-required " : "") + "label-elem form-horizontal col-form-label " +
-      "col-" + (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 12);
+      (!this.labelHidden && this.labelPosition === 'left' ? "col-" + this.labelWidth + " text-right" : "col-12");
   }
 
   private getInputCssClass() : string {
