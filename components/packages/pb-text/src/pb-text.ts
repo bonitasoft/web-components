@@ -160,7 +160,7 @@ export class PbText extends LitElement {
 
   private getLabelCssClass() : string {
     return "label-elem form-horizontal col-form-label " +
-      "col-" + (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 12);
+      (!this.labelHidden && this.labelPosition === 'left' ? "col-" + this.labelWidth + " text-right": "col-12");
   }
 
   private getParagraphCssClass() : string {
