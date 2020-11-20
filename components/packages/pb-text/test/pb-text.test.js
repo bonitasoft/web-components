@@ -36,26 +36,26 @@ describe('pb-text', () => {
     expect(label).equals(null);
   });
 
-  it('Should set the css class col-xs-xxx the when attribute label-position/label-width are set', async () => {
+  it('Should set the css class col-xxx the when attribute label-position/label-width are set', async () => {
     pbText = await fixture(html`
       <pb-text label-position="left" label-width="5"></pb-text>
     `);
     let label = pbText.shadowRoot.querySelector('label');
     // If position left, take the label-width
-    expect(label.classList.value).to.include("col-xs-5");
+    expect(label.classList.value).to.include("col-5");
     let paragraph = pbText.shadowRoot.querySelector('p');
     // If position left, take (12 - label-width)
-    expect(paragraph.classList.value).to.include("col-xs-7");
+    expect(paragraph.classList.value).to.include("col");
 
     pbText = await fixture(html`
-      <pb-text label-position="right" label-width="5"></pb-text>
+      <pb-text label-position="top" label-width="5"></pb-text>
     `);
     label = pbText.shadowRoot.querySelector('label');
     // If position is not left, take 12
-    expect(label.classList.value).to.include("col-xs-5");
+    expect(label.classList.value).to.include("col-12");
     paragraph = pbText.shadowRoot.querySelector('p');
     // If position is not left, take 12
-    expect(paragraph.classList.value).to.include("col-xs-12");
+    expect(paragraph.classList.value).to.include("col");
   });
 
   it('Should set the text when attribute text is set', async () => {
@@ -69,7 +69,7 @@ describe('pb-text', () => {
 
   it('Should set the css class text-<alignment> the when attribute alignment is set', async () => {
     pbText = await fixture(html`
-      <pb-text alignment="center"></pb-text>
+      <pb-text label-hidden alignment="center"></pb-text>
     `);
     let paragraph = pbText.shadowRoot.querySelector('p');
     expect(paragraph.classList.value).to.include("text-center");

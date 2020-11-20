@@ -31,6 +31,9 @@ export class PbText extends LitElement {
   // @property({ attribute: 'hidden', type: Boolean, reflect: true })
   // private hidden: boolean = false;
 
+  @property({ attribute: 'id', type: String, reflect: true })
+  private idRoot: string = "";
+
   @property({ attribute: 'label-hidden', type: Boolean, reflect: true })
   private labelHidden: boolean = false;
 
@@ -100,19 +103,39 @@ export class PbText extends LitElement {
       .label-elem {
         font-size: 14px;
         font-weight: 700;
-        margin-bottom: 5px;
-      }     
+        padding-left: 0;
+        padding-top: 0;
+      }
+      
+      .paragraph-elem {
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #333;
+        background-color: #fff;
+        margin: 0;
+        padding-left: 0;
+      }
+      
+      .text-center {
+        text-align: center!important;
+      }
+      .text-right {
+        text-align: right!important;
+      }
     `;
   }
 
   render() {
     return html`
       <style>${bootstrapStyle}</style>
-      <div class="form-group">
-        ${this.getLabel()}
-        <p
-            class="${this.getParagraphCssClass()}"
-        >${this.getTextValue()}</p>
+      <div id="${this.idRoot}" class="container">
+        <div class="row">
+          ${this.getLabel()}
+          <p
+              class="${this.getParagraphCssClass()}"
+          >${this.getTextValue()}</p>
+        </div>
       </div>
     `;
   }
@@ -136,13 +159,13 @@ export class PbText extends LitElement {
   }
 
   private getLabelCssClass() : string {
-    return "control-label label-elem " +
-      " col-xs-" + (!this.labelHidden ? this.labelWidth : 12);
+    return "label-elem form-horizontal col-form-label " +
+      "col-" + (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 12);
   }
 
   private getParagraphCssClass() : string {
-    return "form-control-static  " + "text-" + this.alignment +
-      " col-xs-" + (12 - (!this.labelHidden && this.labelPosition === 'left' ? this.labelWidth : 0));
+    return "form-control-static paragraph-elem " + (this.labelHidden ? "text-" + this.alignment + " " : "") +
+      "col";
   }
 
 }

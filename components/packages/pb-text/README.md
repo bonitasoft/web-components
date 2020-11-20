@@ -6,13 +6,14 @@ Simple text web component
 
 ## Attributes
 
-- `lang`            (default: en)
+- `id`              (default: empty)
+- `lang`            en|es-ES|fr|ja|pt-BR (default: en)
 - `label-hidden`    (default: false)
 - `label`           (default: "Default label")
-- `label-position`  (default: top)
+- `label-position`  left|top (default: top)
 - `label-width`     (default: 4)
 - `text`            (default: empty)
-- `alignment`       (default: left)
+- `alignment`       left|center|right (default: left)
 - `allow-html`      (default: false)
 
 Note: If `allow-html` is set, this is unsafe to use the `text` attribute with any user-provided input that hasn't been
