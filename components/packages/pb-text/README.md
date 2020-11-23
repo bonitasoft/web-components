@@ -6,15 +6,17 @@ Simple text web component
 
 ## Attributes
 
-- `id`              (default: empty)
-- `lang`            en|es-ES|fr|ja|pt-BR (default: en)
-- `label-hidden`    (default: false)
-- `label`           (default: "Default label")
-- `label-position`  left|top (default: top)
-- `label-width`     (default: 4)
-- `text`            (default: empty)
-- `alignment`       left|center|right (default: left)
-- `allow-html`      (default: false)
+| Attribute        | Type      | Default | Possible values    |
+|------------------|-----------|---------|--------------------|
+| `alignment`      | `string`  | "left"  | left center right  |
+| `allow-html`     | `boolean` | false   |                    |
+| `id`             | `string`  | ""      |                    |
+| `label`          | `string`  | ""      |                    |
+| `label-hidden`   | `boolean` | false   |                    |
+| `label-position` | `string`  | "top"   | left top           |
+| `label-width`    | `number`  | 4       |                    |
+| `lang`           | `string`  | "en"    |en es-ES fr ja pt-BR|
+| `text`           | `string`  | ""      |                    |
 
 Note: If `allow-html` is set, this is unsafe to use the `text` attribute with any user-provided input that hasn't been
       sanitized or escaped, as it may lead to cross-site-scripting vulnerabilities.
@@ -27,4 +29,4 @@ Run:
 
 Then import `node_modules/@bonitasoft/pb-text/lib/pb-text.es5.min.js`
 
-And you can use new html tag `<pb-text lang="fr" text="My text"></pb-text>`
+And you can use new html tag `<pb-text text="My text"></pb-text>`

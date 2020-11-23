@@ -6,23 +6,31 @@ Simple input web component
 
 ## Attributes
 
-- `id`              (default: empty)
-- `lang`            en|es-ES|fr|ja|pt-BR (default: en)
-- `required`        (default: false)
-- `min-length`      (default: 0)
-- `max-length`      (default: Number.MAX_VALUE)
-- `readonly`        (default: false)
-- `label-hidden`    (default: false)
-- `label`           (default: "Default label")
-- `label-position`  left | top (default: top)
-- `label-width`     (default: 4)
-- `value`           (default: empty)
-- `type`            (default: text)
-- `min`             (default: empty)
-- `max`             (default: empty)
-- `step`            (default: 1)
-- `placeholder`     (default: empty)
+| Attribute        | Type      | Default | Possible values    |
+|------------------|-----------|---------|--------------------|
+| `id`             | `string`  | ""      |                    |
+| `label`          | `string`  | ""      |                    |
+| `label-hidden`   | `boolean` | false   |                    |
+| `label-position` | `string`  | "top"   | left top           |
+| `label-width`    | `string`  | "4"     |                    |
+| `lang`           | `string`  | "en"    |en es-ES fr ja pt-BR|
+| `max`            | `string`  | ""      |                    |
+| `max-length`     | `string`  | ""      |                    |
+| `min`            | `string`  | ""      |                    |
+| `min-length`     | `string`  | ""      |                    |
+| `placeholder`    | `string`  | ""      |                    |
+| `readonly`       | `boolean` | false   |                    |
+| `required`       | `boolean` | false   |                    |
+| `step`           | `string`  | "1"     |                    |
+| `type`           | `string`  | "text"  |                    |
+| `value`          | `string`  | ""      |                    |
 
+
+## Events
+
+| Event         | Type                  |
+|---------------|-----------------------|
+| `valueChange` | `CustomEvent<string>` |
 
 ## Usage
 
