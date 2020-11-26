@@ -117,8 +117,6 @@ export class PbInput extends LitElement {
         display: block;
         font-family: sans-serif;
         text-align: left;
-        padding: 10px 10px 10px 0px;
-        max-width: var(--max-width, 50%);
       }
 
       .input-elem {

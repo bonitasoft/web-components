@@ -1,6 +1,6 @@
 {
   "name": "@bonitasoft/pb-input",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An input with label",
   "homepage": "https://github.com/bonitasoft/web-components/components/packages/pb-input#readme",
   "license": "GPLv2",
