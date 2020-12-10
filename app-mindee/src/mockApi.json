@@ -1,0 +1,165 @@
+{
+  "call": {
+    "endpoint": {
+      "name": "expense_receipts",
+      "version": "3.0"
+    },
+    "finished_at": "2020-12-10T11:00:41+00:00",
+    "id": "3b199fe8-c45c-4cf4-b778-2a0904cdd34d",
+    "n_documents": 1,
+    "n_inputs": 1,
+    "processing_time": 1.263,
+    "started_at": "2020-12-10T11:00:40+00:00"
+  },
+  "documents": [
+    {
+      "id": "b2013dd9-315d-4a9c-8349-46e8be8db425",
+      "name": "sample_receipt.jpg"
+    }
+  ],
+  "predictions": [
+    {
+      "category": {
+        "probability": 0.99,
+        "value": "food"
+      },
+      "date": {
+        "probability": 0.99,
+        "raw": "26-Feb-2016",
+        "segmentation": {
+          "bounding_box": [
+            [
+              0.479,
+              0.173
+            ],
+            [
+              0.613,
+              0.173
+            ],
+            [
+              0.613,
+              0.197
+            ],
+            [
+              0.479,
+              0.197
+            ]
+          ]
+        },
+        "value": "2016-02-26"
+      },
+      "locale": {
+        "country": "GB",
+        "currency": "GBP",
+        "language": "en",
+        "probability": 0.82,
+        "value": "en-GB"
+      },
+      "orientation": {
+        "degrees": 0,
+        "probability": 0.99
+      },
+      "supplier": {
+        "probability": 0.71,
+        "segmentation": {
+          "bounding_box": [
+            [
+              0.394,
+              0.068
+            ],
+            [
+              0.477,
+              0.068
+            ],
+            [
+              0.477,
+              0.087
+            ],
+            [
+              0.394,
+              0.087
+            ]
+          ]
+        },
+        "value": "CLACHAN"
+      },
+      "taxes": [
+        {
+          "code": "N/A",
+          "probability": 0.98,
+          "rate": 20,
+          "segmentation": {
+            "bounding_box": [
+              [
+                0.19,
+                0.403
+              ],
+              [
+                0.698,
+                0.403
+              ],
+              [
+                0.698,
+                0.432
+              ],
+              [
+                0.19,
+                0.432
+              ]
+            ]
+          },
+          "value": 1.7
+        }
+      ],
+      "time": {
+        "probability": 0.99,
+        "raw": "15:20",
+        "segmentation": {
+          "bounding_box": [
+            [
+              0.62,
+              0.173
+            ],
+            [
+              0.681,
+              0.173
+            ],
+            [
+              0.681,
+              0.191
+            ],
+            [
+              0.62,
+              0.191
+            ]
+          ]
+        },
+        "value": "15:20"
+      },
+      "total_incl": {
+        "probability": 0.99,
+        "segmentation": {
+          "bounding_box": [
+            [
+              0.549,
+              0.619
+            ],
+            [
+              0.715,
+              0.619
+            ],
+            [
+              0.715,
+              0.64
+            ],
+            [
+              0.549,
+              0.64
+            ]
+          ]
+        },
+        "value": 10.2
+      }
+    }
+  ]
+}

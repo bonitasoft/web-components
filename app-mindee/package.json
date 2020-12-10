@@ -1,0 +1,32 @@
+{
+  "scripts": {
+    "storybook": "start-storybook",
+    "storybook:build": "build-storybook",
+    "build": "rimraf dist && rollup -c rollup.config.js",
+    "start:build": "npm run build && web-dev-server --root-dir dist --app-index index.html --open --compatibility none",
+    "start": "web-dev-server --app-index index.html --node-resolve --open --watch",
+    "dev": "rollup -c rollup.config.js -w --environment devMode:true"
+  },
+  "devDependencies": {
+    "@open-wc/demoing-storybook": "^2.0.0",
+    "@open-wc/building-rollup": "^1.0.0",
+    "@rollup/plugin-commonjs": "^17.0.0",
+    "deepmerge": "^4.2.2",
+    "rimraf": "^2.6.3",
+    "rollup": "^2.3.4",
+    "@web/dev-server": "^0.0.12"
+  },
+  "name": "app-mindee",
+  "version": "0.0.0",
+  "description": "Webcomponent app-mindee following open-wc recommendations",
+  "author": "app-mindee",
+  "license": "MIT",
+  "dependencies": {
+    "@rollup/plugin-json": "^4.1.0",
+    "lit-element": "^2.0.1",
+    "lit-html": "^1.0.0",
+    "mindee-js": "^1.0.0-rc1",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-serve": "^1.1.0"
+  }
+}
