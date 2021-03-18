@@ -1,10 +1,10 @@
 {
-  "name": "@bonitasoft/pagination-selector",
-  "version": "1.0.4",
-  "description": "A pagination selector",
-  "homepage": "https://github.com/bonitasoft/web-components/tree/master/components/packages/pagination-selector",
+  "name": "@bonitasoft/search-box",
+  "version": "1.0.5",
+  "description": "A simple search box",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/misc/search-box#readme",
   "license": "LicenseRef-LICENSE",
-  "module": "lib/pagination-selector.es5.min.js",
+  "module": "lib/search-box.es5.min.js",
   "files": [
     "lib"
   ],
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/bonitasoft/web-components.git"
   },
   "scripts": {
-    "start": "tsc && rollup -c -w --environment devMode:true",
+    "start": "npm install && rollup -c -w --environment devMode:true",
     "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
     "bundle": "tsc && rollup -c",
     "clean": "rm -rf build lib node_modules",

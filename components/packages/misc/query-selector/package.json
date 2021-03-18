@@ -2,7 +2,7 @@
 	"name": "@bonitasoft/query-selector",
 	"version": "1.0.5",
 	"description": "A query selector",
-	"homepage": "https://github.com/bonitasoft/web-components/components/packages/query-selector#readme",
+	"homepage": "https://github.com/bonitasoft/web-components/components/packages/misc/query-selector#readme",
 	"license": "LicenseRef-LICENSE",
 	"module": "lib/query-selector.es5.min.js",
 	"files": [
