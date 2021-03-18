@@ -37,7 +37,8 @@ if [ -z "$COMPONENT" ]; then
   usage;
 fi
 
-cd "$BASE_DIR/packages/$COMPONENT" || exit
+COMPONENT_PATH=$(find $BASE_DIR -name $COMPONENT)
+cd "$COMPONENT_PATH" || exit
 
 ## Push on npm repository
 # Check if user is logged on npm registry
