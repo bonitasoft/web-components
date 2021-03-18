@@ -76,17 +76,17 @@ add_crowdin_directory() {
 # $1 web component name
 # $2 target language
 upload_translations() {
-  wc=$1
+  wcdir=$1
   lang=$2
-  JSON_FILE="$BASE_DIR"/packages/$wc/src/i18n/$lang.json
+  JSON_FILE="$BASE_DIR"/packages/$wcdir/src/i18n/$lang.json
   if [ ! -f "$JSON_FILE" ]; then
     echo "Warning: json file $JSON_FILE does not exist";
     return;
   fi
 
-  echo "Uploading '$wc' $lang translation to '$PROJECT' crowdin project ..."
+  echo "Uploading '$wcdir' $lang translation to '$PROJECT' crowdin project ..."
 
-  curl -F "files[web-components/$wc/messages.json]=@$JSON_FILE" \
+  curl -F "files[web-components/$wcdir/messages.json]=@$JSON_FILE" \
        -F "language=$lang" \
        -F "auto_approve_imported=1" \
        -F "import_duplicates=1" \
@@ -104,6 +104,12 @@ cd "$BASE_DIR" || exit
 add_crowdin_directory "$BRANCH_NAME/web-components"
 
 cd "packages" || exit
+
+for wctype in $(ls -d *)
+do
+  add_crowdin_directory "$BRANCH_NAME/web-components/$wctype"
+done
+
 # shellcheck disable=SC2045
 # shellcheck disable=SC2035
 # web components are in (1-level) sub-directories
@@ -120,10 +126,10 @@ do
 
   if [ "$UPLOAD_TRANS" = true ]
   then
-    upload_translations "$wc" fr
-    upload_translations "$wc" es
-    upload_translations "$wc" ja
-    upload_translations "$wc" pt-BR
+    upload_translations "$wcdir" fr
+    upload_translations "$wcdir" es-ES
+    upload_translations "$wcdir" ja
+    upload_translations "$wcdir" pt-BR
   fi
 
 done
