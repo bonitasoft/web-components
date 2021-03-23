@@ -91,15 +91,15 @@ cd "$BASE_DIR"/packages || exit
 # shellcheck disable=SC2035
 
 # Loop on web components
-for wcdir in $(ls -d */)
+for wcdir in $(find . -type d -mindepth 2 -maxdepth 2)
 do
-  # Remove trailer '/'
-  wc=${wcdir%%/}
+  ## Remove './' prefix
+  wcdir=${wcdir##./}
   cd "$CROWDIN_DOWNLOAD_DIR" || exit
   # Loop on langs
   for lang in "${languages[@]}"
   do
-    cp "$CROWDIN_DOWNLOAD_DIR"/"$lang"/"$BRANCH_NAME"/web-components/"$wc"/messages.json "$BASE_DIR"/packages/"$wc"/src/i18n/"$lang".json
+    cp "$CROWDIN_DOWNLOAD_DIR"/"$lang"/"$BRANCH_NAME"/web-components/"$wcdir"/messages.json "$BASE_DIR"/packages/"$wcdir"/src/i18n/"$lang".json
   done
 done
 rm -rf "$CROWDIN_DOWNLOAD_DIR"

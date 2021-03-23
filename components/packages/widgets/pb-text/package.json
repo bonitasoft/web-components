@@ -2,7 +2,7 @@
   "name": "@bonitasoft/pb-text",
   "version": "0.1.1",
   "description": "A text component",
-  "homepage": "https://github.com/bonitasoft/web-components/components/packages/pb-text#readme",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/widgets/pb-text#readme",
   "license": "GPLv2",
   "module": "lib/pb-text.es5.min.js",
   "files": [

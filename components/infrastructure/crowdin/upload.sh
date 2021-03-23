@@ -106,16 +106,17 @@ add_crowdin_directory "$BRANCH_NAME/web-components"
 cd "packages" || exit
 # shellcheck disable=SC2045
 # shellcheck disable=SC2035
-for wcdir in $(ls -d */)
+# web components are in (1-level) sub-directories
+for wcdir in $(find . -type d -mindepth 2 -maxdepth 2)
 do
-  # Remove trailer '/'
-  wc=${wcdir%%/}
-  add_crowdin_directory "$BRANCH_NAME/web-components/$wc"
-  echo "Uploading '$wc' web component json translation file to '$PROJECT' crowdin project ..."
+  ## Remove './' prefix
+  wcdir=${wcdir##./}
+  add_crowdin_directory "$BRANCH_NAME/web-components/$wcdir"
+  echo "Uploading '$wcdir' web component json translation file to '$PROJECT' crowdin project ..."
   upload_sources \
-    "files[web-components/$wc/messages.json]=@$wc/src/i18n/en.json" \
+    "files[web-components/$wcdir/messages.json]=@$wcdir/src/i18n/en.json" \
     "branch=$BRANCH_NAME" \
-    "exports_pattern=[web-components/$wc/messages.json]=/$wc/src/i18n/%locale%.json"
+    "exports_pattern=[web-components/$wcdir/messages.json]=/$wcdir/src/i18n/%locale%.json"
 
   if [ "$UPLOAD_TRANS" = true ]
   then
