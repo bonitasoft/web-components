@@ -13,13 +13,16 @@ registerTranslateConfig({
   loader: (lang) => Promise.resolve(PbInput.getCatalog(lang))
 });
 
+/**
+ * Input field, optionally with a label, where the user can enter information
+ */
 @customElement('pb-input')
 export class PbInput extends LitElement {
 
   private name = "pbInput";
 
   @property({ attribute: 'lang', type: String, reflect: true })
-  lang: string = "en";
+  private lang: string = "en";
 
   // Common properties below are handled by the div above pb-input:
 
@@ -33,49 +36,53 @@ export class PbInput extends LitElement {
   // private hidden: boolean = false;
 
   @property({ attribute: 'id', type: String, reflect: true })
-  private idRoot: string = "";
+  id: string = "";
 
   @property({ attribute: 'required', type: Boolean, reflect: true })
-  private required: boolean = false;
+  required: boolean = false;
 
-  @property({ attribute: 'min-length', type: String, reflect: true })
-  private minLength: string = "";
+  @property({ attribute: 'min-length', type: Number, reflect: true })
+  minLength: number | undefined;
 
-  @property({ attribute: 'max-length', type: String, reflect: true })
-  private maxLength: string = "";
+  @property({ attribute: 'max-length', type: Number, reflect: true })
+  maxLength: number | undefined;
 
   @property({ attribute: 'readonly', type: Boolean, reflect: true })
-  private readOnly: boolean = false;
+  readOnly: boolean = false;
 
   @property({ attribute: 'label-hidden', type: Boolean, reflect: true })
-  private labelHidden: boolean = false;
+  labelHidden: boolean = false;
 
   @property({ attribute: 'label', type: String, reflect: true })
-  private label: string = "";
+  label: string = "";
 
+  /**
+   * Position of the label
+   * @type {"left"|"top"}
+   */
   @property({ attribute: 'label-position', type: String, reflect: true })
-  private labelPosition: string = "top";
+  labelPosition: string = "top";
 
-  @property({ attribute: 'label-width', type: String, reflect: true })
-  private labelWidth: string = "4";
+  @property({ attribute: 'label-width', type: Number, reflect: true })
+  labelWidth: number = 4;
 
   @property({ attribute: 'placeholder', type: String, reflect: true })
-  private placeholder: string = "";
+  placeholder: string = "";
 
   @property({ attribute: 'value', type: String, reflect: true })
-  private value: string = "";
+  value: string = "";
 
   @property({ attribute: 'type', type: String, reflect: true })
-  private type: string = "text";
+  type: string = "text";
 
-  @property({ attribute: 'min', type: String, reflect: true })
-  private min: string = "";
+  @property({ attribute: 'min', type: Number, reflect: true })
+  min: number | undefined;
 
-  @property({ attribute: 'max', type: String, reflect: true })
-  private max: string = "";
+  @property({ attribute: 'max', type: Number, reflect: true })
+  max: number | undefined;
 
-  @property({ attribute: 'step', type: String, reflect: true })
-  private step: string = "1";
+  @property({ attribute: 'step', type: Number, reflect: true })
+  step: number = 1;
 
 
   constructor() {
@@ -146,7 +153,7 @@ export class PbInput extends LitElement {
   render() {
     return html`
       <style>${bootstrapStyle}</style>
-      <div id="${this.idRoot}" class="container">
+      <div id="${this.id}" class="container">
         <div class="row">
           ${this.getLabel()}
           <input 
