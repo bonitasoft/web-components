@@ -58,7 +58,6 @@ export class PbInput extends LitElement {
 
   /**
    * Position of the label
-   * @type {"left"|"top"}
    */
   @property({ attribute: 'label-position', type: String, reflect: true })
   labelPosition: string = "top";
