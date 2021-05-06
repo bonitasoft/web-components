@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'components/*'
+      - 'legacy-elements/*'
+      - '.github/workflows/build.yml'
+  pull_request:
+    branches:
+      - master
+    paths:
+      - 'components/*'
+      - 'legacy-elements/*'
+      - '.github/workflows/build.yml'
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+
+      - name: Install npm modules
+        run: cd components && npm ci
+
+      - name: Build
+        run: cd components && npm run test:ci
+
+      - name: Package
+        run: cd components && npm run pack
+
+      - name: Archive artefact
+        uses: actions/upload-artifact@v2
+        with:
+          name: all-components-in-one-zip
+          path: |
+            components/packages/**/lib/**,
+            components/packages/**/*.tgz
+
+      - name: Send message to Slack channel
+        uses: act10ns/slack@v1
+        if: ${{ failure() && (github.ref == 'refs/heads/master') }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          status: ${{ job.status }}
