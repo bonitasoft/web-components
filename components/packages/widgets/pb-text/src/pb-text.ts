@@ -32,30 +32,30 @@ export class PbText extends LitElement {
   // private hidden: boolean = false;
 
   @property({ attribute: 'id', type: String, reflect: true })
-  private idRoot: string = "";
+  id: string = "";
 
   @property({ attribute: 'label-hidden', type: Boolean, reflect: true })
-  private labelHidden: boolean = false;
+  labelHidden: boolean = false;
 
   @property({ attribute: 'label', type: String, reflect: true })
-  private label: string = "";
+  label: string = "";
 
   @property({ attribute: 'label-position', type: String, reflect: true })
-  private labelPosition: string = "top";
+  labelPosition: string = "top";
 
   @property({ attribute: 'label-width', type: String, reflect: true })
-  private labelWidth: number = 4;
+  labelWidth: number = 4;
 
   @property({ attribute: 'text', type: String, reflect: true })
-  private text: string = "";
+  text: string = "";
 
   // User should take care to sanitize the 'text' content before using this.
   // See e.g. https://github.com/google/closure-library/blob/master/closure/goog/html/sanitizer/htmlsanitizer.js
   @property({ attribute: 'allow-html', type: Boolean, reflect: true })
-  private allowHTML: boolean = false;
+  allowHTML: boolean = false;
 
   @property({ attribute: 'alignment', type: String, reflect: true })
-  private alignment: string = "left";
+  alignment: string = "left";
 
   constructor() {
     super();
@@ -127,7 +127,7 @@ export class PbText extends LitElement {
   render() {
     return html`
       <style>${bootstrapStyle}</style>
-      <div id="${this.idRoot}" class="container">
+      <div id="${this.id}" class="container">
         <div class="row">
           ${this.getLabel()}
           <p
