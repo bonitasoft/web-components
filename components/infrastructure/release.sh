@@ -53,7 +53,7 @@ if [ -z "$COMPONENT" ]; then
   usage;
 fi
 
-COMPONENT_PATH=$(find $BASE_DIR -name $COMPONENT)
+COMPONENT_PATH="$(find $BASE_DIR -name "$COMPONENT")"
 cd "$COMPONENT_PATH" || exit
 
 ## Release component and get new version
