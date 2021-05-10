@@ -12,7 +12,7 @@ usage() {
   echo -e "ARGUMENTS"
   echo -e "  --component=component      component to publish"
   echo ""
-  echo -e "  --help                   display this help"
+  echo -e "  --help display this help"
   echo ""
   exit 1;
 }
@@ -43,8 +43,8 @@ cd "$COMPONENT_PATH" || exit
 ## Push on npm repository
 # Check if user is logged on npm registry
 NPM_USER=$(npm whoami)
-
 if [ "$NPM_USER" ]; then
-    npm publish --access public
+    npm ci
+    npm publish --ignore-scripts --access public
     echo "Publish ${COMPONENT} on npm registry as  ${NPM_USER}"
 fi
