@@ -12,7 +12,7 @@ usage() {
   echo -e "ARGUMENTS"
   echo -e "  --component=component      component to publish"
   echo ""
-  echo -e "  --help                   display this help"
+  echo -e "  --help display this help"
   echo ""
   exit 1;
 }
