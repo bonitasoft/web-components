@@ -45,6 +45,7 @@ cd "$COMPONENT_PATH" || exit
 NPM_USER=$(npm whoami)
 
 if [ "$NPM_USER" ]; then
-    npm publish --access public
+    npm ci
+    npm publish --ignore-scripts --access public
     echo "Publish ${COMPONENT} on npm registry as  ${NPM_USER}"
 fi
