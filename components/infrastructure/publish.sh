@@ -43,9 +43,8 @@ cd "$COMPONENT_PATH" || exit
 ## Push on npm repository
 # Check if user is logged on npm registry
 NPM_USER=$(npm whoami)
-
 if [ "$NPM_USER" ]; then
-    npm run bundle
-    npm publish --access public
+    npm ci
+    npm publish --ignore-scripts --access public
     echo "Publish ${COMPONENT} on npm registry as  ${NPM_USER}"
 fi

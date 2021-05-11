@@ -9,7 +9,7 @@ on:
       releaseType:
         description: Choose release type (semver following) [patch, minor, major, prepatch, preminor, premajor, prerelease]
         required: true
-        default: minor
+        default: patch
       npmPublish:
         description: true to push on npm repository
         required: true
@@ -43,8 +43,10 @@ jobs:
       - name: Publish on NPM
         if: ${{ success() && github.event.inputs.npmPublish == 'true'}}
         run: |
-          echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_REGISTRY_API_TOKEN }} >> $HOME/.npmrc
+          npm config set //registry.npmjs.org/:_authToken ${{secrets.NPM_TOKEN}}
           ./components/infrastructure/publish.sh --component=${{github.event.inputs.component}}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send message to Slack channel
         uses: act10ns/slack@v1
