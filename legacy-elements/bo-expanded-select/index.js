@@ -24,7 +24,8 @@ class BoExpandedSelect extends HTMLElement {
       return {
         id: opt.getAttribute('id'),
         value: opt.getAttribute('value'),
-        text: opt.textContent
+        text: opt.textContent,
+        disabled: opt.getAttribute('disabled')
       };
     });
 
@@ -53,7 +54,7 @@ class BoExpandedSelect extends HTMLElement {
   _generateSelectBox(options) {
     let optionsHtml = [];
     options.forEach(o => {
-      optionsHtml.push(`<option value="${o.id}" val="${o.value.toString()}">${o.text}</option>`);
+      optionsHtml.push(`<option value="${o.id}" val="${o.value.toString()}" ${o.disabled === 'true' ? 'disabled' :''}>${o.text}</option>`);
     });
     let innerHtml = `<select class="form-control">${optionsHtml.join('')}</select>`;
 

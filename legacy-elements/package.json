@@ -1,6 +1,6 @@
 {
   "name": "build-web-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "dependencies": {
     "@babel/runtime": "^7.3.4",
@@ -16,7 +16,7 @@
     "@babel/preset-env": "^7.3.4",
     "@storybook/html": "^5.0.10",
     "jest": "^24.3.1",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.0",
     "npm-run-all": "^4.1.5",
     "prettier": "1.16.4",
     "pretty-quick": "^1.10.0",

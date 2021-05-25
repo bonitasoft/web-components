@@ -1,6 +1,6 @@
 import tmpl from './template.js';
 import '../bo-expanded-select/index';
-import mapping from './mapping-property';
+import {mapping,isIncompatibleMapping} from './mapping-property';
 
 // We define an ES6 class that extends HTMLElement
 class BoSwitchConfig extends HTMLElement {
@@ -117,25 +117,31 @@ class BoSwitchConfig extends HTMLElement {
     <div class="title-area">${this._translate('Value')}</div>`;
     let content = Object.keys(this.to.options).map(
       keyTo =>
-        `<bo-expanded-select selected='${keyTo}' key='${keyTo}'>
-           <div slot="label"><b>${this._translate(
-             this.to.options[keyTo].label
-           )}</b> ${this._addBondIcon(this.to.options[keyTo].bond)}</div>
-           <bo-expanded-select-option id='' value='${this.to.options[keyTo].value ||
-             this.to.options[keyTo].defaultValue}'></bo-expanded-select-option>` +
-        Object.keys(this.from.options)
-          .map(
-            keyFrom =>
-              `<bo-expanded-select-option id='${keyFrom}' value='${this.from.options[keyFrom]
-                .value + '' || this.from.options[keyFrom].defaultValue + ''}'>
-            ${this._translate(this.from.options[keyFrom].label)}
-            </bo-expanded-select-option>`
-          )
-          .join('') +
-        `</bo-expanded-select>`
+        this._addSelectedInput(keyTo)
     );
 
     this._to.innerHTML = content.join('');
+  }
+
+  _addSelectedInput(keyTo) {
+    return `<bo-expanded-select selected='${keyTo}' key='${keyTo}'>
+           <div slot="label"><b>${this._translate(
+        this.to.options[keyTo].label
+        )}</b> ${this._addBondIcon(this.to.options[keyTo].bond)}</div>
+           <bo-expanded-select-option id='' value='${this.to.options[keyTo].value ||
+        this.to.options[keyTo].defaultValue}'></bo-expanded-select-option>` +
+        Object.keys(this.from.options)
+            .map(
+                keyFrom => this._addSelectedOptions(keyTo, keyFrom)).join('') +
+        `</bo-expanded-select>`;
+  }
+
+  _addSelectedOptions(keyTo, keyFrom){
+    let from = this.from.options[keyFrom];
+    let to = this.to.options[keyTo];
+      return `<bo-expanded-select-option id='${keyFrom}' value='${from.value + '' || from.defaultValue + ''}' disabled="${isIncompatibleMapping(to, from)}">
+           ${this._translate(from.label) + ' ' + this._addBondIcon(from.type)}
+            </bo-expanded-select-option>`
   }
 
   _addBondIcon(bond) {
