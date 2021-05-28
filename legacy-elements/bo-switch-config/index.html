@@ -14,29 +14,33 @@
         max-height: 300px;
       }
     </style>
-<!--from='{"name":"Input","options":{"cssClasses":{"type":"constant","value":"","label":"CSS classes"},"hidden":{"type":"constant","value":false,"label":"Hidden"},"required":{"type":"constant","value":false,"label":"Required"},"minLength":{"type":"constant","value":"","label":"Value min length"},"maxLength":{"type":"constant","value":"","label":"Value max length"},"readOnly":{"type":"constant","value":false,"label":"Read-only"},"labelHidden":{"type":"constant","value":false,"label":"Label hidden"},"label":{"type":"interpolation","value":"Default label","label":"Label"},"labelPosition":{"type":"constant","value":"top","label":"Label position"},"labelWidth":{"type":"constant","value":4,"label":"Label width"},"placeholder":{"type":"interpolation","label":"Placeholder"},"value":{"type":"variable","value":"","label":"Value"},"type":{"type":"constant","value":"text","label":"Type"},"min":{"type":"constant","label":"Min value"},"max":{"type":"constant","label":"Max value"},"step":{"type":"constant","value":1,"label":"Step"}}}'
-        to='{"id":"pbChecklist","name":"Checklist","options":{"cssClasses":{"label":"CSS classes","caption":"Space-separated list","name":"cssClasses","type":"string","defaultValue":"","bond":"expression","help":"Any accessible CSS classes. By default UI Designer comes with Bootstrap http://getbootstrap.com/css/#helper-classes"},"hidden":{"label":"Hidden","name":"hidden","type":"boolean","defaultValue":false,"bond":"expression"},"disabled":{"label":"Disabled","name":"disabled","type":"boolean","defaultValue":false,"bond":"expression"},"inline":{"label":"Inline","name":"inline","type":"boolean","defaultValue":false,"bond":"constant"},"labelHidden":{"label":"Label hidden","name":"labelHidden","type":"boolean","defaultValue":false,"bond":"constant"},"label":{"label":"Label","name":"label","showFor":"properties.labelHidden.value === false","type":"text","defaultValue":"Default label","bond":"interpolation"},"labelPosition":{"label":"Label position","name":"labelPosition","showFor":"properties.labelHidden.value === false","type":"choice","defaultValue":"top","choiceValues":["left","top"],"bond":"constant"},"labelWidth":{"label":"Label width","name":"labelWidth","showFor":"properties.labelHidden.value === false","type":"integer","defaultValue":4,"bond":"constant","constraints":{"min":"1","max":"12"}},"availableValues":{"label":"Available values","name":"availableValues","caption":"Comma-separated list or bound an array data","help":"Can be a list of objects. Use Displayed key to refine options and Returned key to refine selections","type":"collection","defaultValue":["green","red","blue"],"bond":"expression"},"displayedKey":{"label":"Displayed key","name":"displayedKey","help":"The name of the key to use as label. Can be empty","type":"text","bond":"expression"},"returnedKey":{"label":"Returned key","name":"returnedKey","caption":"Value must be unique","help":"The name of the key to use as value. Leave it empty for whole object","type":"text","bond":"expression"},"selectedValues":{"label":"Selected values","name":"selectedValues","type":"text","bond":"variable"}}}'-->
     <div id="popup">
-<!--      <bo-switch-config-->
-<!--        id="switch-component-config"-->
-<!--        dictionary='{"cancel": "annuler", "properties": "propriétés"}'-->
-<!--        from='{"name":"Input","options":{-->
-<!--        "hidden":{"type":"expression","value":"toto","label":"Hidden"},-->
-<!--        "pageSize":{"type":"constant","value":"10","label":"Page Size"},-->
-<!--        "content":{"type":"expression","value":"json_data","label":"Content"},-->
-<!--        "labelHidden":{"type":"constant","value":false,"label":"Label hidden"}-->
-<!--        }}'-->
-<!--        to='{"id":"CustomInput","name":"CustomInput","options":{-->
-<!--        "hidden":{"label":"Hidden","name":"hidden","type":"boolean","defaultValue":false,"bond":"expression"},-->
-<!--        "pageSize":{"value":"","label":"Page Size", "bond": "variable"},-->
-<!--        "content":{"bond":"expression","value":"json_data","label":"Content"},-->
-<!--        "labelHidden":{"label":"Label hidden","name":"labelHidden","type":"boolean","defaultValue":false,"bond":"constant"}-->
-<!--        }}'-->
-<!--      ></bo-switch-config>-->
       <bo-switch-config id="switch-component-config" dictionary="{}"
-                        from='{"name":"Autocomplete","options":{"cssClasses":{"type":"constant","value":"input","label":"CSS classes"},"hidden":{"type":"expression","value":"hidden === true","label":"Hidden"},"readOnly":{"type":"constant","value":false,"label":"Read-only"},"required":{"type":"constant","value":true,"label":"Required"},"labelHidden":{"type":"constant","value":false,"label":"Label hidden"},"label":{"type":"interpolation","value":"{{myLabel}}","label":"Label"},"labelPosition":{"type":"constant","value":"top","label":"Label position"},"labelWidth":{"type":"constant","value":4,"label":"Label width"},"placeholder":{"type":"interpolation","label":"Placeholder"},"availableValues":{"type":"constant","value":["London","Paris","San Francisco"],"label":"Available values"},"displayedKey":{"type":"constant","value":"","label":"Displayed key"},"returnedKey":{"type":"variable","value":"","label":"Returned key"},"value":{"type":"variable","value":"inputValue","label":"Value"}}}'
-                        to='{"id":"customSwtich","name":"swtich","options":{"cssClasses":{"label":"CSS classes","caption":"Space-separated list","name":"cssClasses","type":"string","defaultValue":"","bond":"expression","help":"Any accessible CSS classes. By default UI Designer comes with Bootstrap http://getbootstrap.com/css/#helper-classes"},"hidden":{"label":"Hidden","name":"hidden","type":"boolean","defaultValue":false,"bond":"expression"},"value":{"label":"Value","name":"value","type":"text","defaultValue":"This is the initial value","bond":"expression"},"color":{"label":"Color","name":"color","type":"choice","defaultValue":"RebeccaPurple","choiceValues":["RebeccaPurple","Chartreuse","Tomato","DeepSkyBlue"],"bond":"expression"},"background":{"label":"Background color on click","name":"background","type":"choice","defaultValue":"Yellow","choiceValues":["Yellow","LightGray"],"bond":"expression"},"visible":{"label":"Visible","name":"visible","type":"boolean","bond":"constant"},"minValue":{"label":"minValue","name":"minValue","type":"integer","bond":"constant"},"testChoice":{"label":"testChoice","name":"testChoice","type":"choice","choiceValues":["toto","titi","tata","tutu"],"bond":"constant"},"ArrayCollec":{"label":"ArrayCollec","name":"ArrayCollec","type":"collection","bond":"constant"}}}'></bo-switch-config>
+                        from='{"name":"Autocomplete","options":{
+                        "cssClasses":{"type":"constant","value":"input","label":"CSS classes"},
+                        "hidden":{"type":"expression","value":"hidden === true","label":"Hidden"},
+                        "readOnly":{"type":"constant","value":false,"label":"Read-only"},
+                        "required":{"type":"constant","value":true,"label":"Required"},
+                        "labelHidden":{"type":"constant","value":false,"label":"Label hidden"},
+                        "label":{"type":"interpolation","value":"{{myLabel}}","label":"Label"},
+                        "labelPosition":{"type":"constant","value":"top","label":"Label position"},
+                        "labelWidth":{"type":"constant","value":4,"label":"Label width"},
+                        "placeholder":{"type":"interpolation","label":"Placeholder"},
+                        "availableValues":{"type":"constant","value":["London","Paris","San Francisco"],"label":"Available values"},
+                        "displayedKey":{"type":"constant","value":"","label":"Displayed key"},
+                        "returnedKey":{"type":"variable","value":"","label":"Returned key"},
+                        "value":{"type":"variable","value":"inputValue","label":"Value"}}}'
+                        to='{"id":"customSwtich","name":"swtich","options":{
+                        "cssClasses":{"label":"CSS classes","caption":"Space-separated list","name":"cssClasses","type":"string","defaultValue":"","bond":"expression","help":"Any accessible CSS classes. By default UI Designer comes with Bootstrap http://getbootstrap.com/css/#helper-classes"},
+                        "hidden":{"label":"Hidden","name":"hidden","type":"boolean","defaultValue":false,"bond":"expression"},
+                        "value":{"label":"Value","name":"value","type":"text","defaultValue":"This is the initial value","bond":"expression"},
+                        "color":{"label":"Color","name":"color","type":"choice","defaultValue":"RebeccaPurple","choiceValues":["RebeccaPurple","Chartreuse","Tomato","DeepSkyBlue"],"bond":"expression"},
+                        "background":{"label":"Background color on click","name":"background","type":"choice","defaultValue":"Yellow","choiceValues":["Yellow","LightGray"],"bond":"expression"},
+                        "visible":{"label":"Visible","name":"visible","type":"boolean","bond":"constant"},
+                        "minValue":{"label":"minValue","name":"minValue","type":"integer","bond":"constant"},
+                        "testChoice":{"label":"testChoice","name":"testChoice","type":"choice","choiceValues":["toto","titi","tata","tutu"],"bond":"constant"},
+                        "ArrayCollec":{"label":"ArrayCollec","name":"ArrayCollec","type":"collection","bond":"constant"}}}'>
+      </bo-switch-config>
     </div>
   </body>
 </html>
-<!--document.getElementById('switch-component-config')._getMappingResult()-->
