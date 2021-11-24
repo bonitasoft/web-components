@@ -69,9 +69,8 @@ fi
 pull_request() {
   PR="{\"title\": \"[${BRANCH_NAME}] Translations update\", \"head\": \"feat/${BRANCH_NAME}/update-translations\", \"base\": \"${BRANCH_NAME}\"}"
   echo "Create new pull request $PR"
-
-  curl -i -X POST -d "$PR" \
-     https://api.github.com/repos/bonitasoft/web-components/pulls?access_token="$1"
+  curl -H "Authorization: token $1" -i -X POST -d "$PR" \
+     https://api.github.com/repos/bonitasoft/web-components/pulls
 }
 
 echo "***********************************************************************************"
