@@ -1,0 +1,35 @@
+{
+  "name": "@bonitasoft/http-action-editor",
+  "version": "1.0.0",
+  "description": "A editor of HTTP action",
+  "homepage": "https://github.com/bonitasoft/web-components/components/packages/misc/http-action-editor#readme",
+  "license": "LicenseRef-LICENSE",
+  "module": "lib/http-action-editor.es5.min.js",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@songhay/input-autocomplete": "^0.1.3",
+    "bootstrap": "^4.5.3",
+    "lit-element": "^2.4.0",
+    "lit-translate": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.1.8",
+    "ts-loader": "^9.2.6",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bonitasoft/web-components.git"
+  },
+  "scripts": {
+    "start": "npm install && rollup -c -w --environment devMode:true",
+    "lint": "prettier --write \"src/**/*.{js,ts,tsx}\"",
+    "bundle": "tsc && rollup -c",
+    "clean": "rm -rf build lib node_modules",
+    "pack": "npm pack",
+    "publish": "npm publish"
+  }
+}
