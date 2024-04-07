@@ -1,7 +1,7 @@
 {
-  "title": "Pagination",
-  "nbelements": "Element (c)",
-  "nbelementsPlaceholder": "Type a number of elements",
-  "pageindex": "Page index (p)",
-  "pageindexPlaceholder": "Type a page index"
+  "title": "ページネーション",
+  "nbelements": "要素 (c)",
+  "nbelementsPlaceholder": "要素の数を入力",
+  "pageindex": "ページインデックス (p)",
+  "pageindexPlaceholder": "ページインデックスを入力"
 }

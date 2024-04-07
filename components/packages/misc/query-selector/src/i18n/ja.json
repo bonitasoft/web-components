@@ -1,8 +1,8 @@
 {
-  "help": "Select a query from one of the 2 lists. If any, enter the filter value(s)",
-  "defaultQueriesTitle": "'Find By' queries on an attribute",
-  "additionalQueriesTitle": "Additional queries",
-  "filterTitlePrefix": "Filter the query of",
-  "tip1": "If you dragged and dropped a Business Object, you can now use the generated user interface, or adapt it to your needs. If you created a new variable, you can create your own user interface using this variable.",
-  "tip2": "The return type of the generated Business Data variable is an array."
+  "help": "2 つのリストからクエリを選択します。存在する場合は、フィルタの値を入力します。",
+  "defaultQueriesTitle": "属性の「Find By」クエリ",
+  "additionalQueriesTitle": "追加のクエリ",
+  "filterTitlePrefix": "次のクエリをフィルタリングします:",
+  "tip1": "ビジネスオブジェクトをドラッグ&ドロップすると、生成されたユーザインタフェースを使用したり、ニーズに合わせて調整したりすることができます。新しい変数を作成した場合は、この変数を使用して独自のユーザーインターフェイスを作成できます。",
+  "tip2": "生成されたビジネス データ変数の戻り値の型は、配列です。"
 }
